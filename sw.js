@@ -1,7 +1,7 @@
-/* QUANT Terminal service worker (v5.3)
+/* QUANT Terminal service worker (v5.4)
  * 只缓存 App 外壳,让它能装到桌面、断网时也能打开界面。
  * 行情(CoinGecko)和云端快照(data/)永远走网络,绝不缓存 —— 过期行情比没有行情更危险。 */
-const CACHE = 'quant-shell-v5.3';
+const CACHE = 'quant-shell-v5.4';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
@@ -26,5 +26,18 @@ self.addEventListener('fetch', (e) => {
         return res;
       })
       .catch(() => caches.match(e.request, { ignoreSearch: true }).then((r) => r || caches.match('./index.html')))
+  );
+});
+
+// 点系统通知 → 回到App并打开消息列表
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  e.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+      for (const c of list) {
+        if (c.url.startsWith(self.registration.scope)) { c.postMessage({ type: 'open-messages' }); return c.focus(); }
+      }
+      return self.clients.openWindow('./?tab=messages');
+    })
   );
 });

@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.3)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.4)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -35,7 +35,7 @@ const readJson = async (p, fallback = null) => {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------- 1. 跑扫描 ---------- */
-async function runScan(cfg, prev) {
+async function runScan(cfg, prev, state, isDigest) {
   const browser = await chromium.launch(env.QS_CHROMIUM ? { executablePath: env.QS_CHROMIUM } : {});
   try {
     const ctx = await browser.newContext({ locale: 'zh-CN', timezoneId: 'Asia/Shanghai' });
@@ -74,53 +74,25 @@ async function runScan(cfg, prev) {
       if (status.lastScan && !status.error) break;
     }
     if (!status?.lastScan || status.error) throw new Error(`扫描失败: ${status?.error || '未知原因'}`);
-    return await page.evaluate(() => window.__QS.snapshot());
+    // 提醒规则和消息格式都用页面里的那一份(App也用它),云端不另写一套
+    return await page.evaluate(({ prev, alertCfg, prevKeys, isDigest }) => {
+      const snap = window.__QS.snapshot();
+      const active = window.__QS.computeAlerts(snap, prev, alertCfg);
+      const fresh = active.filter((a) => !prevKeys.includes(a.key));   // 边沿触发:只报新出现的
+      const message = (fresh.length || isDigest) ? window.__QS.buildMessage(snap, fresh, isDigest, 'cloud') : null;
+      return { snap, active, fresh, message };
+    }, {
+      prev: prev ? { regime: prev.regime, gate: prev.gate } : null,
+      alertCfg: cfg.alerts || {},
+      prevKeys: state.activeAlertKeys || [],
+      isDigest,
+    });
   } finally {
     await browser.close();
   }
 }
 
-/* ---------- 2. 提醒规则 ---------- */
-// 返回当前"处于触发状态"的提醒。是否发邮件由下面的边沿检测决定(只在刚触发时发一次)。
-function computeAlerts(snap, prev, cfg) {
-  const a = cfg.alerts || {};
-  const out = [];
-  const pct = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
-
-  if (a.regimeChange && prev && prev.regime !== snap.regime)
-    out.push({ key: `regime:${snap.regime}`, text: `市场状态变化:${prev.regime} → ${snap.regime}` });
-
-  if (a.gateFlip && prev && !!prev.gate?.closed !== !!snap.gate.closed)
-    out.push({ key: `gate:${snap.gate.closed}`, text: `总闸${snap.gate.closed ? '关闭(多头信号被否决)' : '打开(多头信号放行)'} —— 价格因子:${snap.gate.priceDowntrend ? '下跌' : '正常'},货币因子:${snap.gate.monetaryTight ? '紧缩' : '中性/宽松'}` });
-
-  if (a.gateStale && snap.gate.stale)
-    out.push({ key: 'stale', text: `货币闸需人工复核:已关闭${snap.gate.stale.days}天,期间BTC ${pct(snap.gate.stale.btcGain)}。请确认货币环境是否仍然紧缩(工具不会自动开闸)` });
-
-  if (a.newSRR) {
-    const before = new Set((prev?.srr || []).map((x) => x.s));
-    snap.srr.filter((x) => !before.has(x.s)).forEach((x) =>
-      out.push({ key: `srr:${x.s}`, text: `新的SRR 4/4:${x.s} $${fmtPrice(x.p)} —— ${x.reason}` }));
-    // 仍在榜上的SRR保持"激活",避免掉榜又上榜时漏报、常驻时重复报
-    snap.srr.filter((x) => before.has(x.s)).forEach((x) => out.push({ key: `srr:${x.s}`, text: null }));
-  }
-
-  if (a.btcMove24hPct && snap.btc && Math.abs(snap.btc.c24) >= a.btcMove24hPct)
-    out.push({ key: `btc24:${snap.btc.c24 > 0 ? 'up' : 'down'}`, text: `BTC 24h ${pct(snap.btc.c24)},现价 $${fmtPrice(snap.btc.p)}` });
-
-  if (a.watchMove24hPct)
-    (snap.watch || []).filter((w) => Math.abs(w.c24) >= a.watchMove24hPct).forEach((w) =>
-      out.push({ key: `watch:${w.s}:${w.c24 > 0 ? 'up' : 'down'}`, text: `自选 ${w.s} 24h ${pct(w.c24)},现价 $${fmtPrice(w.p)}` }));
-
-  // v5.2: 1小时异动。key里带"小时",所以同一小时内重跑不会重复推;下一小时仍超阈值会再推一次(那是新的一小时)。
-  if (a.hourlyMovePct) {
-    const hourKey = snap.time.slice(0, 13);
-    (snap.all || []).filter((t) => t.c1h != null && Math.abs(t.c1h) >= a.hourlyMovePct && (t.mc || 0) >= (a.hourlyMinMcapUsd || 0))
-      .sort((x, y) => Math.abs(y.c1h) - Math.abs(x.c1h))
-      .forEach((t) => out.push({ key: `h1:${t.s}:${hourKey}`, text: `${t.s} 1小时 ${pct(t.c1h)},现价 $${fmtPrice(t.p)}`, mover: t }));
-  }
-
-  return out;
-}
+/* ---------- 2. 提醒规则:在 index.html 里(computeAlerts / buildMessage),App与云端共用 ---------- */
 
 /* ---------- 3. 简报时段 ---------- */
 // 不用"当前小时==8"来判断:GitHub的定时任务经常延迟十几分钟到一小时。
@@ -262,13 +234,10 @@ const cfg = await readJson(path.join(ROOT, 'cloud', 'config.json'), {});
 const prev = await readJson(path.join(DATA, 'latest.json'));
 const state = await readJson(path.join(DATA, 'state.json'), {});
 
-const snap = await runScan(cfg, prev);
+const slot = dueDigestSlot(cfg, state);
+const { snap, active, fresh, message } = await runScan(cfg, prev, state, !!slot);
 console.log(`扫描完成(Top${snap.pool}):${snap.regime} · BTC $${fmtPrice(snap.btc?.p)} · 覆盖${snap.covered} · SRR ${snap.srr.length} · 多头${snap.longs.length} · 回避/偏空${snap.avoid.length + snap.shorts.length}`);
 
-const active = computeAlerts(snap, prev, cfg);
-const prevKeys = new Set(state.activeAlertKeys || []);
-const fresh = active.filter((a) => a.text && !prevKeys.has(a.key));   // 边沿触发:只报新出现的
-const slot = dueDigestSlot(cfg, state);
 const shouldSend = FORCE || fresh.length > 0 || !!slot;
 console.log(`提醒:${fresh.length}条新触发 / ${active.length}条处于触发状态;简报时段:${slot ? '到点' : '未到'};${shouldSend ? '发邮件' : '不发邮件'}`);
 
@@ -281,6 +250,10 @@ if (shouldSend) {
 
 await fs.mkdir(path.join(DATA, 'reports'), { recursive: true });
 await fs.writeFile(path.join(DATA, 'latest.json'), JSON.stringify({ ...snap, alerts: fresh.map((a) => a.text), emailed: sent }, null, 1));
+if (message) {   // App的消息列表读这个文件;只留最近100条
+  const msgs = await readJson(path.join(DATA, 'messages.json'), []);
+  await fs.writeFile(path.join(DATA, 'messages.json'), JSON.stringify([message, ...(Array.isArray(msgs) ? msgs : [])].slice(0, 100), null, 1));
+}
 await fs.writeFile(path.join(DATA, 'state.json'), JSON.stringify({
   // 邮件没发出去(未配置/失败)就不记账,下次还会补发
   lastDigestSlot: slot && (sent || DRY) ? slot : (state.lastDigestSlot || null),
