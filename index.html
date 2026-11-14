@@ -1,0 +1,2016 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>QUANT//v5.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+:root {
+  --bg: #0a0a0a;
+  --bg-panel: #141414;
+  --bg-hover: #1a1a1a;
+  --border: #27272a;
+  --border-light: #18181b;
+  --text: #f4f4f5;
+  --text-dim: #a1a1aa;
+  --text-mute: #71717a;
+  --text-faint: #52525b;
+  --emerald: #34d399;
+  --emerald-bg: rgba(52, 211, 153, 0.1);
+  --emerald-border: rgba(52, 211, 153, 0.3);
+  --rose: #fb7185;
+  --rose-bg: rgba(251, 113, 133, 0.1);
+  --rose-border: rgba(251, 113, 133, 0.3);
+  --amber: #fbbf24;
+  --amber-bg: rgba(251, 191, 36, 0.1);
+  --amber-border: rgba(251, 191, 36, 0.3);
+  --cyan: #22d3ee;
+  --cyan-bg: rgba(34, 211, 238, 0.1);
+  --cyan-border: rgba(34, 211, 238, 0.3);
+}
+html, body {
+  background: var(--bg); color: var(--text);
+  font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 13px; line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+.tnum { font-variant-numeric: tabular-nums; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 2px; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+.spinning { animation: spin 1s linear infinite; }
+.pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+/* HEADER */
+.header {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.header-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+}
+.header-left { display: flex; align-items: center; gap: 8px; }
+.brand {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.2em;
+  color: var(--text-mute);
+}
+.brand-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text-faint);
+}
+.brand-dot.scanning { background: var(--amber); animation: pulse-dot 1.5s ease-in-out infinite; }
+.brand-dot.live { background: var(--emerald); animation: pulse-dot 1.5s ease-in-out infinite; }
+
+.regime-badge {
+  font-size: 10px; padding: 2px 8px; border-radius: 2px;
+  border: 1px solid var(--text-faint); color: var(--text-dim);
+}
+.regime-badge.rose { color: var(--rose); border-color: var(--rose-border); background: var(--rose-bg); }
+.regime-badge.emerald { color: var(--emerald); border-color: var(--emerald-border); background: var(--emerald-bg); }
+.regime-badge.amber { color: var(--amber); border-color: var(--amber-border); background: var(--amber-bg); }
+.regime-badge.cyan { color: var(--cyan); border-color: var(--cyan-border); background: var(--cyan-bg); }
+
+.header-right { display: flex; gap: 6px; }
+.icon-btn {
+  padding: 6px; border: 1px solid var(--border); border-radius: 2px;
+  color: var(--text-dim); display: inline-flex; align-items: center;
+}
+.icon-btn:hover { background: var(--bg-hover); color: var(--text); }
+.icon-btn.active {
+  background: var(--emerald-bg); border-color: var(--emerald-border); color: var(--emerald);
+}
+.icon-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.icon-btn svg { width: 14px; height: 14px; display: block; }
+
+/* MACRO BAR */
+.macro-bar {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px; padding: 6px 12px;
+  border-top: 1px solid var(--border-light);
+  font-size: 11px;
+}
+.macro-item .label {
+  font-size: 9px; color: var(--text-faint);
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.macro-item .value {
+  display: flex; align-items: baseline; gap: 6px;
+}
+.macro-item .primary { font-weight: 600; color: var(--text); }
+.up { color: var(--emerald); }
+.down { color: var(--rose); }
+.flat { color: var(--text-dim); }
+
+/* TABS */
+.tabs {
+  display: flex; border-top: 1px solid var(--border-light);
+}
+.tab {
+  flex: 1; padding: 10px; font-size: 11px; letter-spacing: 0.05em;
+  color: var(--text-faint);
+  border-bottom: 2px solid transparent;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.tab:hover { color: var(--text-dim); }
+.tab.active {
+  color: var(--emerald); border-bottom-color: var(--emerald);
+  background: rgba(52, 211, 153, 0.05);
+}
+.tab svg { width: 11px; height: 11px; }
+.tab-count {
+  font-size: 9px; color: var(--text-faint);
+}
+
+/* FILTERS */
+.filters {
+  padding: 8px 8px; border-bottom: 1px solid var(--border-light);
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.filter-row {
+  display: flex; gap: 4px; margin-bottom: 6px; flex-wrap: nowrap; width: max-content;
+}
+.filter-row:last-child { margin-bottom: 0; }
+.chip {
+  padding: 4px 10px; font-size: 10px; border-radius: 2px;
+  border: 1px solid var(--border); color: var(--text-mute);
+  letter-spacing: 0.03em; white-space: nowrap;
+}
+.chip:hover { color: var(--text-dim); }
+.chip.active {
+  border-color: rgba(52, 211, 153, 0.5);
+  background: var(--emerald-bg); color: var(--emerald);
+}
+.chip-sort {
+  padding: 2px 8px; font-size: 10px;
+  color: var(--text-faint); border-radius: 2px;
+  white-space: nowrap;
+}
+.chip-sort.active { background: var(--border); color: var(--text); }
+
+/* TOKEN LIST */
+.token-list { background: var(--bg); }
+.token-row {
+  border-bottom: 1px solid var(--border-light);
+}
+.token-row:hover { background: rgba(255, 255, 255, 0.02); }
+.token-summary {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; width: 100%; text-align: left;
+}
+.token-symbol-col { width: 60px; flex-shrink: 0; }
+.token-symbol {
+  display: flex; align-items: center; gap: 4px;
+  font-size: 12px; font-weight: 700; color: var(--text);
+}
+.token-price { font-size: 9px; color: var(--text-faint); }
+.token-change-col { width: 56px; text-align: right; flex-shrink: 0; }
+.token-change-24h { font-size: 11px; font-weight: 600; }
+.token-change-7d { font-size: 9px; }
+.token-rsi-col { width: 36px; text-align: right; flex-shrink: 0; }
+.token-rsi-label { font-size: 9px; color: var(--text-faint); }
+.token-rsi-value { font-size: 11px; font-weight: 600; }
+.token-tags-col { flex: 1; min-width: 0; overflow: hidden; }
+.token-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+.tag {
+  display: inline-block; font-size: 8.5px;
+  padding: 1.5px 5px; border-radius: 2px;
+  font-weight: 600; letter-spacing: 0.04em;
+  border: 1px solid;
+}
+.tag.emerald { color: var(--emerald); background: var(--emerald-bg); border-color: var(--emerald-border); }
+.tag.rose { color: var(--rose); background: var(--rose-bg); border-color: var(--rose-border); }
+.tag.amber { color: var(--amber); background: var(--amber-bg); border-color: var(--amber-border); }
+.tag.cyan { color: var(--cyan); background: var(--cyan-bg); border-color: var(--cyan-border); }
+.tag-more { font-size: 8.5px; color: var(--text-faint); align-self: center; }
+
+.chevron {
+  width: 12px; height: 12px; color: var(--text-faint);
+  transition: transform 0.15s; flex-shrink: 0;
+}
+.expanded .chevron { transform: rotate(90deg); }
+.token-detail {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--border-light);
+  padding: 8px 12px 12px;
+  display: none;
+}
+.expanded .token-detail { display: block; }
+.metrics-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 8px; margin-bottom: 8px;
+}
+.metric .label {
+  font-size: 9px; color: var(--text-faint);
+  letter-spacing: 0.05em;
+}
+.metric .value { font-size: 11px; color: var(--text); }
+.pattern-card {
+  border: 1px solid; border-radius: 2px;
+  padding: 6px 8px; margin-bottom: 5px;
+}
+.pattern-card.emerald { border-color: var(--emerended-border, var(--emerald-border)); background: var(--emerald-bg); }
+.pattern-card.rose { border-color: var(--rose-border); background: var(--rose-bg); }
+.pattern-card.amber { border-color: var(--amber-border); background: var(--amber-bg); }
+.pattern-card.cyan { border-color: var(--cyan-border); background: var(--cyan-bg); }
+.pattern-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px; margin-bottom: 2px;
+}
+.pattern-name { font-size: 10px; font-weight: 700; }
+.pattern-name.emerald { color: var(--emerald); }
+.pattern-name.rose { color: var(--rose); }
+.pattern-name.amber { color: var(--amber); }
+.pattern-name.cyan { color: var(--cyan); }
+.pattern-score { font-size: 10px; color: var(--text-mute); }
+.pattern-reason { font-size: 10px; color: var(--text-dim); line-height: 1.4; }
+
+.action-row {
+  display: flex; gap: 6px; margin-top: 8px;
+  padding-top: 8px; border-top: 1px solid var(--border-light);
+}
+.action-btn {
+  flex: 1; padding: 6px; font-size: 10px;
+  border: 1px solid var(--border); border-radius: 2px;
+  color: var(--text-dim); text-align: center;
+  text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+}
+.action-btn:hover { color: var(--text); }
+.action-btn.active {
+  border-color: var(--amber-border); background: var(--amber-bg); color: var(--amber);
+}
+.action-btn svg { width: 11px; height: 11px; }
+
+/* REPORT */
+.report-actions {
+  padding: 8px 12px; border-bottom: 1px solid var(--border-light);
+  display: flex; gap: 8px;
+}
+.action-btn-full {
+  flex: 1; padding: 6px; font-size: 11px;
+  border: 1px solid var(--border); border-radius: 2px;
+  color: var(--text-dim);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.action-btn-full:hover { background: var(--bg-hover); color: var(--text); }
+.report-body {
+  padding: 12px; font-size: 10.5px; line-height: 1.6;
+  color: var(--text-dim); white-space: pre-wrap; word-break: break-word;
+  overflow-x: auto;
+}
+
+/* HISTORY */
+.history-item {
+  padding: 10px 12px; border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; gap: 12px;
+}
+.history-item:hover { background: var(--bg-hover); }
+.history-text {
+  flex: 1; font-size: 11px; color: var(--text-dim);
+}
+.history-key { font-size: 9px; color: var(--text-faint); margin-top: 2px; }
+.del-btn { color: var(--text-faint); padding: 4px; }
+.del-btn:hover { color: var(--rose); }
+.del-btn svg { width: 11px; height: 11px; }
+
+.history-back {
+  padding: 8px 12px; border-bottom: 1px solid var(--border-light);
+  display: flex; align-items: center; gap: 8px;
+}
+.history-back-btn { font-size: 11px; color: var(--text-dim); }
+.history-back-btn:hover { color: var(--text); }
+.history-time { font-size: 10px; color: var(--text-faint); margin-left: auto; }
+
+/* HELP */
+.help { padding: 12px; font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+.help-section-title {
+  font-size: 10px; letter-spacing: 0.15em;
+  color: var(--text-faint); margin-bottom: 6px; margin-top: 12px;
+}
+.help-section-title:first-child { margin-top: 0; }
+.help-item {
+  display: flex; gap: 8px; border-left: 2px solid;
+  padding: 2px 0 2px 8px; margin-bottom: 4px;
+  font-size: 11px;
+}
+.help-item.emerald { border-color: var(--emerald); }
+.help-item.rose { border-color: var(--rose); }
+.help-item.amber { border-color: var(--amber); }
+.help-item.cyan { border-color: var(--cyan); }
+.help-code { font-weight: 700; width: 64px; flex-shrink: 0; }
+.help-desc { color: var(--text-mute); }
+.help-manual { color: var(--text-mute); font-size: 11px; }
+.help-manual strong { color: var(--text-dim); }
+.help-footer {
+  margin-top: 16px; padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+  font-size: 10px; color: var(--text-faint); line-height: 1.6;
+}
+
+/* COMMON */
+.empty {
+  padding: 40px 12px; text-align: center;
+  font-size: 11px; color: var(--text-faint);
+}
+.error-banner {
+  margin: 8px; padding: 8px;
+  border: 1px solid var(--rose-border); background: var(--rose-bg);
+  color: var(--rose); font-size: 11px; border-radius: 2px;
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.error-banner svg { flex-shrink: 0; width: 13px; height: 13px; margin-top: 1px; }
+
+.auto-bar {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 12px 0; flex-wrap: wrap;
+}
+.auto-label { font-size: 9px; color: var(--text-faint); margin-right: 2px; }
+.cloud-banner {
+  margin: 8px 12px 0; padding: 8px 10px; cursor: pointer;
+  border: 1px solid var(--border); border-radius: 3px;
+  font-size: 10px; color: var(--text-dim); line-height: 1.5;
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+}
+.cloud-link { color: var(--emerald); flex-shrink: 0; }
+.footer-info {
+  padding: 12px; text-align: center;
+  font-size: 9px; color: var(--text-faint);
+}
+.star { color: var(--amber); }
+
+/* SVG icon defaults */
+.icon { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ============== CONSTANTS ============== */
+const CG_BASE = 'https://api.coingecko.com/api/v3';
+// v5.1: 定时刷新档位(分钟)。原来固定60秒 —— 会撞CoinGecko免费限流,且不记忆;现在可选档位并持久化。
+const AUTO_OPTIONS = [0, 5, 15, 30, 60];
+const APP_VERSION = '5.1';
+// 云端定时任务用无头浏览器打开本页时带 ?cloud=1:不注册Service Worker、不读云端快照、不启动定时器。
+const IS_CLOUD = new URLSearchParams(location.search).has('cloud');
+function loadAutoMin() {
+  try { const v = JSON.parse(localStorage.getItem('qs_auto_min') ?? '0'); return AUTO_OPTIONS.includes(v) ? v : 0; }
+  catch { return 0; }
+}
+const TOP_N = 50;
+const HISTORY_LIMIT = 30;
+
+const STABLECOINS = new Set([
+  'usdt','usdc','dai','busd','tusd','usdp','gusd','lusd','fdusd','pyusd',
+  'usde','susd','usds','usd1','rlusd','crvusd','mim','frax','sfrax','dola',
+  'usdb','usdd','usdy','usd0','eurt','eurs','eurc','xaut','paxg','usn',
+  'wbtc','weth','cbbtc','lbtc','tbtc','stbtc','reth','steth','wsteth',
+  'wbeth','rseth','meth','ezeth','weeth','sweth','renbtc','wsol','jitosol',
+  'msol','bnsol','bbtc','wbnb','wxtz','wpls'
+]);
+
+function isPeggedAsset(t) {
+  if (STABLECOINS.has(t.symbol.toLowerCase())) return true;
+  // Heuristic: priced near $1, ultra-low volatility across all timeframes
+  if (t.price > 0.95 && t.price < 1.05 &&
+      Math.abs(t.change24h) < 0.5 &&
+      Math.abs(t.change7d) < 1 &&
+      Math.abs(t.change30d || 0) < 2) return true;
+  return false;
+}
+
+/* ============== SECTOR MAP (for SER detection) ============== */
+const SECTOR_MAP = {
+  ai_infra:   { name: 'AI基建',     leaders: ['render','tao','fet','akt','virtual'], members: ['render','tao','fet','akt','sahara','opg','theta','nos','asi','rndr','vvv'] },
+  ai_data:    { name: 'AI数据DePIN',leaders: ['grass','theta'],                       members: ['grass','theta','masa','nmr','trac','io','iota','livepeer','lpt'] },
+  perp_dex:   { name: 'Perp DEX',   leaders: ['hype','aster'],                        members: ['hype','aster','lit','dydx','gmx','jup','drift','vela'] },
+  solana:     { name: 'Solana生态', leaders: ['sol'],                                 members: ['sol','jup','jto','ray','pyth','bonk','wif','popcat','grass','helium','hnt'] },
+  rwa:        { name: 'RWA',        leaders: ['ondo','pendle'],                       members: ['ondo','pendle','syrup','plume','cfg','hbar','iota','xdc'] },
+  defi_lend:  { name: 'DeFi借贷',   leaders: ['aave'],                                members: ['aave','comp','syrup','morpho','justlend','jst'] },
+  memecoin:   { name: 'Meme',       leaders: ['doge','shib','pepe'],                  members: ['doge','shib','pepe','wif','bonk','floki','memecoin','meme','popcat'] },
+  stable_yld: { name: '稳定币收益', leaders: ['ena'],                                 members: ['ena','sky','mkr','pendle','frax'] },
+  political:  { name: '政治crypto', leaders: ['wlfi'],                                members: ['wlfi','trump'] },
+  // === v5.0 补齐:以下六个板块是2025年5月建表时漏掉的大类。 ===
+  // 漏表的后果不是"少一个标签",而是 getTokenSector() 返回 null → SRR第2项检查自动判负
+  // → 这些标的在结构上永远拿不到4/4。历史上每一个4/4(SOL/HYPE/ENA/AAVE/TAO)都来自上面9个已映射板块,无一例外。
+  l1_l2:      { name: 'L1/L2',      leaders: ['sol','bnb','avax'],                    members: ['ada','avax','dot','arb','op','near','strk','sui','apt','trx','xlm','algo','atom'] },
+  privacy:    { name: '隐私',       leaders: ['zec','xmr'],                           members: ['zec','xmr','dash','zen','scrt','rose'] },
+  storage:    { name: '存储',       leaders: ['fil','ar'],                            members: ['fil','ar','wal','storj','sia'] },
+  oracle:     { name: '预言机',     leaders: ['link'],                                members: ['link','api3','rlc','band','pyth','trac'] },
+  dex:        { name: 'DEX',        leaders: ['uni'],                                 members: ['uni','crv','ray','orca','cake','sushi','aero'] },
+  gaming:     { name: '游戏',       leaders: ['sand'],                                members: ['sand','mana','axs','imx','gala','pixel'] },
+};
+
+// === v4.8: 真实收入/费用标的注册表 ===
+// 有可验证协议收入或费用捕获机制的标的。用于区分"结构性重估"vs"衰竭型pump"。
+// 可手动维护 — 新增时确认该协议确有链上收入/回购/销毁机制。
+const REVENUE_TOKENS = new Set([
+  // Perp DEX (费用收入 + 回购/销毁)
+  'hype','lit','aster','dydx','gmx','jup','drift',
+  // DeFi 蓝筹 (协议费)
+  'aave','uni','crv','mkr','sky','pendle','morpho','syrup','ldo',
+  // 稳定币收益
+  'ena','frax',
+  // RWA
+  'ondo','plume','cfg',
+  // AI/DePIN (真实算力/服务收入)
+  'render','rndr','tao','akt','grass','fil','ar','lpt','hnt',
+  // L1/L2 (真实gas收入)
+  'eth','sol','bnb','avax','sui','apt','hbar','trx',
+  // 交易所/基础设施
+  'link','pump','edgex','raydium','ray',
+]);
+
+function hasRealRevenue(symbol) {
+  return REVENUE_TOKENS.has(symbol.toLowerCase());
+}
+
+function getTokenSector(symbol) {
+  const s = symbol.toLowerCase();
+  for (const [code, info] of Object.entries(SECTOR_MAP)) {
+    if (info.members.includes(s)) return { code, ...info };
+  }
+  return null;
+}
+
+/* ============== v5.0: 货币闸陈旧度提醒 ============== */
+// 货币闸是手动开关,且必须保持手动 —— 10/6我提议把否决从-5放松到-2,10/15的实测证明那会正好
+// 在BTC -5.1%、山寨-12%~-24%之前开闸。人工判断当时赢了模型。所以这里不改否决强度、不自动开闸,
+// 只做一件事:闸关太久而市场已经走高时,在报告顶部打一行"需人工复核"。判断权留在你手里。
+const STALE_DAYS = 60;      // 闸关闭天数阈值
+const STALE_BTC_GAIN = 15;  // 期间BTC涨幅阈值(%)
+
+function getMonetaryAnchor() {
+  try { const raw = localStorage.getItem('qs_monetary_anchor'); return raw ? JSON.parse(raw) : null; }
+  catch { return null; }
+}
+function setMonetaryAnchor(btcPrice) {
+  const anchor = { since: new Date().toISOString(), btc: btcPrice ?? null };
+  try { localStorage.setItem('qs_monetary_anchor', JSON.stringify(anchor)); } catch {}
+  return anchor;
+}
+function clearMonetaryAnchor() {
+  try { localStorage.removeItem('qs_monetary_anchor'); } catch {}
+}
+// 返回 null = 不陈旧;否则返回 { days, btcGain, since, btcRef }
+function checkMonetaryStaleness(monetaryTight, btcPrice) {
+  if (!monetaryTight) return null;
+  const a = getMonetaryAnchor();
+  if (!a || !a.btc || !btcPrice) return null;
+  const days = (Date.now() - new Date(a.since).getTime()) / 86400000;
+  const btcGain = ((btcPrice - a.btc) / a.btc) * 100;
+  if (days > STALE_DAYS && btcGain > STALE_BTC_GAIN) {
+    return { days: Math.floor(days), btcGain, since: a.since, btcRef: a.btc };
+  }
+  return null;
+}
+
+const PATTERNS = {
+  QCI:        { name: 'QCI',    full: 'Quiet Coil 静默积累',          type: 'long',  color: 'emerald' },
+  RPE1:       { name: 'RPE-1',  full: '回调一级 15-20%',              type: 'long',  color: 'emerald' },
+  RPE2:       { name: 'RPE-2',  full: '回调二级 20-30%',              type: 'long',  color: 'emerald' },
+  RPE3:       { name: 'RPE-3',  full: '深跌三级 >30%企稳',            type: 'long',  color: 'emerald' },
+  MOMENTUM:   { name: 'MOM+',   full: '强势动量 7d>20% RSI<75',       type: 'long',  color: 'emerald' },
+  TBR:        { name: 'TBR',    full: '多重底回收 3次触底成型',       type: 'long',  color: 'cyan' },
+  VEX:        { name: 'VEX',    full: '量爆发触发 量3x + 价升',       type: 'long',  color: 'cyan' },
+  SER:        { name: 'SER',    full: '板块echo 龙头先涨，候选未启动',type: 'long',  color: 'cyan' },
+  HCEP:       { name: 'HCEP',   full: 'RSI高位 不要追',               type: 'avoid', color: 'amber' },
+  SRR:        { name: 'SRR',    full: '结构性重估 4/4满分·强趋势',     type: 'long',  color: 'emerald' },
+  RPE_CRASH:  { name: 'CRASH',  full: '急跌警告 24h<-10%',            type: 'avoid', color: 'rose' },
+  TRRP:       { name: 'TRRP?',  full: '近期多次拒绝同一价位',         type: 'short', color: 'rose' },
+  WEAK:       { name: 'WEAK',   full: '7d显著跑输BTC',                type: 'short', color: 'rose' },
+  VOL_DRY:    { name: 'DRY',    full: '成交量萎缩 量价背离',          type: 'long',  color: 'cyan' },
+  NEAR_ATL:   { name: 'ATL-N',  full: '接近历史低点 -90%',            type: 'long',  color: 'cyan' },
+};
+
+/* ============== TECHNICAL INDICATORS ============== */
+function calcRSI(closes, period = 14) {
+  if (closes.length < period + 1) return 50;
+  let gains = 0, losses = 0;
+  for (let i = 1; i <= period; i++) {
+    const d = closes[i] - closes[i - 1];
+    if (d > 0) gains += d; else losses -= d;
+  }
+  let avgGain = gains / period, avgLoss = losses / period;
+  for (let i = period + 1; i < closes.length; i++) {
+    const d = closes[i] - closes[i - 1];
+    if (d > 0) {
+      avgGain = (avgGain * (period - 1) + d) / period;
+      avgLoss = (avgLoss * (period - 1)) / period;
+    } else {
+      avgGain = (avgGain * (period - 1)) / period;
+      avgLoss = (avgLoss * (period - 1) - d) / period;
+    }
+  }
+  if (avgLoss === 0) return 100;
+  return 100 - 100 / (1 + avgGain / avgLoss);
+}
+
+function detectTripleRejection(prices) {
+  // Legacy TRRP detection - kept for "short" pattern (顶部反复被拒)
+  if (prices.length < 50) return false;
+  const recent = prices.slice(-100);
+  const maxP = Math.max(...recent);
+  const minP = Math.min(...recent);
+  if ((maxP - minP) / maxP < 0.03) return false;
+  const topThreshold = maxP * 0.985;
+  const dipThreshold = maxP * 0.96;
+  let touches = 0;
+  let hasDippedSinceLastTouch = true;
+  for (let i = 0; i < recent.length; i++) {
+    if (recent[i] < dipThreshold) {
+      hasDippedSinceLastTouch = true;
+    } else if (recent[i] >= topThreshold && hasDippedSinceLastTouch) {
+      touches++;
+      hasDippedSinceLastTouch = false;
+    }
+  }
+  return touches >= 3;
+}
+
+// === v4.3 TBR: Triple-Bottom Reclaim ===
+// 检测7d内底部反复被测试（多重底成型）
+function detectTBR(prices) {
+  if (!prices || prices.length < 60) return { hit: false };
+  // Use last 7 days (168 hours) of sparkline
+  const recent = prices.slice(-Math.min(prices.length, 168));
+  const minP = Math.min(...recent);
+  const maxP = Math.max(...recent);
+  // Need real range - at least 5% top to bottom
+  if ((maxP - minP) / maxP < 0.05) return { hit: false };
+  // Touch zone: within 3% of low
+  const touchZone = minP * 1.03;
+  // Lift zone: must bounce at least 4% between touches
+  const liftZone = minP * 1.04;
+  let touches = 0;
+  let hasLiftedSinceLastTouch = true;
+  let firstTouch = -1;
+  for (let i = 0; i < recent.length; i++) {
+    if (recent[i] > liftZone) {
+      hasLiftedSinceLastTouch = true;
+    } else if (recent[i] <= touchZone && hasLiftedSinceLastTouch) {
+      if (firstTouch < 0) firstTouch = i;
+      touches++;
+      hasLiftedSinceLastTouch = false;
+    }
+  }
+  // Need at least 3 touches AND not just last-bar collapse
+  const isCurrent = recent[recent.length - 1] <= touchZone;
+  return {
+    hit: touches >= 3 && !isCurrent, // require lift off the most recent low
+    touches,
+    low: minP,
+    span: ((maxP - minP) / minP * 100).toFixed(0),
+  };
+}
+
+// === v4.3 VEX: Volume Expansion Trigger ===
+// 量爆发: 当前24h量 vs 30d均量, 配合价格上涨
+function detectVEX(token) {
+  // v4.4: VEX must be EARLY expansion, not a blow-off top.
+  // Real VEX: high turnover (V/MC > 8%) + EARLY price move (+3% to +15%) + RSI not overbought
+  const turnover = token.volMcRatio;
+  if (turnover < 0.08) return { hit: false };
+  // v4.4 fix: exclude over-extended moves (the chasing-the-top problem from 6/4-6/9 data)
+  if (token.change24h < 3) return { hit: false };
+  if (token.change24h > 15) return { hit: false, lateStage: true }; // already exploded - too late
+  if (token.rsi > 72) return { hit: false }; // already too hot
+  // Score: higher turnover + early price action = stronger
+  let score = 6;
+  if (turnover > 0.15) score++;
+  if (token.change24h >= 5 && token.change24h <= 12) score++; // sweet spot
+  if (token.rsi < 60) score++;
+  return {
+    hit: true,
+    score,
+    turnover: (turnover * 100).toFixed(1)
+  };
+}
+
+// === v4.4: Risk warnings (microcap, post-pump, unlock) ===
+function computeWarnings(t) {
+  const warns = [];
+  // Microcap risk (SAHARA lesson: <$100M crashes -50%+ in deleveraging)
+  if (t.marketCap > 0 && t.marketCap < 50e6) {
+    warns.push({ code: 'NANO', desc: `市值$${fmtVolume(t.marketCap)} 纳米盘，极易插针` });
+  } else if (t.marketCap >= 50e6 && t.marketCap < 150e6) {
+    warns.push({ code: 'MICRO', desc: `市值$${fmtVolume(t.marketCap)} 微盘，崩盘跌幅2-4x大盘` });
+  }
+  // Post-pump reversal (7d big gain but 24h turning down = top)
+  if (t.change7d > 30 && t.change24h < -3) {
+    warns.push({ code: 'POST-PUMP', desc: `7d+${t.change7d.toFixed(0)}%后24h转跌，反转风险` });
+  }
+  // Over-extended (already pumped hard recently)
+  if (t.change7d > 80) {
+    warns.push({ code: 'EXTENDED', desc: `7d+${t.change7d.toFixed(0)}% 严重超买区，回撤风险高` });
+  }
+  return warns;
+}
+
+// === v4.3 SER: Sector Echo Rotation ===
+// 板块龙头先启动 + 候选未启动 = SER机会
+function detectSER(token, allTokens) {
+  const sector = getTokenSector(token.symbol);
+  if (!sector) return { hit: false };
+
+  // Find sector leaders in current scan
+  const leaders = allTokens.filter(t =>
+    sector.leaders.includes(t.symbol.toLowerCase()) &&
+    t.symbol.toLowerCase() !== token.symbol.toLowerCase()
+  );
+  if (leaders.length === 0) return { hit: false };
+
+  // Average 7d performance of leaders
+  const leaderAvg7d = leaders.reduce((sum, t) => sum + (t.change7d || 0), 0) / leaders.length;
+  // Leader must have moved >12% in 7d
+  if (leaderAvg7d < 12) return { hit: false };
+
+  // This token must be in compression (not yet pumped)
+  const thisStable = Math.abs(token.change7d || 0) < 6;
+  const thisRSILow = token.rsi < 60;
+  if (!thisStable || !thisRSILow) return { hit: false };
+
+  return {
+    hit: true,
+    score: 7 + (leaderAvg7d > 25 ? 1 : 0),
+    sectorName: sector.name,
+    leaderAvg7d: leaderAvg7d.toFixed(0),
+    leaderSymbols: leaders.map(l => l.symbol.toUpperCase()).join('/')
+  };
+}
+
+// === v4.8 SRR: Structural Re-Rating 结构性重估判别器 ===
+// LIT教训($1.35说"别追"→$3.75):HCEP是为"衰竭型pump"设计的,
+// 但对有真实收入+板块轮动+催化管道的标的,高RSI是重估的起点而非终点。
+// 四项打分,≥3项 → 判定为结构性重估 → HCEP降级、禁用"等回踩"逻辑。
+function detectSRR(t, allTokens) {
+  const checks = [];
+  let score = 0;
+
+  // 1. 真实收入/费用捕获机制
+  const revenue = hasRealRevenue(t.symbol);
+  if (revenue) { score++; checks.push('真实收入'); }
+
+  // 2. 板块龙头同步走强(SER的正向应用)
+  const sector = getTokenSector(t.symbol);
+  let sectorStrong = false;
+  if (sector && allTokens) {
+    const leaders = allTokens.filter(x => sector.leaders.includes(x.symbol.toLowerCase()));
+    if (leaders.length) {
+      const avg30d = leaders.reduce((s, x) => s + (x.change30d || 0), 0) / leaders.length;
+      if (avg30d > 20) { sectorStrong = true; score++; checks.push(`${sector.name}板块+${avg30d.toFixed(0)}%`); }
+    }
+  }
+
+  // 3. 量能"持续"而非"脉冲"(换手抬升但未极端 = 资金在轮入,不是一次性引爆)
+  const turnover = t.volMcRatio || 0;
+  let sustainedVol = false;
+  if (turnover > 0.04 && turnover < 0.30) { sustainedVol = true; score++; checks.push(`换手${(turnover*100).toFixed(0)}%持续`); }
+
+  // 4. 多周期同向(30d和7d都在涨 = 趋势而非单日脉冲)
+  let multiTF = false;
+  if ((t.change30d || 0) > 15 && (t.change7d || 0) > 0) { multiTF = true; score++; checks.push('30d/7d同向'); }
+
+  return {
+    // v4.9: 阈值从 >=3 提到 =4。8/29-9/12实测依据:
+    //   4/4组(SOL/HYPE/AAVE/TAO) 平均 +0.39%,跑赢BTC(-0.46%)
+    //   3/4组(ENA缺换手/PUMP缺板块) 平均 -17.00%,跑输16.5pp
+    // 缺任何一项都是毒药,必须四项全中。
+    hit: score >= 4,
+    score: Math.min(9, 5 + score),
+    checks,
+    revenue, sectorStrong, sustainedVol, multiTF,
+    raw: score
+  };
+}
+
+/* ============== PATTERN DETECTOR ============== */
+function detectPatterns(t, btcChange7d, allTokens, macroCtx) {
+  // Skip pegged assets entirely - stablecoins and wrapped tokens
+  if (isPeggedAsset(t)) return [];
+
+  const patterns = [];
+  const pull = t.high7d > 0 ? ((t.high7d - t.price) / t.high7d) * 100 : 0;
+  const isDowntrend = macroCtx?.isDowntrend || false;
+
+  // QCI - tightened: must be in accumulation AFTER a real dip (30d<-5% or pull from 7d high >8%)
+  const inAccumulation = (t.change30d != null && t.change30d < -5) || pull > 8;
+  if (t.rsi >= 45 && t.rsi <= 58 && Math.abs(t.change7d) < 5 && inAccumulation) {
+    patterns.push({
+      code: 'QCI',
+      score: 6 + (Math.abs(t.change7d) < 2 ? 1 : 0) + (t.rsi >= 48 && t.rsi <= 55 ? 1 : 0) + ((t.change30d || 0) < -15 ? 1 : 0),
+      reason: `RSI ${t.rsi.toFixed(0)} 中性 | 7d ${fmtPct(t.change7d)} | 30d ${fmtPct(t.change30d || 0)}`
+    });
+  }
+
+  // RPE
+  if (pull >= 15 && pull < 20) patterns.push({ code: 'RPE1', score: 6, reason: `7d高点回调${pull.toFixed(1)}%` });
+  else if (pull >= 20 && pull < 30) patterns.push({ code: 'RPE2', score: 7, reason: `7d高点回调${pull.toFixed(1)}%` });
+  else if (pull >= 30 && t.change24h > -5) patterns.push({ code: 'RPE3', score: 8, reason: `7d深跌${pull.toFixed(1)}%企稳中` });
+
+  // MOMENTUM
+  if (t.change7d > 20 && t.rsi < 75) {
+    patterns.push({ code: 'MOMENTUM', score: 7, reason: `7d ${fmtPct(t.change7d)} RSI仅${t.rsi.toFixed(0)}` });
+  }
+
+  // === TBR: Triple-Bottom Reclaim ===
+  // v4.4 fix: TBR is a REVERSAL pattern. In a downtrend, "multi-bottom" = support
+  // that's about to break (the SAHARA/RENDER/ICP failures of 6/4-6/9). Only valid
+  // when BTC is NOT in a downtrend.
+  if (t.sparkline && !isDowntrend) {
+    const tbr = detectTBR(t.sparkline);
+    if (tbr.hit) {
+      patterns.push({
+        code: 'TBR',
+        score: 7 + (tbr.touches >= 4 ? 1 : 0) + (t.rsi < 50 ? 1 : 0),
+        reason: `7d内${tbr.touches}次$${fmtPrice(tbr.low)}测试，区间${tbr.span}% | RSI ${t.rsi.toFixed(0)}`
+      });
+    }
+  }
+
+  // === VEX: Volume Expansion Trigger ===
+  const vex = detectVEX(t);
+  if (vex.hit) {
+    patterns.push({
+      code: 'VEX',
+      score: vex.score,
+      reason: `日换手${vex.turnover}% | 24h ${fmtPct(t.change24h)} | RSI ${t.rsi.toFixed(0)}`
+    });
+  }
+
+  // === SER: Sector Echo Rotation ===
+  if (allTokens && !isDowntrend) {
+    const ser = detectSER(t, allTokens);
+    if (ser.hit) {
+      patterns.push({
+        code: 'SER',
+        score: ser.score,
+        reason: `${ser.sectorName}龙头${ser.leaderSymbols}近7d +${ser.leaderAvg7d}% | 此标的未启动`
+      });
+    }
+  }
+
+  // VOL_DRY - require actual prior decline (not stablecoin flatness)
+  if (t.volMcRatio > 0 && t.volMcRatio < 0.02 && Math.abs(t.change7d) < 8 &&
+      (t.change30d != null && t.change30d < -10)) {
+    patterns.push({ code: 'VOL_DRY', score: 6, reason: `日换手${(t.volMcRatio * 100).toFixed(1)}% 极低 | 30d ${fmtPct(t.change30d)}` });
+  }
+
+  // NEAR_ATL
+  if (t.ath && t.price < t.ath * 0.1) {
+    patterns.push({ code: 'NEAR_ATL', score: 5, reason: `距ATH仅${((t.price/t.ath)*100).toFixed(1)}% 历史底部区域` });
+  }
+
+  // === v4.8/v4.9 SRR: 结构性重估判别(必须在HCEP之前跑) ===
+  const srrRaw = detectSRR(t, allTokens);
+
+  // v4.9 冲突压制:相对强弱一票否决。
+  // 依据:8/29的ENA同时带SRR和WEAK(7d -13.5% vs BTC -2.9%),14天后 -12.9%。
+  // 一个标的不可能既"结构性重估"又"显著跑输大盘"或"顶部反复被拒"。
+  const conflictWeak = btcChange7d !== null &&
+                       t.change7d < btcChange7d - 10 && t.change7d < -5;
+  const conflictRejected = t.sparkline && detectTripleRejection(t.sparkline);
+  const srrConflict = conflictWeak || conflictRejected;
+
+  const srr = {
+    ...srrRaw,
+    hit: srrRaw.hit && !srrConflict,
+    suppressedBy: srrConflict ? (conflictWeak ? 'WEAK(跑输大盘)' : 'TRRP(顶部被拒)') : null
+  };
+
+  if (srr.hit) {
+    patterns.push({
+      code: 'SRR',
+      score: srr.score,
+      reason: `${srr.checks.join(' + ')} | 4/4满分·强趋势·勿预设回踩,用突破触发`
+    });
+  }
+
+  // HCEP — v4.8: 结构性重估标的降级为"注意"而非"避免"
+  if (t.rsi > 75) {
+    if (srr.hit) {
+      patterns.push({
+        code: 'HCEP',
+        score: Math.max(3, (t.rsi > 85 ? 9 : 7) - 4),
+        srrDowngraded: true,
+        reason: `RSI ${t.rsi.toFixed(0)}高位,但SRR成立(${srr.raw}/4)→ 降级为注意。回调可能不深,别等深度回踩`
+      });
+    } else {
+      patterns.push({ code: 'HCEP', score: t.rsi > 85 ? 9 : 7, reason: `RSI ${t.rsi.toFixed(0)} 超买，等回落65` });
+    }
+  }
+
+  // CRASH
+  if (t.change24h < -10) {
+    patterns.push({ code: 'RPE_CRASH', score: 8, reason: `24h急跌${t.change24h.toFixed(1)}% 看支撑别接刀` });
+  }
+
+  // TRRP (legacy short pattern - 顶部反复被拒)
+  if (t.sparkline && detectTripleRejection(t.sparkline)) {
+    patterns.push({ code: 'TRRP', score: 6, reason: `7d内顶部多次被拒` });
+  }
+
+  // WEAK
+  if (btcChange7d !== null && t.change7d < btcChange7d - 10 && t.change7d < -5) {
+    patterns.push({ code: 'WEAK', score: 6, reason: `7d ${fmtPct(t.change7d)} vs BTC ${fmtPct(btcChange7d)}` });
+  }
+
+  // === v4.4/v4.6/v4.8 MACRO VETO LAYER (最高优先级·双因子) ===
+  // Veto longs if price downtrend OR monetary tightening. Proven necessary by:
+  // 6/4-6/9 (TBR 0/8 in price downtrend) AND 6/17 (deal signed but Fed hawkish → still fell).
+  // v4.8: 结构性重估标的(SRR)只降3分而非5分 —— LIT教训:有真实收入+板块轮动的标的
+  // 能在弱宏观里走独立行情(LIT从$1.35→$3.75正是发生在BTC下跌趋势中)。
+  if (isDowntrend) {
+    const cause = (macroCtx?.priceDowntrend && macroCtx?.monetaryTight) ? '下跌趋势+货币紧缩'
+                : macroCtx?.monetaryTight ? '货币紧缩(Fed鹰派)'
+                : '下跌趋势';
+    const srrConfirmed = patterns.some(p => p.code === 'SRR');
+    const penalty = srrConfirmed ? 3 : 5;
+    return patterns.map(p => {
+      const ptype = PATTERNS[p.code]?.type;
+      if (ptype === 'long') {
+        return {
+          ...p,
+          score: Math.max(1, p.score - penalty),
+          vetoed: true,
+          srrSoftened: srrConfirmed,
+          reason: srrConfirmed
+            ? `⚠️${cause}·但SRR成立·仅降3分(可独立行情) | ` + p.reason
+            : `⚠️${cause}·多头已否决 | ` + p.reason
+        };
+      }
+      return p; // avoid/short signals keep full weight (they work in downtrends)
+    });
+  }
+
+  return patterns;
+}
+
+/* ============== HELPERS ============== */
+function fmtPct(n) { return (n >= 0 ? '+' : '') + n.toFixed(1) + '%'; }
+function fmtPrice(p) {
+  if (p === undefined || p === null) return '-';
+  if (p >= 1000) return p.toFixed(0);
+  if (p >= 1) return p.toFixed(2);
+  if (p >= 0.01) return p.toFixed(4);
+  return p.toFixed(6);
+}
+function fmtVolume(v) {
+  if (v >= 1e9) return (v/1e9).toFixed(2) + 'B';
+  if (v >= 1e6) return (v/1e6).toFixed(1) + 'M';
+  if (v >= 1e3) return (v/1e3).toFixed(1) + 'K';
+  return v.toFixed(0);
+}
+
+/* ============== REPORT ============== */
+function generateReport(tokens, macro, time) {
+  const cnTs = time.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
+  const byCode = {};
+  tokens.forEach(t => t.patterns.forEach(p => {
+    if (!byCode[p.code]) byCode[p.code] = [];
+    byCode[p.code].push({ ...t, _pat: p });
+  }));
+
+  const fmtList = (list) => list
+    .sort((a, b) => b._pat.score - a._pat.score).slice(0, 8)
+    .map(x => `- **${x.symbol.toUpperCase()}** $${fmtPrice(x.price)} | 24h${fmtPct(x.change24h)} | ⭐${x._pat.score}/10\n  ${x._pat.reason}`)
+    .join('\n');
+
+  const longCodes = ['SRR', 'TBR', 'VEX', 'SER', 'QCI', 'RPE3', 'RPE2', 'RPE1', 'MOMENTUM', 'VOL_DRY', 'NEAR_ATL'];
+  const avoidCodes = ['HCEP', 'RPE_CRASH'];
+  const shortCodes = ['WEAK', 'TRRP'];
+
+  let md = `# 🟢 QUANT TERMINAL v5.1 — 扫描报告\n\n`;
+  md += `**时间**: ${cnTs} (北京)  \n`;
+  md += `**数据源**: CoinGecko (Top${TOP_N} by 24h volume)  \n`;
+  md += `**覆盖**: ${tokens.length} 标的\n\n`;
+  // === v5.0: 货币闸陈旧度提醒。只提醒,不改否决强度,不自动开闸。 ===
+  if (macro.monetaryStale) {
+    const st = macro.monetaryStale;
+    const sinceStr = new Date(st.since).toLocaleDateString('zh-CN');
+    md += `> ⚠️ **需人工复核：货币闸可能已陈旧**\n`;
+    md += `> 货币闸自 ${sinceStr} 关闭至今 **${st.days} 天**,期间 BTC 从 $${fmtPrice(st.btcRef)} 涨到 $${fmtPrice(macro.btc?.price)}(**${fmtPct(st.btcGain)}**)。\n`;
+    md += `> 闸关着 = 所有多头信号降5分。市场已经走高这么久,请亲自确认货币环境是否仍然紧缩 —— 如果Fed已转鸽,手动切换"货币环境"开关。\n`;
+    md += `> **本工具不会自动开闸。** 10/6我提议把否决从-5放松到-2,10/15实测证明那会正好在BTC -5.1%、山寨-12%~-24%之前开闸。这个判断必须是你做的。\n\n`;
+  }
+  md += `---\n\n## 🌐 STEP 1｜宏观环境\n\n`;
+  if (macro.btc && macro.eth) {
+    md += `| 指标 | 值 |\n|---|---|\n`;
+    md += `| BTC | $${fmtPrice(macro.btc.price)} (${fmtPct(macro.btc.change24h)}) |\n`;
+    md += `| ETH | $${fmtPrice(macro.eth.price)} (${fmtPct(macro.eth.change24h)}) |\n`;
+    md += `| BTC RSI | ${macro.btc.rsi.toFixed(0)} |\n`;
+    md += `| ETH RSI | ${macro.eth.rsi.toFixed(0)} |\n`;
+    md += `| ETH/BTC | ${(macro.eth.price / macro.btc.price).toFixed(5)} |\n`;
+    md += `| BTC 7d | ${fmtPct(macro.btc.change7d)} |\n`;
+    md += `| **市场状态** | **${macro.regime}** |\n\n`;
+  }
+  // v4.6: dual-factor downtrend veto banner
+  if (macro.isDowntrend) {
+    const cause = (macro.priceDowntrend && macro.monetaryTight) ? '价格下跌 + 货币紧缩'
+                : macro.monetaryTight ? '货币紧缩(Fed鹰派)'
+                : '价格下跌趋势';
+    md += `> 🛑 **总闸否决已激活 (${cause})** — 多头信号(TBR/VEX/SER/QCI)降权5分。\n`;
+    md += `> **v4.9例外:标注SRR(4/4满分结构性重估)的标的只降3分** —— 实测依据:8/29-9/12的4/4组跑赢BTC,3/4组跑输16.5pp,故阈值已收紧至四项全中,且跑输大盘或顶部被拒者一票否决。\n`;
+    md += `> 双因子否决:价格下跌 OR 货币紧缩,任一成立即否决多头。**此环境优先看避免/做空清单,但SRR标的值得单独看。**\n\n`;
+  }
+
+  md += `---\n\n## 🟢 STEP 2A｜多头候选\n\n`;
+  let any = false;
+  longCodes.forEach(c => {
+    if (byCode[c]?.length) {
+      any = true;
+      md += `### ${PATTERNS[c].name} — ${PATTERNS[c].full} (${byCode[c].length})\n${fmtList(byCode[c])}\n\n`;
+    }
+  });
+  if (!any) md += `*无符合条件标的*\n\n`;
+
+  md += `---\n\n## 🔴 STEP 2B｜做空候选\n\n`;
+  any = false;
+  shortCodes.forEach(c => {
+    if (byCode[c]?.length) {
+      any = true;
+      md += `### ${PATTERNS[c].name} — ${PATTERNS[c].full} (${byCode[c].length})\n${fmtList(byCode[c])}\n\n`;
+    }
+  });
+  if (!any) md += `*无符合条件标的*\n\n`;
+
+  md += `---\n\n## ⚠️ STEP 3｜避免触碰\n\n`;
+  any = false;
+  avoidCodes.forEach(c => {
+    if (byCode[c]?.length) {
+      any = true;
+      md += `### ${PATTERNS[c].name} — ${PATTERNS[c].full} (${byCode[c].length})\n${fmtList(byCode[c])}\n\n`;
+    }
+  });
+  if (!any) md += `*无显著高风险标的*\n\n`;
+
+  md += `---\n\n## 📊 STEP 4｜24h涨幅Top10\n\n`;
+  md += [...tokens].sort((a, b) => b.change24h - a.change24h).slice(0, 10).map(t =>
+    `- **${t.symbol.toUpperCase()}** $${fmtPrice(t.price)} | ${fmtPct(t.change24h)} | RSI ${t.rsi.toFixed(0)} | ${t.patterns.map(p => PATTERNS[p.code]?.name).join(' / ') || '-'}`
+  ).join('\n');
+
+  md += `\n\n---\n\n## 📉 STEP 5｜24h跌幅Top10\n\n`;
+  md += [...tokens].sort((a, b) => a.change24h - b.change24h).slice(0, 10).map(t =>
+    `- **${t.symbol.toUpperCase()}** $${fmtPrice(t.price)} | ${fmtPct(t.change24h)} | RSI ${t.rsi.toFixed(0)} | ${t.patterns.map(p => PATTERNS[p.code]?.name).join(' / ') || '-'}`
+  ).join('\n');
+
+  md += `\n\n---\n\n*数据源: CoinGecko公共API（含资金费/OI的部分模式需手动复核新闻+链上）*`;
+  return md;
+}
+
+/* ============== STATE ============== */
+/* ============== CHECKLIST (可编辑情景触发清单) ============== */
+const DEFAULT_CHECKLIST = {
+  title: '情景A触发 + L1催化追踪',
+  updated: '2026-07-07',
+  groups: [
+    {
+      name: '🌍 地缘信号',
+      items: [
+        { id: 'g1', text: '美伊协议正式签署', hint: '搜 US Iran deal signed', checked: false },
+        { id: 'g2', text: '霍尔木兹通航恢复确认', hint: '搜 Strait of Hormuz reopen', checked: false },
+        { id: 'g3', text: 'Brent油跌破$85', hint: '看油价', checked: false },
+        { id: 'g4', text: '连续48h无新互相打击', hint: '搜 Israel Iran strike 无新结果', checked: false },
+      ]
+    },
+    {
+      name: '📈 技术确认 (BTC锚)',
+      items: [
+        { id: 't1', text: 'BTC收复$66K', hint: '看币安', checked: false },
+        { id: 't2', text: 'BTC站稳$68K满12h', hint: '看4h K线', checked: false },
+        { id: 't3', text: 'BTC日线RSI>50', hint: '看币安指标', checked: false },
+      ]
+    },
+    {
+      name: '🛑 v4.5 regime翻转 (总闸·自动检测)',
+      items: [
+        { id: 'r1', text: 'regime脱离Risk-Off/弱势震荡', hint: '扫描自动判定', checked: false, gate: true, auto: true },
+        { id: 'r2', text: '否决横幅消失(非下跌趋势)', hint: '扫描自动判定', checked: false, auto: true },
+        { id: 'r3', text: 'BTC 7d > -5%', hint: '扫描自动判定', checked: false, auto: true },
+      ]
+    },
+    {
+      name: '💵 货币信号 (v4.6新增·总闸第二因子)',
+      items: [
+        { id: 'm1', text: '下次CPI < 4.0%', hint: '看数据(当前5月4.2%)', checked: false },
+        { id: 'm2', text: '12月加息赔率 < 50%', hint: 'CME FedWatch(当前77%)', checked: false },
+        { id: 'm3', text: '10年期收益率 < 4.3%', hint: '看数据(当前4.49%)', checked: false },
+        { id: 'm4', text: '美元指数(DXY)转跌', hint: '当前2026新高', checked: false },
+        { id: 'm5', text: 'Fed移除鹰派措辞/暗示暂停', hint: '看FOMC声明', checked: false, gate: true },
+      ]
+    },
+    {
+      name: '🎯 ADA 催化 (深跌L1·不计宏观分)',
+      items: [
+        { id: 'ada1', text: 'ADA站上$0.25(结构翻转)', hint: '看币安,当前~$0.18', checked: false, noScore: true },
+        { id: 'ada2', text: '8/9 SEC ETF审查窗口/GADA进展', hint: '搜 Cardano ETF GADA', checked: false, noScore: true },
+        { id: 'ada3', text: 'van Rossem硬分叉顺利落地', hint: '搜 Cardano van Rossem', checked: false, noScore: true },
+        { id: 'ada4', text: '日交易量回升(脱离45天低)', hint: '链上活动止跌', checked: false, noScore: true },
+      ]
+    },
+    {
+      name: '🎯 APT 催化 (等10月解锁悬崖)',
+      items: [
+        { id: 'apt1', text: '2026年10月解锁悬崖结束', hint: '四年归属完成', checked: false, noScore: true },
+        { id: 'apt2', text: '燃烧量 > 月解锁量(通缩生效)', hint: '100%手续费燃烧', checked: false, noScore: true },
+        { id: 'apt3', text: 'Bitwise现货ETF进展', hint: '搜 Aptos ETF S-1', checked: false, noScore: true },
+        { id: 'apt4', text: 'APT站上$0.85', hint: '看币安,当前~$0.65', checked: false, noScore: true },
+      ]
+    },
+    {
+      name: '🎯 SEI 催化 (谨慎·接刀风险)',
+      items: [
+        { id: 'sei1', text: 'TVL止血回升(脱离$41.6M)', hint: '看DefiLlama', checked: false, noScore: true },
+        { id: 'sei2', text: 'Giga升级主网交付+采用', hint: '20万TPS', checked: false, noScore: true },
+        { id: 'sei3', text: '7/15团队解锁被吸收', hint: '55.56M SEI', checked: false, noScore: true },
+        { id: 'sei4', text: 'SEI站上$0.10', hint: '看币安,当前~$0.06', checked: false, noScore: true },
+      ]
+    }
+  ],
+  // 打分→行动规则 (可编辑) — 15信号
+  actionRules: [
+    { min: 0, max: 3, label: '深度恐慌', action: '现金为王,不动', pos: '0%' },
+    { min: 4, max: 6, label: '初现转机', action: '试探仓(1-2个最强錯殺)', pos: '25%' },
+    { min: 7, max: 9, label: '趋势确认', action: '加仓', pos: '50%' },
+    { min: 10, max: 12, label: 'risk-on成立', action: '主力建仓', pos: '75%' },
+    { min: 13, max: 15, label: '全面反转', action: '满仓錯殺组合', pos: '100%' },
+  ],
+  // 失效条件 (可编辑)
+  failConditions: [
+    '新一轮重大互相打击',
+    '霍尔木兹宣布完全封锁',
+    'BTC跌破$58K (创新低)',
+    'Brent反弹站上$105',
+    'Fed意外加息 / CPI再创新高',
+  ],
+};
+
+function loadChecklist() {
+  try {
+    const saved = localStorage.getItem('qs_checklist');
+    if (saved) return JSON.parse(saved);
+  } catch {}
+  return JSON.parse(JSON.stringify(DEFAULT_CHECKLIST));
+}
+function saveChecklist() {
+  try { localStorage.setItem('qs_checklist', JSON.stringify(state.checklist)); } catch {}
+}
+function syncChecklistAuto() {
+  // Fusion: scanner regime auto-fills the regime gate items
+  if (!state.checklist || !state.macro) return;
+  const m = state.macro;
+  // r1/r2 reflect PRICE regime (not the combined gate, so price recovery shows even if monetary still tight)
+  const priceOk = !m.priceDowntrend;
+  const btc7dOk = m.btc && (m.btc.change7d ?? -99) > -5;
+  state.checklist.groups.forEach(g => g.items.forEach(it => {
+    if (!it.auto) return;
+    if (it.id === 'r1') it.checked = priceOk;
+    else if (it.id === 'r2') it.checked = priceOk;
+    else if (it.id === 'r3') it.checked = btc7dOk;
+  }));
+  saveChecklist();
+}
+
+function computeChecklistScore() {
+  let checked = 0, total = 0, gatePassed = true;
+  (state.checklist?.groups || []).forEach(g => g.items.forEach(it => {
+    if (it.noScore) return; // token-catalyst items don't count toward macro risk-on score
+    total++;
+    if (it.checked) checked++;
+    if (it.gate && !it.checked) gatePassed = false;
+  }));
+  // Find matching action rule
+  let rule = null;
+  (state.checklist?.actionRules || []).forEach(r => {
+    if (checked >= r.min && checked <= r.max) rule = r;
+  });
+  return { checked, total, gatePassed, rule };
+}
+
+const state = {
+  tokens: [],
+  loading: false,
+  error: null,
+  lastScan: null,
+  autoMin: loadAutoMin(),   // v5.1: 定时刷新间隔(分钟),0=关
+  nextScanAt: null,
+  cloud: null,              // v5.1: 云端定时扫描的最近一次快照(data/latest.json)
+  showCloud: false,
+  tab: 'scan',
+  filter: 'all',
+  sortBy: 'score',
+  expanded: null,
+  watchlist: JSON.parse(localStorage.getItem('qs_watchlist') || '[]'),
+  history: JSON.parse(localStorage.getItem('qs_history_keys') || '[]'),
+  checklist: loadChecklist(),
+  checklistEdit: false,
+  monetaryTight: JSON.parse(localStorage.getItem('qs_monetary_tight') ?? 'true'),
+  report: null,
+  macro: null,
+  historyDetail: null,
+  intervalId: null,
+};
+
+/* ============== STORAGE ============== */
+function saveWatchlist() {
+  try { localStorage.setItem('qs_watchlist', JSON.stringify(state.watchlist)); } catch {}
+}
+function saveScan(timestamp, data) {
+  try {
+    const key = 'qs_scan_' + timestamp;
+    localStorage.setItem(key, JSON.stringify(data));
+    state.history = [key, ...state.history].slice(0, HISTORY_LIMIT);
+    // Prune old keys beyond limit
+    Object.keys(localStorage).filter(k => k.startsWith('qs_scan_') && !state.history.includes(k))
+      .forEach(k => localStorage.removeItem(k));
+    localStorage.setItem('qs_history_keys', JSON.stringify(state.history));
+  } catch (e) {
+    console.warn('storage save fail', e);
+  }
+}
+function loadScan(key) {
+  try { return JSON.parse(localStorage.getItem(key)); } catch { return null; }
+}
+function deleteScan(key) {
+  try {
+    localStorage.removeItem(key);
+    state.history = state.history.filter(k => k !== key);
+    localStorage.setItem('qs_history_keys', JSON.stringify(state.history));
+  } catch {}
+}
+
+/* ============== SCAN ============== */
+async function performScan() {
+  if (state.loading) return;
+  state.loading = true; state.error = null; render();
+  try {
+    const url = `${CG_BASE}/coins/markets?vs_currency=usd&order=volume_desc&per_page=${TOP_N}&page=1&sparkline=true&price_change_percentage=24h,7d,30d`;
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    if (!res.ok) {
+      if (res.status === 429) throw new Error('CoinGecko限流：等60秒重试（免费API限制10-30次/分钟）');
+      throw new Error(`CoinGecko API错误 ${res.status}`);
+    }
+    const raw = await res.json();
+    if (!Array.isArray(raw)) throw new Error('数据格式错误');
+
+    const tokens = raw.map(c => {
+      const spark = c.sparkline_in_7d?.price || [];
+      const rsi = spark.length >= 15 ? calcRSI(spark.slice(-30)) : 50;
+      const high7d = spark.length ? Math.max(...spark) : c.high_24h || 0;
+      const low7d = spark.length ? Math.min(...spark) : c.low_24h || 0;
+      const change24h = c.price_change_percentage_24h || 0;
+      const change7d = c.price_change_percentage_7d_in_currency || 0;
+      const change30d = c.price_change_percentage_30d_in_currency || 0;
+      const volMcRatio = c.market_cap > 0 ? (c.total_volume / c.market_cap) : 0;
+      return {
+        id: c.id,
+        symbol: c.symbol,
+        name: c.name,
+        price: c.current_price,
+        marketCap: c.market_cap,
+        volume24h: c.total_volume,
+        volMcRatio,
+        change24h, change7d, change30d,
+        high7d, low7d,
+        ath: c.ath, atl: c.atl,
+        athChange: c.ath_change_percentage,
+        rsi,
+        sparkline: spark,
+        patterns: [],
+      };
+    });
+
+    const btc = tokens.find(t => t.symbol === 'btc');
+    const eth = tokens.find(t => t.symbol === 'eth');
+    const btcChange7d = btc?.change7d ?? null;
+
+    // === v4.4: Compute regime FIRST (so veto can use it) ===
+    let regime = '震荡', regimeColor = 'zinc';
+    if (btc && eth) {
+      if (btc.change24h < -3 && eth.change24h < -3) { regime = 'Risk-Off'; regimeColor = 'rose'; }
+      else if (btc.change24h > 3 && eth.change24h > 3) { regime = 'Risk-On'; regimeColor = 'emerald'; }
+      else if (btc.change24h < -1 && eth.change24h < -1) { regime = '弱势震荡'; regimeColor = 'amber'; }
+      else if (btc.change24h > 1 && eth.change24h > 1) { regime = '条件性Risk-On'; regimeColor = 'cyan'; }
+      else regime = '震荡';
+    }
+
+    // === v4.4: Macro context passed to detector for veto ===
+    const macroCtx = {
+      regime,
+      btcChange7d,
+      btcChange24h: btc?.change24h ?? 0,
+      btcRSI: btc?.rsi ?? 50,
+      // v4.6 DUAL-FACTOR gate: price downtrend OR monetary tightening → veto longs.
+      // This fixes the 6/17 mistake (deal signed but Fed hawkish → still should NOT buy).
+      priceDowntrend: (btcChange7d != null && btcChange7d < -8) || ['Risk-Off', '弱势震荡'].includes(regime),
+      monetaryTight: state.monetaryTight,
+    };
+    macroCtx.isDowntrend = macroCtx.priceDowntrend || macroCtx.monetaryTight;
+
+    // === v5.0: 货币闸起算点。闸处于关闭且还没有起算点时,以本次扫描为起算(无法追溯历史关闸日)。 ===
+    if (state.monetaryTight && !getMonetaryAnchor() && btc?.price) setMonetaryAnchor(btc.price);
+    const monetaryStale = checkMonetaryStaleness(state.monetaryTight, btc?.price);
+
+    tokens.forEach(t => {
+      t.patterns = detectPatterns(t, btcChange7d, tokens, macroCtx);
+      t.maxScore = t.patterns.reduce((m, p) => Math.max(m, p.score), 0);
+      t.warnings = computeWarnings(t);
+    });
+
+    state.tokens = tokens;
+    state.macro = { btc, eth, regime, regimeColor, isDowntrend: macroCtx.isDowntrend, priceDowntrend: macroCtx.priceDowntrend, monetaryTight: macroCtx.monetaryTight, monetaryStale };
+    syncChecklistAuto();
+    state.lastScan = new Date();
+    state.report = generateReport(tokens, state.macro, state.lastScan);
+
+    saveScan(state.lastScan.toISOString(), {
+      timestamp: state.lastScan.toISOString(),
+      regime, btc_close: btc?.price, eth_close: eth?.price,
+      report: state.report,
+      summary: tokens.filter(t => t.patterns.length > 0).slice(0, 30).map(t => ({
+        s: t.symbol, p: t.price, c24: t.change24h, c7: t.change7d, r: t.rsi,
+        pat: t.patterns.map(x => ({ c: x.code, s: x.score, r: x.reason }))
+      }))
+    });
+  } catch (e) {
+    state.error = e.message || '扫描失败';
+  } finally {
+    state.loading = false;
+    scheduleNext();   // v5.1: 每次扫描(手动或自动)结束后重新计时
+    render();
+  }
+}
+
+/* ============== v5.1: 定时刷新 ============== */
+// 用 setTimeout 链而不是 setInterval:手动扫描会重置倒计时,不会出现"刚手动扫完又自动扫一次"。
+// 手机浏览器在后台会冻结定时器,所以另有 visibilitychange 兜底:切回前台时若已过点,立即补扫。
+function scheduleNext() {
+  if (state.intervalId) { clearTimeout(state.intervalId); state.intervalId = null; }
+  state.nextScanAt = null;
+  if (!state.autoMin || IS_CLOUD) return;
+  const ms = state.autoMin * 60000;
+  state.nextScanAt = Date.now() + ms;
+  state.intervalId = setTimeout(() => performScan(), ms);
+}
+function setAutoMin(min) {
+  state.autoMin = AUTO_OPTIONS.includes(min) ? min : 0;
+  try {
+    localStorage.setItem('qs_auto_min', JSON.stringify(state.autoMin));
+    if (state.autoMin) localStorage.setItem('qs_auto_last', JSON.stringify(state.autoMin));
+  } catch {}
+  scheduleNext();
+  render();
+}
+// 顶栏 ▶/⏸ 按钮:开 = 恢复上次用的档位(默认15分钟),关 = 0
+function setAutoRefresh(on) {
+  let last = 15;
+  try { const v = JSON.parse(localStorage.getItem('qs_auto_last') ?? '15'); if (AUTO_OPTIONS.includes(v) && v) last = v; } catch {}
+  setAutoMin(on ? last : 0);
+}
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible' || !state.autoMin || state.loading) return;
+  if (state.nextScanAt && Date.now() >= state.nextScanAt) performScan();
+});
+
+/* ============== v5.1: 云端快照 ============== */
+// 云端定时任务(GitHub Actions)每次扫描后把结果写进 data/latest.json。App 打开时读它:
+// 实时扫描还没回来、或被CoinGecko限流时,至少能看到最近一次定时扫描的结论。
+async function loadCloudSnapshot() {
+  if (IS_CLOUD || !location.protocol.startsWith('http')) return;
+  try {
+    const res = await fetch('data/latest.json?t=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) return;
+    const d = await res.json();
+    if (d && d.time && d.report) { state.cloud = d; render(); }
+  } catch {}
+}
+
+/* ============== v5.1: 对外快照(云端任务与邮件用) ============== */
+// 邮件里的数字全部取自这里 —— 和App里看到的是同一次计算,不存在第二套判定逻辑。
+function buildSnapshot() {
+  if (!state.lastScan || !state.macro) return null;
+  const m = state.macro;
+  const slim = t => ({ s: t.symbol.toUpperCase(), p: t.price, c24: t.change24h, c7: t.change7d, c30: t.change30d, rsi: Math.round(t.rsi) });
+  const withPat = (t, p) => ({ ...slim(t), code: p.code, tag: PATTERNS[p.code]?.name || p.code, score: p.score, reason: p.reason, vetoed: !!p.vetoed, softened: !!p.srrSoftened });
+  const byType = (type) => {
+    const out = [];
+    state.tokens.forEach(t => {
+      const ps = t.patterns.filter(p => PATTERNS[p.code]?.type === type);
+      if (ps.length) out.push(withPat(t, ps.reduce((a, b) => (b.score > a.score ? b : a))));
+    });
+    return out.sort((a, b) => b.score - a.score);
+  };
+  const srr = [];
+  state.tokens.forEach(t => { const p = t.patterns.find(x => x.code === 'SRR'); if (p) srr.push(withPat(t, p)); });
+  const watch = state.tokens.filter(t => state.watchlist.includes(t.symbol)).map(t => ({
+    ...slim(t), tags: t.patterns.map(p => PATTERNS[p.code]?.name || p.code),
+  }));
+  return {
+    version: APP_VERSION,
+    time: state.lastScan.toISOString(),
+    regime: m.regime,
+    btc: m.btc ? slim(m.btc) : null,
+    eth: m.eth ? slim(m.eth) : null,
+    gate: { closed: !!m.isDowntrend, priceDowntrend: !!m.priceDowntrend, monetaryTight: !!m.monetaryTight, stale: m.monetaryStale || null, anchor: getMonetaryAnchor() },
+    covered: state.tokens.length,
+    srr, longs: byType('long'), avoid: byType('avoid'), shorts: byType('short'), watch,
+    report: state.report,
+  };
+}
+window.__QS = {
+  version: APP_VERSION,
+  status: () => ({ loading: state.loading, error: state.error, lastScan: state.lastScan ? state.lastScan.toISOString() : null }),
+  snapshot: buildSnapshot,
+};
+
+/* ============== ACTIONS ============== */
+function toggleWatch(symbol) {
+  state.watchlist = state.watchlist.includes(symbol)
+    ? state.watchlist.filter(s => s !== symbol)
+    : [...state.watchlist, symbol];
+  saveWatchlist();
+  render();
+}
+function copyReport() {
+  if (!state.report) return;
+  navigator.clipboard.writeText(state.report).then(() => {
+    alert('已复制到剪贴板');
+  }).catch(() => alert('复制失败，请长按报告内容选择复制'));
+}
+function downloadReport() {
+  if (!state.report) return;
+  const blob = new Blob([state.report], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `quant-scan-${(state.lastScan || new Date()).toISOString().slice(0,16).replace(/[:T]/g,'-')}.md`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
+/* ============== ICONS ============== */
+const ICONS = {
+  refresh: '<svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>',
+  play: '<svg class="icon" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3" fill="currentColor"/></svg>',
+  pause: '<svg class="icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" fill="currentColor"/><rect x="14" y="4" width="4" height="16" fill="currentColor"/></svg>',
+  chevron: '<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+  star: '<svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>',
+  star_outline: '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><polygon points="12 2 15 9 22 9 17 14 19 22 12 18 5 22 7 14 2 9 9 9"/></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  download: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+  activity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
+  file: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+  history: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><polyline points="3 3 3 8 8 8"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="12" y1="12" x2="15" y2="14"/></svg>',
+  chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>',
+  alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+};
+
+/* ============== FILTERED ============== */
+function getFiltered() {
+  let arr = [...state.tokens];
+  const f = state.filter;
+  if (f === 'long')   arr = arr.filter(t => t.patterns.some(p => PATTERNS[p.code]?.type === 'long'));
+  else if (f === 'short')  arr = arr.filter(t => t.patterns.some(p => PATTERNS[p.code]?.type === 'short'));
+  else if (f === 'avoid')  arr = arr.filter(t => t.patterns.some(p => PATTERNS[p.code]?.type === 'avoid'));
+  else if (f === 'watch')  arr = arr.filter(t => state.watchlist.includes(t.symbol));
+  else if (f === 'tagged') arr = arr.filter(t => t.patterns.length > 0);
+
+  const s = state.sortBy;
+  if (s === 'score')          arr.sort((a, b) => b.maxScore - a.maxScore);
+  else if (s === 'vol')       arr.sort((a, b) => b.volume24h - a.volume24h);
+  else if (s === '24h_up')    arr.sort((a, b) => b.change24h - a.change24h);
+  else if (s === '24h_down')  arr.sort((a, b) => a.change24h - b.change24h);
+  else if (s === '7d_up')     arr.sort((a, b) => b.change7d - a.change7d);
+  else if (s === 'rsi')       arr.sort((a, b) => a.rsi - b.rsi);
+
+  return arr;
+}
+
+/* ============== RENDER ============== */
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function renderHeader() {
+  const m = state.macro;
+  const regimeHtml = m ? `<span class="regime-badge ${m.regimeColor}">${escapeHtml(m.regime)}</span>` : '';
+  const dotClass = state.loading ? 'scanning' : state.autoMin ? 'live' : '';
+
+  let macroHtml = '';
+  if (m?.btc && m?.eth) {
+    macroHtml = `
+      <div class="macro-bar">
+        <div class="macro-item">
+          <div class="label">BTC</div>
+          <div class="value">
+            <span class="primary">$${fmtPrice(m.btc.price)}</span>
+            <span class="${m.btc.change24h >= 0 ? 'up' : 'down'}">${fmtPct(m.btc.change24h)}</span>
+          </div>
+        </div>
+        <div class="macro-item">
+          <div class="label">ETH</div>
+          <div class="value">
+            <span class="primary">$${fmtPrice(m.eth.price)}</span>
+            <span class="${m.eth.change24h >= 0 ? 'up' : 'down'}">${fmtPct(m.eth.change24h)}</span>
+          </div>
+        </div>
+        <div class="macro-item">
+          <div class="label">ETH/BTC</div>
+          <div class="value">
+            <span class="primary">${(m.eth.price / m.btc.price).toFixed(5)}</span>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  const filtered = getFiltered();
+  const checklistScore = computeChecklistScore();
+  const tabs = [
+    { k: 'scan',    label: '扫描',   icon: ICONS.activity, count: filtered.length },
+    { k: 'report',  label: '报告',   icon: ICONS.file },
+    { k: 'checklist', label: '清单', icon: ICONS.check, count: checklistScore.checked > 0 ? checklistScore.checked : undefined },
+    { k: 'history', label: '历史',   icon: ICONS.history, count: state.history.length },
+    { k: 'help',    label: 'v10',    icon: ICONS.chart },
+  ];
+
+  return `
+    <div class="header">
+      <div class="header-row">
+        <div class="header-left">
+          <div class="brand">
+            <span class="brand-dot ${dotClass}"></span>
+            <span>QUANT//v5.1</span>
+          </div>
+          ${regimeHtml}
+        </div>
+        <div class="header-right">
+          <button class="icon-btn ${state.autoMin ? 'active' : ''}" onclick="setAutoRefresh(${!state.autoMin})" title="定时刷新">
+            ${state.autoMin ? ICONS.pause : ICONS.play}
+          </button>
+          <button class="icon-btn" ${state.loading ? 'disabled' : ''} onclick="performScan()" title="立即扫描">
+            <span class="${state.loading ? 'spinning' : ''}" style="display:inline-flex">${ICONS.refresh}</span>
+          </button>
+        </div>
+      </div>
+      ${macroHtml}
+      <div class="tabs">
+        ${tabs.map(t => `
+          <button class="tab ${state.tab === t.k ? 'active' : ''}" onclick="setTab('${t.k}')">
+            ${t.icon}
+            <span>${t.label}</span>
+            ${t.count !== undefined && t.count > 0 ? `<span class="tab-count">(${t.count})</span>` : ''}
+          </button>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderTokenRow(t) {
+  const ch24Cls = t.change24h >= 0 ? 'up' : 'down';
+  const ch7Cls = t.change7d >= 0 ? 'up' : 'down';
+  const rsiCls = t.rsi > 75 ? 'amber' : t.rsi < 30 ? 'cyan' : 'flat';
+  const inWl = state.watchlist.includes(t.symbol);
+  const isExpanded = state.expanded === t.symbol;
+
+  const tags = t.patterns.slice(0, 3).map(p => {
+    const pat = PATTERNS[p.code]; if (!pat) return '';
+    const vetoMark = p.vetoed
+      ? (p.srrSoftened ? ' style="opacity:0.75;border-style:dashed"' : ' style="opacity:0.45;text-decoration:line-through"')
+      : '';
+    return `<span class="tag ${pat.color}"${vetoMark}>${escapeHtml(pat.name)}·${p.score}</span>`;
+  }).join('');
+  const moreTags = t.patterns.length > 3 ? `<span class="tag-more">+${t.patterns.length - 3}</span>` : '';
+  // v4.4: warning badges (microcap / post-pump / extended)
+  const warnTags = (t.warnings || []).map(w =>
+    `<span class="tag rose" style="background:rgba(251,113,133,0.2)">⚠${escapeHtml(w.code)}</span>`
+  ).join('');
+
+  let detail = '';
+  if (isExpanded) {
+    const patternsHtml = t.patterns.map(p => {
+      const pat = PATTERNS[p.code]; if (!pat) return '';
+      return `
+        <div class="pattern-card ${pat.color}">
+          <div class="pattern-head">
+            <span class="pattern-name ${pat.color}">${escapeHtml(pat.name)} · ${escapeHtml(pat.full)}</span>
+            <span class="pattern-score">⭐ ${p.score}/10</span>
+          </div>
+          <div class="pattern-reason">${escapeHtml(p.reason)}</div>
+        </div>
+      `;
+    }).join('');
+
+    // v4.4: warning cards
+    const warningsHtml = (t.warnings || []).map(w => `
+      <div class="pattern-card rose" style="background:rgba(251,113,133,0.12)">
+        <div class="pattern-head">
+          <span class="pattern-name rose">⚠️ ${escapeHtml(w.code)}</span>
+        </div>
+        <div class="pattern-reason">${escapeHtml(w.desc)}</div>
+      </div>
+    `).join('');
+
+    detail = `
+      <div class="token-detail">
+        <div class="metrics-grid">
+          <div class="metric"><div class="label">高7d</div><div class="value">$${fmtPrice(t.high7d)}</div></div>
+          <div class="metric"><div class="label">低7d</div><div class="value">$${fmtPrice(t.low7d)}</div></div>
+          <div class="metric"><div class="label">7d</div><div class="value ${ch7Cls}">${fmtPct(t.change7d)}</div></div>
+          <div class="metric"><div class="label">30d</div><div class="value ${t.change30d >= 0 ? 'up' : 'down'}">${fmtPct(t.change30d || 0)}</div></div>
+          <div class="metric"><div class="label">市值</div><div class="value">$${fmtVolume(t.marketCap)}</div></div>
+          <div class="metric"><div class="label">24h量</div><div class="value">$${fmtVolume(t.volume24h)}</div></div>
+          <div class="metric"><div class="label">换手</div><div class="value">${(t.volMcRatio * 100).toFixed(1)}%</div></div>
+          <div class="metric"><div class="label">距ATH</div><div class="value down">${(t.athChange || 0).toFixed(0)}%</div></div>
+        </div>
+        ${warningsHtml}
+        ${patternsHtml || '<div style="font-size:10px;color:var(--text-faint);padding:4px 0">无v10模式匹配</div>'}
+        <div class="action-row">
+          <button class="action-btn ${inWl ? 'active' : ''}" onclick="event.stopPropagation();toggleWatch('${t.symbol}')">
+            ${inWl ? ICONS.star : ICONS.star_outline}
+            <span>${inWl ? '已关注' : '加关注'}</span>
+          </button>
+          <a class="action-btn" href="https://www.coingecko.com/zh/币种/${encodeURIComponent(t.id)}" target="_blank" rel="noopener">CoinGecko →</a>
+          <a class="action-btn" href="https://www.binance.com/zh-CN/futures/${escapeHtml(t.symbol.toUpperCase())}USDT" target="_blank" rel="noopener">币安期货 →</a>
+        </div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="token-row ${isExpanded ? 'expanded' : ''}">
+      <button class="token-summary" onclick="toggleExpand('${t.symbol}')">
+        <div class="token-symbol-col">
+          <div class="token-symbol">${inWl ? `<span class="star">${ICONS.star}</span>` : ''}${escapeHtml(t.symbol.toUpperCase())}</div>
+          <div class="token-price">$${fmtPrice(t.price)}</div>
+        </div>
+        <div class="token-change-col">
+          <div class="token-change-24h ${ch24Cls}">${fmtPct(t.change24h)}</div>
+          <div class="token-change-7d ${ch7Cls}">7d ${fmtPct(t.change7d)}</div>
+        </div>
+        <div class="token-rsi-col">
+          <div class="token-rsi-label">RSI</div>
+          <div class="token-rsi-value ${rsiCls}">${t.rsi.toFixed(0)}</div>
+        </div>
+        <div class="token-tags-col">
+          <div class="token-tags">${tags}${warnTags}${moreTags}</div>
+        </div>
+        ${ICONS.chevron}
+      </button>
+      ${detail}
+    </div>
+  `;
+}
+
+function renderScanTab() {
+  const filtered = getFiltered();
+  const filters = [['all','全部'],['tagged','有标记'],['long','多头'],['short','空头'],['avoid','避免'],['watch','关注']];
+  const sorts = [['score','评分↓'],['vol','成交↓'],['24h_up','24h↑'],['24h_down','24h↓'],['7d_up','7d↑'],['rsi','RSI↑']];
+
+  return `
+    ${renderCloudBanner()}
+    <div class="filters">
+      <div class="filter-row">
+        ${filters.map(([k,l]) => `<button class="chip ${state.filter === k ? 'active' : ''}" onclick="setFilter('${k}')">${l}</button>`).join('')}
+      </div>
+      <div class="filter-row">
+        ${sorts.map(([k,l]) => `<button class="chip-sort ${state.sortBy === k ? 'active' : ''}" onclick="setSort('${k}')">${l}</button>`).join('')}
+      </div>
+    </div>
+    <div class="token-list">
+      ${filtered.length === 0
+        ? `<div class="empty">${state.tokens.length === 0 ? '初次扫描中...' : '当前筛选下无标的'}</div>`
+        : filtered.map(renderTokenRow).join('')}
+    </div>
+    ${renderAutoBar()}
+  `;
+}
+
+// v5.1: 定时刷新档位 + 上次/下次扫描时间
+function renderAutoBar() {
+  const hm = (d) => new Date(d).toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' });
+  const last = state.lastScan ? `上次扫描 ${state.lastScan.toLocaleTimeString('zh-CN', { hour12: false })}` : '';
+  const next = state.autoMin && state.nextScanAt ? ` · 下次 ${hm(state.nextScanAt)}` : '';
+  return `
+    <div class="auto-bar">
+      <span class="auto-label">定时刷新</span>
+      ${AUTO_OPTIONS.map(m => `<button class="chip-sort ${state.autoMin === m ? 'active' : ''}" onclick="setAutoMin(${m})">${m ? m + '分' : '关'}</button>`).join('')}
+    </div>
+    <div class="footer-info">${last}${next}${state.autoMin ? '' : (last ? ' · 定时刷新未开' : '')}</div>
+  `;
+}
+
+// v5.1: 云端定时扫描的最近一次结果
+function renderCloudBanner() {
+  const c = state.cloud;
+  if (!c) return '';
+  const when = new Date(c.time).toLocaleString('zh-CN', { hour12: false, month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const btc = c.btc ? ` · BTC $${fmtPrice(c.btc.p)} (${fmtPct(c.btc.c24)})` : '';
+  return `
+    <div class="cloud-banner" onclick="viewCloudReport()">
+      <span>☁ 云端定时扫描 ${when} · ${escapeHtml(c.regime || '')}${btc} · SRR ${(c.srr || []).length}</span>
+      <span class="cloud-link">看报告 ›</span>
+    </div>`;
+}
+
+function renderReportTab() {
+  // v5.1: 没有实时报告(还在扫/被限流)或用户点了云端横幅 → 显示云端定时扫描的报告
+  if (state.cloud && (state.showCloud || !state.report)) {
+    const when = new Date(state.cloud.time).toLocaleString('zh-CN', { hour12: false });
+    return `
+      <div class="cloud-banner" style="cursor:default">
+        <span>☁ 这是云端定时扫描的报告(${when}),不是刚刚的实时扫描</span>
+        ${state.report ? `<span class="cloud-link" onclick="hideCloudReport()" style="cursor:pointer">回到实时 ›</span>` : ''}
+      </div>
+      <div class="report-body">${escapeHtml(state.cloud.report)}</div>
+    `;
+  }
+  if (!state.report) return `<div class="empty">扫描后生成报告</div>`;
+  return `
+    <div class="report-actions">
+      <button class="action-btn-full" onclick="copyReport()">${ICONS.copy}<span>复制MD</span></button>
+      <button class="action-btn-full" onclick="downloadReport()">${ICONS.download}<span>下载.md</span></button>
+    </div>
+    <div class="report-body">${escapeHtml(state.report)}</div>
+  `;
+}
+
+function renderHistoryTab() {
+  if (state.historyDetail) {
+    const d = new Date(state.historyDetail.timestamp);
+    return `
+      <div class="history-back">
+        <button class="history-back-btn" onclick="closeHistoryDetail()">← 返回列表</button>
+        <span class="history-time">${d.toLocaleString('zh-CN', { hour12: false })}</span>
+      </div>
+      <div class="report-body">${escapeHtml(state.historyDetail.report || '无报告内容')}</div>
+    `;
+  }
+  if (state.history.length === 0) return `<div class="empty">暂无历史</div>`;
+  return `
+    <div>
+      ${state.history.map(key => {
+        const ts = key.replace('qs_scan_', '');
+        const d = new Date(ts);
+        return `
+          <div class="history-item">
+            <button class="history-text" onclick="openHistoryDetail('${key}')" style="background:none;border:0;text-align:left;cursor:pointer;color:inherit;font:inherit;flex:1;">
+              <div>${d.toLocaleString('zh-CN', { hour12: false })}</div>
+              <div class="history-key">${escapeHtml(key)}</div>
+            </button>
+            <button class="del-btn" onclick="deleteScanItem('${key}')">${ICONS.trash}</button>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderHelpTab() {
+  const items = Object.entries(PATTERNS).map(([code, p]) => `
+    <div class="help-item ${p.color}">
+      <span class="help-code">${escapeHtml(p.name)}</span>
+      <span class="help-desc">${escapeHtml(p.full)}</span>
+    </div>
+  `).join('');
+
+  return `
+    <div class="help">
+      <div class="help-section-title">自动识别 (Auto-detected, ${Object.keys(PATTERNS).length}个)</div>
+      ${items}
+
+      <div class="help-section-title">需手动复核 (需新闻/链上数据)</div>
+      <div class="help-manual">
+        <p><strong>DFD</strong> · 通缩飞轮 (AKT/VVV/HYPE)</p>
+        <p><strong>EUC/MEC</strong> · 机构催化迁移</p>
+        <p><strong>GC</strong> · 治理催化</p>
+        <p><strong>DEBT</strong> · DFD+ETF+回购三合一</p>
+        <p><strong>AYI/AYI-S</strong> · 加密优先股股息</p>
+        <p><strong>NIS</strong> · 主权银行信号</p>
+        <p><strong>BCC</strong> · 双催化确认</p>
+        <p><strong>ILES</strong> · 常春藤捐赠</p>
+        <p><strong>WCW</strong> · 巨鲸集中度</p>
+        <p><strong>ESN</strong> · ETF出货</p>
+        <p><strong>HEX</strong> · 监管攻击</p>
+        <p><strong>HFR</strong> · BTC ETF轮动</p>
+        <p><strong>SHV</strong> · 安全漏洞</p>
+        <p><strong>BMR</strong> · 债市恐慌</p>
+        <p><strong>MUC</strong> · 矿企抛售</p>
+        <p><strong>FUND系列</strong> · 资金费/OI (币安永续不可用时无)</p>
+        <p><strong>IABD</strong> · 机构吸筹(OI)</p>
+      </div>
+
+      <div class="help-section-title">v4.3 板块映射 (用于SER检测)</div>
+      <div class="help-manual">
+        ${Object.entries(SECTOR_MAP).map(([code, info]) => `
+          <p><strong>${escapeHtml(info.name)}</strong> · 龙头: ${info.leaders.map(s => s.toUpperCase()).join(', ')}<br>
+          <span style="font-size:10px;color:var(--text-faint)">成员: ${info.members.map(s => s.toUpperCase()).join(', ')}</span></p>
+        `).join('')}
+      </div>
+
+      <div class="help-footer">
+        QUANT TERMINAL v5.1 (手机App · 定时刷新 · 邮件推送)<br>
+        覆盖: CoinGecko Top${TOP_N}标的(按24h成交量)<br>
+        数据源: api.coingecko.com (免费公共API，全球可访问)<br>
+        本地存储: 浏览器localStorage / 最近${HISTORY_LIMIT}次扫描历史<br><br>
+        <strong>v4.3：</strong> TBR(三重底)+VEX(量爆发)+SER(板块echo)，基于LIT/GRASS/DEXE三例。<br>
+        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><br>
+        ⚠️ 注意：CoinGecko免费API限流10-30次/分钟，开启自动刷新前请确认网络稳定。<br>
+        若遇429限流错误，关掉自动刷新等60秒。
+      </div>
+    </div>
+  `;
+}
+
+function renderChecklistTab() {
+  const cl = state.checklist;
+  if (!cl) return '<div class="empty">清单加载失败</div>';
+  const sc = computeChecklistScore();
+  const edit = state.checklistEdit;
+
+  // Action gauge
+  const rule = sc.rule || { label: '-', action: '-', pos: '-' };
+  const mt = state.monetaryTight;
+  // v4.6: monetary toggle · v5.0: 加起算日 + 陈旧度提醒
+  const anchor = mt ? getMonetaryAnchor() : null;
+  const stale = state.macro?.monetaryStale;
+  const anchorLine = anchor
+    ? `<div style="font-size:9px;color:var(--text-faint);margin-top:3px">关闸起算: ${new Date(anchor.since).toLocaleDateString('zh-CN')}${anchor.btc ? ` · BTC $${fmtPrice(anchor.btc)}` : ''}</div>`
+    : '';
+  const staleLine = stale
+    ? `<div style="margin-top:6px;padding:6px 8px;border:1px solid var(--amber-border);background:var(--amber-bg);border-radius:3px;font-size:10px;color:var(--amber);line-height:1.5">⚠️ <strong>需人工复核</strong>：闸已关 ${stale.days} 天,期间BTC ${fmtPct(stale.btcGain)}。请亲自确认货币环境 —— 工具不会自动开闸。</div>`
+    : '';
+  const monetaryToggle = `
+    <div style="margin-top:6px;padding:6px 8px;border:1px solid ${mt ? 'var(--amber-border)' : 'var(--emerald-border)'};background:${mt ? 'var(--amber-bg)' : 'var(--emerald-bg)'};border-radius:3px;display:flex;align-items:center;justify-content:space-between">
+      <div>
+        <span style="font-size:10px;color:${mt ? 'var(--amber)' : 'var(--emerald)'}">💵 货币环境: ${mt ? '紧缩(Fed鹰派)→ 否决多头' : '中性/宽松 → 放行'}</span>
+        ${anchorLine}
+      </div>
+      <button onclick="toggleMonetary()" style="font-size:9px;padding:2px 8px;border:1px solid var(--border);border-radius:3px;color:var(--text-dim);flex-shrink:0">切换</button>
+    </div>${staleLine}`;
+  const gateBlock = !sc.gatePassed
+    ? `<div style="margin-top:6px;padding:6px 8px;border:1px solid var(--rose-border);background:var(--rose-bg);border-radius:3px;font-size:10px;color:var(--rose)">🛑 总闸未开(价格或货币因子未通过)：最多试探仓25%，不许重仓</div>`
+    : `<div style="margin-top:6px;padding:6px 8px;border:1px solid var(--emerald-border);background:var(--emerald-bg);border-radius:3px;font-size:10px;color:var(--emerald)">✅ 总闸已开：可按打分执行仓位</div>`;
+
+  // Capped position if gate not passed OR monetary tight
+  let effPos = rule.pos;
+  const hardCap = !sc.gatePassed || mt;
+  if (hardCap && rule.pos && parseInt(rule.pos) > 25) effPos = '25% (总闸未开/货币紧缩·封顶)';
+
+  const groupsHtml = cl.groups.map((g, gi) => `
+    <div style="margin-top:12px">
+      <div style="font-size:11px;letter-spacing:0.05em;color:var(--text-dim);margin-bottom:6px;font-weight:600">${escapeHtml(g.name)}</div>
+      ${g.items.map((it, ii) => {
+        const autoTag = it.auto ? '<span style="font-size:8px;color:var(--cyan);border:1px solid var(--cyan-border);padding:0 3px;border-radius:2px;margin-left:4px">自动</span>' : '';
+        const gateTag = it.gate ? '<span style="font-size:8px;color:var(--amber);border:1px solid var(--amber-border);padding:0 3px;border-radius:2px;margin-left:4px">总闸</span>' : '';
+        const trackTag = it.noScore ? '<span style="font-size:8px;color:var(--text-faint);border:1px solid var(--border);padding:0 3px;border-radius:2px;margin-left:4px">追踪</span>' : '';
+        if (edit) {
+          return `<div style="display:flex;gap:6px;align-items:center;padding:4px 0">
+            <input value="${escapeHtml(it.text)}" onchange="editChecklistItem(${gi},${ii},this.value)"
+              style="flex:1;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:11px;padding:4px 6px;border-radius:3px"/>
+            <button onclick="removeChecklistItem(${gi},${ii})" style="color:var(--rose);padding:2px 6px">✕</button>
+          </div>`;
+        }
+        return `<button onclick="toggleChecklistItem(${gi},${ii})" ${it.auto ? 'disabled' : ''}
+          style="display:flex;gap:8px;align-items:flex-start;width:100%;text-align:left;padding:6px 8px;margin-bottom:3px;border:1px solid ${it.checked ? 'var(--emerald-border)' : 'var(--border)'};background:${it.checked ? 'var(--emerald-bg)' : 'transparent'};border-radius:3px;${it.auto ? 'opacity:0.85;cursor:default' : 'cursor:pointer'}">
+          <span style="flex-shrink:0;width:16px;height:16px;border:1.5px solid ${it.checked ? 'var(--emerald)' : 'var(--text-faint)'};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;color:var(--emerald);font-size:11px;margin-top:1px">${it.checked ? '✓' : ''}</span>
+          <span style="flex:1">
+            <span style="font-size:11px;color:${it.checked ? 'var(--text)' : 'var(--text-dim)'}">${escapeHtml(it.text)}${autoTag}${gateTag}${trackTag}</span>
+            ${it.hint ? `<br><span style="font-size:9px;color:var(--text-faint)">${escapeHtml(it.hint)}</span>` : ''}
+          </span>
+        </button>`;
+      }).join('')}
+      ${edit ? `<button onclick="addChecklistItem(${gi})" style="font-size:10px;color:var(--cyan);padding:4px">+ 加一项</button>` : ''}
+    </div>
+  `).join('');
+
+  const rulesHtml = cl.actionRules.map((r, ri) => {
+    const active = sc.rule && sc.rule.min === r.min;
+    if (edit) {
+      return `<div style="display:flex;gap:4px;align-items:center;padding:3px 0;font-size:10px">
+        <input type="number" value="${r.min}" onchange="editRule(${ri},'min',this.value)" style="width:34px;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:10px;padding:2px;border-radius:2px"/>
+        <span>-</span>
+        <input type="number" value="${r.max}" onchange="editRule(${ri},'max',this.value)" style="width:34px;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:10px;padding:2px;border-radius:2px"/>
+        <input value="${escapeHtml(r.action)}" onchange="editRule(${ri},'action',this.value)" style="flex:1;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:10px;padding:2px 4px;border-radius:2px"/>
+        <input value="${escapeHtml(r.pos)}" onchange="editRule(${ri},'pos',this.value)" style="width:48px;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:10px;padding:2px;border-radius:2px"/>
+      </div>`;
+    }
+    return `<div style="display:flex;justify-content:space-between;padding:4px 8px;border-radius:2px;font-size:10px;${active ? 'background:var(--emerald-bg);border:1px solid var(--emerald-border)' : ''}">
+      <span style="color:var(--text-dim)">${r.min}-${r.max}分 · ${escapeHtml(r.label)}</span>
+      <span style="color:${active ? 'var(--emerald)' : 'var(--text-mute)'}">${escapeHtml(r.action)} · <strong>${escapeHtml(r.pos)}</strong></span>
+    </div>`;
+  }).join('');
+
+  const failHtml = cl.failConditions.map((f, fi) => {
+    if (edit) {
+      return `<div style="display:flex;gap:6px;align-items:center;padding:3px 0">
+        <input value="${escapeHtml(f)}" onchange="editFail(${fi},this.value)" style="flex:1;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:10px;padding:3px 5px;border-radius:2px"/>
+        <button onclick="removeFail(${fi})" style="color:var(--rose);padding:2px 6px">✕</button>
+      </div>`;
+    }
+    return `<div style="font-size:10px;color:var(--rose);padding:2px 0">🔴 ${escapeHtml(f)}</div>`;
+  }).join('');
+
+  const pct = sc.total ? Math.round(sc.checked / sc.total * 100) : 0;
+
+  return `
+    <div style="padding:0">
+      <!-- Header / score gauge -->
+      <div style="padding:12px;border-bottom:1px solid var(--border-light)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-size:12px;font-weight:600;color:var(--text)">${escapeHtml(cl.title)}</div>
+          <button onclick="toggleChecklistEdit()" style="font-size:10px;padding:3px 8px;border:1px solid var(--border);border-radius:3px;color:${edit ? 'var(--emerald)' : 'var(--text-dim)'}">${edit ? '完成' : '编辑'}</button>
+        </div>
+        <div style="font-size:9px;color:var(--text-faint);margin-bottom:8px">更新: ${edit ? `<input value="${escapeHtml(cl.updated)}" onchange="editChecklistMeta('updated',this.value)" style="background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:9px;padding:1px 4px;border-radius:2px;width:90px"/>` : escapeHtml(cl.updated)}</div>
+        ${edit ? `<input value="${escapeHtml(cl.title)}" onchange="editChecklistMeta('title',this.value)" style="width:100%;background:var(--bg-panel);border:1px solid var(--border);color:var(--text);font:inherit;font-size:11px;padding:4px 6px;border-radius:3px;margin-bottom:8px" placeholder="清单标题"/>` : ''}
+        <!-- Score bar -->
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+          <span style="font-size:24px;font-weight:700;color:${sc.checked >= 7 ? 'var(--emerald)' : sc.checked >= 5 ? 'var(--cyan)' : sc.checked >= 3 ? 'var(--amber)' : 'var(--rose)'}">${sc.checked}</span>
+          <span style="font-size:12px;color:var(--text-faint)">/ ${sc.total} 信号</span>
+        </div>
+        <div style="height:6px;background:var(--bg-panel);border-radius:3px;overflow:hidden;margin-bottom:8px">
+          <div style="height:100%;width:${pct}%;background:${sc.checked >= 7 ? 'var(--emerald)' : sc.checked >= 5 ? 'var(--cyan)' : sc.checked >= 3 ? 'var(--amber)' : 'var(--rose)'};transition:width 0.3s"></div>
+        </div>
+        <!-- Current action -->
+        <div style="padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg-panel)">
+          <div style="font-size:10px;color:var(--text-faint)">当前状态</div>
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin:2px 0">${escapeHtml(rule.label)}</div>
+          <div style="font-size:11px;color:var(--text-dim)">行动: ${escapeHtml(rule.action)} · 仓位: <strong style="color:var(--emerald)">${escapeHtml(effPos)}</strong></div>
+        </div>
+        ${gateBlock}
+        ${monetaryToggle}
+      </div>
+
+      <!-- Signal groups -->
+      <div style="padding:0 12px 12px">
+        ${groupsHtml}
+        ${edit ? `<button onclick="addChecklistGroup()" style="font-size:10px;color:var(--cyan);padding:6px;margin-top:8px;border:1px dashed var(--border);border-radius:3px;width:100%">+ 加一组</button>` : ''}
+
+        <!-- Action rules -->
+        <div style="margin-top:16px">
+          <div style="font-size:11px;letter-spacing:0.05em;color:var(--text-dim);margin-bottom:6px;font-weight:600">📊 打分→行动规则</div>
+          ${rulesHtml}
+        </div>
+
+        <!-- Fail conditions -->
+        <div style="margin-top:16px">
+          <div style="font-size:11px;letter-spacing:0.05em;color:var(--text-dim);margin-bottom:6px;font-weight:600">🚫 失效条件 (任一触发→清仓回现金)</div>
+          ${failHtml}
+          ${edit ? `<button onclick="addFail()" style="font-size:10px;color:var(--cyan);padding:4px">+ 加一条</button>` : ''}
+        </div>
+
+        <!-- Reset -->
+        <div style="margin-top:16px;padding-top:12px;border-top:1px solid var(--border-light)">
+          <button onclick="resetChecklist()" style="font-size:10px;color:var(--text-faint);padding:6px">↺ 恢复默认清单</button>
+          <button onclick="uncheckAllChecklist()" style="font-size:10px;color:var(--text-faint);padding:6px;margin-left:8px">清空所有勾选</button>
+        </div>
+        <div style="margin-top:8px;font-size:9px;color:var(--text-faint);line-height:1.5">
+          🛑总闸项(regime)由扫描自动检测，下跌趋势时无法重仓。地缘/技术项需你手动勾。点"编辑"可改信号、阈值、规则——形势变了随时调。
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function render() {
+  const errorHtml = state.error ? `<div class="error-banner">${ICONS.alert}<span>${escapeHtml(state.error)}</span></div>` : '';
+  let content = '';
+  if (state.tab === 'scan') content = renderScanTab();
+  else if (state.tab === 'report') content = renderReportTab();
+  else if (state.tab === 'checklist') content = renderChecklistTab();
+  else if (state.tab === 'history') content = renderHistoryTab();
+  else if (state.tab === 'help') content = renderHelpTab();
+
+  document.getElementById('app').innerHTML = renderHeader() + errorHtml + content;
+}
+
+/* ============== EVENT HANDLERS (exposed to window) ============== */
+window.setTab = (tab) => { state.tab = tab; state.historyDetail = null; state.showCloud = false; render(); };
+window.setFilter = (f) => { state.filter = f; render(); };
+window.setSort = (s) => { state.sortBy = s; render(); };
+window.toggleExpand = (sym) => { state.expanded = state.expanded === sym ? null : sym; render(); };
+window.toggleWatch = (sym) => toggleWatch(sym);
+window.performScan = performScan;
+window.setAutoRefresh = setAutoRefresh;
+window.setAutoMin = setAutoMin;
+window.viewCloudReport = () => { state.showCloud = true; state.tab = 'report'; state.historyDetail = null; render(); };
+window.hideCloudReport = () => { state.showCloud = false; render(); };
+window.copyReport = copyReport;
+window.downloadReport = downloadReport;
+window.openHistoryDetail = (key) => {
+  const data = loadScan(key);
+  if (data) { state.historyDetail = data; render(); }
+};
+window.closeHistoryDetail = () => { state.historyDetail = null; render(); };
+window.deleteScanItem = (key) => {
+  if (!confirm('删除这条扫描记录？')) return;
+  deleteScan(key);
+  if (state.historyDetail?.timestamp && ('qs_scan_' + state.historyDetail.timestamp) === key) {
+    state.historyDetail = null;
+  }
+  render();
+};
+
+/* ===== Checklist handlers ===== */
+window.toggleChecklistItem = (gi, ii) => {
+  const it = state.checklist.groups[gi].items[ii];
+  if (it.auto) return; // auto items can't be manually toggled
+  it.checked = !it.checked;
+  saveChecklist(); render();
+};
+window.toggleChecklistEdit = () => { state.checklistEdit = !state.checklistEdit; render(); };
+window.toggleMonetary = () => {
+  state.monetaryTight = !state.monetaryTight;
+  try { localStorage.setItem('qs_monetary_tight', JSON.stringify(state.monetaryTight)); } catch {}
+  // v5.0: 关闸 → 记起算点(日期+当时BTC);开闸 → 清掉,下次关闸重新起算。
+  if (state.monetaryTight) setMonetaryAnchor(state.macro?.btc?.price ?? null);
+  else clearMonetaryAnchor();
+  // Re-run veto with new monetary state (re-detect on existing tokens)
+  if (state.tokens.length && state.macro) {
+    const btcChange7d = state.macro.btc?.change7d ?? null;
+    const macroCtx = {
+      regime: state.macro.regime, btcChange7d,
+      priceDowntrend: state.macro.priceDowntrend,
+      monetaryTight: state.monetaryTight,
+    };
+    macroCtx.isDowntrend = macroCtx.priceDowntrend || macroCtx.monetaryTight;
+    state.macro.isDowntrend = macroCtx.isDowntrend;
+    state.macro.monetaryTight = state.monetaryTight;
+    state.macro.monetaryStale = checkMonetaryStaleness(state.monetaryTight, state.macro.btc?.price);
+    state.tokens.forEach(t => {
+      t.patterns = detectPatterns(t, btcChange7d, state.tokens, macroCtx);
+      t.maxScore = t.patterns.reduce((m, p) => Math.max(m, p.score), 0);
+    });
+  }
+  render();
+};
+window.editChecklistItem = (gi, ii, val) => { state.checklist.groups[gi].items[ii].text = val; saveChecklist(); };
+window.removeChecklistItem = (gi, ii) => {
+  state.checklist.groups[gi].items.splice(ii, 1);
+  saveChecklist(); render();
+};
+window.addChecklistItem = (gi) => {
+  const id = 'c' + Date.now();
+  state.checklist.groups[gi].items.push({ id, text: '新信号', hint: '', checked: false });
+  saveChecklist(); render();
+};
+window.addChecklistGroup = () => {
+  state.checklist.groups.push({ name: '🆕 新分组', items: [] });
+  saveChecklist(); render();
+};
+window.editChecklistMeta = (key, val) => { state.checklist[key] = val; saveChecklist(); };
+window.editRule = (ri, key, val) => {
+  const r = state.checklist.actionRules[ri];
+  r[key] = (key === 'min' || key === 'max') ? parseInt(val) || 0 : val;
+  saveChecklist(); render();
+};
+window.editFail = (fi, val) => { state.checklist.failConditions[fi] = val; saveChecklist(); };
+window.removeFail = (fi) => { state.checklist.failConditions.splice(fi, 1); saveChecklist(); render(); };
+window.addFail = () => { state.checklist.failConditions.push('新失效条件'); saveChecklist(); render(); };
+window.uncheckAllChecklist = () => {
+  state.checklist.groups.forEach(g => g.items.forEach(it => { if (!it.auto) it.checked = false; }));
+  saveChecklist(); render();
+};
+window.resetChecklist = () => {
+  if (!confirm('恢复默认清单？你的自定义改动会丢失。')) return;
+  state.checklist = JSON.parse(JSON.stringify(DEFAULT_CHECKLIST));
+  syncChecklistAuto();
+  saveChecklist(); render();
+};
+
+/* ============== BOOTSTRAP ============== */
+render();
+performScan();
+loadCloudSnapshot();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http') && !IS_CLOUD) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

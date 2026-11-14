@@ -1,0 +1,25 @@
+{
+  "_说明": "云端定时扫描的设置。手机App里的开关存在手机本地,云端读不到 —— 云端只认这个文件。改完提交即可,下次定时运行生效。",
+
+  "monetaryTight": true,
+  "_monetaryTight": "货币闸。true=紧缩(否决多头),false=中性/宽松(放行)。和App里的'货币环境'开关是同一个东西,但需要分别设置。",
+
+  "monetaryAnchor": null,
+  "_monetaryAnchor": "关闸起算点,用于陈旧度提醒。留null=首次云端扫描时自动起算。要手动指定就写 {\"since\":\"2026-06-17T00:00:00Z\",\"btc\":100000}",
+
+  "watchlist": [],
+  "_watchlist": "自选标的(小写symbol),例如 [\"sol\",\"ena\",\"render\"]。邮件里会单列,并按下面的阈值触发提醒。",
+
+  "digestHoursBeijing": [8, 20],
+  "_digestHoursBeijing": "每天固定发简报的北京时间(整点)。其余时段只在触发提醒时才发邮件。",
+
+  "alerts": {
+    "regimeChange": true,
+    "gateFlip": true,
+    "gateStale": true,
+    "newSRR": true,
+    "btcMove24hPct": 5,
+    "watchMove24hPct": 10
+  },
+  "_alerts": "提醒规则。regimeChange=市场状态变化;gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。同一条提醒只在刚触发时发一次,不会每两小时重复轰炸。"
+}

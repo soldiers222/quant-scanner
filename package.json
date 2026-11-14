@@ -1,0 +1,15 @@
+{
+  "name": "quant-scanner",
+  "version": "5.1.0",
+  "private": true,
+  "type": "module",
+  "description": "QUANT Terminal — 手机App(PWA) + 云端定时扫描 + 邮件推送",
+  "scripts": {
+    "scan": "node cloud/scan.mjs",
+    "scan:dry": "QS_DRY_RUN=1 QS_FORCE_EMAIL=1 node cloud/scan.mjs"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.16",
+    "playwright": "^1.49.0"
+  }
+}

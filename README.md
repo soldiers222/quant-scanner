@@ -1,0 +1,67 @@
+# QUANT Terminal v5.1
+
+手机 App（可装到桌面）＋ 云端定时扫描 ＋ 邮件推送。判定逻辑与 v5.0 完全相同，一行没动。
+
+| 部分 | 在哪运行 | 做什么 |
+|---|---|---|
+| App（`index.html`） | 你的手机浏览器 | 实时扫描、模式标记、报告；打开期间按 5/15/30/60 分钟定时刷新 |
+| 定时任务（`cloud/scan.mjs`） | GitHub 的服务器 | 每 2 小时扫一次；每天 08:00、20:00（北京）发简报，其余时段只在触发提醒时发邮件 |
+
+手机网页在后台或锁屏时不会自己运行，也发不了邮件，所以“定时＋邮件”放在云端。云端用无头浏览器打开同一个 `index.html` 来扫描，邮件里的数字和 App 里看到的是同一套计算。
+
+## 部署（一次性，约 10 分钟）
+
+**1. 建仓库并上传**
+GitHub 新建一个 **Public** 仓库（例如 `quant-scanner`），把本文件夹里的全部内容传上去（包括 `.github` 文件夹）。
+
+**2. 开启网页**
+仓库 Settings → Pages → Source 选 **Deploy from a branch** → Branch 选 `main`、目录 `/ (root)` → Save。
+一两分钟后 App 地址是 `https://<你的用户名>.github.io/<仓库名>/`
+
+**3. 填邮箱密钥**
+仓库 Settings → Secrets and variables → Actions → New repository secret，逐个添加：
+
+| 名称 | 填什么 | QQ 邮箱示例 |
+|---|---|---|
+| `SMTP_HOST` | 发信服务器 | `smtp.qq.com` |
+| `SMTP_PORT` | 端口 | `465` |
+| `SMTP_USER` | 发信邮箱地址 | 你的 QQ 邮箱 |
+| `SMTP_PASS` | **授权码**（不是登录密码） | QQ 邮箱 → 设置 → 账号 → 开启 SMTP 服务后生成 |
+| `MAIL_TO` | 收件邮箱，多个用英文逗号分隔 | 可以和发信邮箱相同 |
+
+其他邮箱：163 用 `smtp.163.com` / `465` / 授权码；Gmail 用 `smtp.gmail.com` / `465` / 应用专用密码。
+密钥只填在这个页面里。不要写进任何文件，也不要发到聊天里。
+
+**4. 测试**
+仓库 Actions → 左侧 `quant-scan` → Run workflow → 保持 `force_email` 勾选 → Run。
+约 2 分钟后应收到一封邮件。没收到就点进这次运行看日志，“邮件发送失败”后面是原因。
+
+**5. 装到手机**
+用 Edge 打开第 2 步的地址 → 菜单 → “添加到手机 / 添加到主屏幕”。之后从桌面图标打开。
+
+## 日常设置
+
+云端的设置都在 `cloud/config.json`（在 GitHub 网页上直接点铅笔图标编辑、提交即可）：
+
+- `monetaryTight`：货币闸。**和手机 App 里的“货币环境”开关互不同步，需要两边各改一次。**
+- `watchlist`：自选标的，邮件里单列并按阈值提醒。App 里的自选存在手机本地，云端读不到。
+- `digestHoursBeijing`：每天发简报的北京时间。
+- `alerts`：提醒规则与阈值。同一条提醒只在刚触发时发一次。
+
+扫描频率在 `.github/workflows/scan.yml` 的 `cron` 一行。
+
+## 需要知道的限制
+
+- **定时不准点**：GitHub 的定时任务常延迟十几分钟，高峰期更久。简报按“该发的时点是否发过”判断，晚到会补发，不会漏、不会重复。
+- **CoinGecko 限流**：GitHub 服务器的 IP 是共享的，偶尔会被限流；脚本会自动等待重试 3 次。经常失败的话，到 CoinGecko 申请免费 Demo Key，添加为 secret `CG_DEMO_KEY`。
+- **公开仓库里别人能看到**：代码、`cloud/config.json`（含自选列表）、`data/` 下的扫描结果。看不到：邮箱和密钥。
+- **价格是扫描时刻的快照**：邮件到手时可能已过去几分钟到几十分钟，下单前以交易所 App 为准。
+- **App 的定时刷新只在 App 开着时有效**：切到后台会暂停，切回来若已过点会立即补扫。
+
+## 本地自测（可选）
+
+```bash
+npm ci
+QS_DRY_RUN=1 QS_FORCE_EMAIL=1 QS_MOCK=cloud/fixtures/sample-markets.json node cloud/scan.mjs
+# 不发信，邮件写到 out/email.html。样例行情是合成数据，仅用于测试流程。
+```
