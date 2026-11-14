@@ -10,7 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>QUANT//v5.1</title>
+<title>QUANT//v5.2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -372,7 +372,9 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 const CG_BASE = 'https://api.coingecko.com/api/v3';
 // v5.1: 定时刷新档位(分钟)。原来固定60秒 —— 会撞CoinGecko免费限流,且不记忆;现在可选档位并持久化。
 const AUTO_OPTIONS = [0, 5, 15, 30, 60];
-const APP_VERSION = '5.1';
+const APP_VERSION = '5.2';
+// v5.2: 1小时异动阈值(%)。只用于展示和推送,不参与任何模式判定。
+const HOUR_MOVE_PCT = 3;
 // 云端定时任务用无头浏览器打开本页时带 ?cloud=1:不注册Service Worker、不读云端快照、不启动定时器。
 const IS_CLOUD = new URLSearchParams(location.search).has('cloud');
 function loadAutoMin() {
@@ -902,7 +904,7 @@ function generateReport(tokens, macro, time) {
   const avoidCodes = ['HCEP', 'RPE_CRASH'];
   const shortCodes = ['WEAK', 'TRRP'];
 
-  let md = `# 🟢 QUANT TERMINAL v5.1 — 扫描报告\n\n`;
+  let md = `# 🟢 QUANT TERMINAL v5.2 — 扫描报告\n\n`;
   md += `**时间**: ${cnTs} (北京)  \n`;
   md += `**数据源**: CoinGecko (Top${TOP_N} by 24h volume)  \n`;
   md += `**覆盖**: ${tokens.length} 标的\n\n`;
@@ -936,6 +938,14 @@ function generateReport(tokens, macro, time) {
     md += `> 双因子否决:价格下跌 OR 货币紧缩,任一成立即否决多头。**此环境优先看避免/做空清单,但SRR标的值得单独看。**\n\n`;
   }
 
+  // v5.2: 1小时异动(只陈列,不参与判定)
+  const movers = tokens.filter(t => t.change1h != null && Math.abs(t.change1h) >= HOUR_MOVE_PCT && !isPeggedAsset(t))
+    .sort((a, b) => Math.abs(b.change1h) - Math.abs(a.change1h));
+  md += `---\n\n## ⚡ 1小时异动(涨跌 ≥ ${HOUR_MOVE_PCT}%)\n\n`;
+  md += movers.length
+    ? movers.map(t => `- **${t.symbol.toUpperCase()}** $${fmtPrice(t.price)} | 1h${fmtPct(t.change1h)} | 24h${fmtPct(t.change24h)} | 7d${fmtPct(t.change7d)}${t.patterns.length ? ' | ' + t.patterns.map(p => PATTERNS[p.code]?.name || p.code).join(' ') : ''}`).join('\n') + '\n\n'
+    : `本次无。\n\n`;
+  md += `> 1小时涨跌只是"正在动"的提示,不是信号。是否可做仍看下面的模式标记和总闸状态。\n\n`;
   md += `---\n\n## 🟢 STEP 2A｜多头候选\n\n`;
   let any = false;
   longCodes.forEach(c => {
@@ -1166,7 +1176,7 @@ async function performScan() {
   if (state.loading) return;
   state.loading = true; state.error = null; render();
   try {
-    const url = `${CG_BASE}/coins/markets?vs_currency=usd&order=volume_desc&per_page=${TOP_N}&page=1&sparkline=true&price_change_percentage=24h,7d,30d`;
+    const url = `${CG_BASE}/coins/markets?vs_currency=usd&order=volume_desc&per_page=${TOP_N}&page=1&sparkline=true&price_change_percentage=1h,24h,7d,30d`;
     const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
     if (!res.ok) {
       if (res.status === 429) throw new Error('CoinGecko限流：等60秒重试（免费API限制10-30次/分钟）');
@@ -1181,6 +1191,7 @@ async function performScan() {
       const high7d = spark.length ? Math.max(...spark) : c.high_24h || 0;
       const low7d = spark.length ? Math.min(...spark) : c.low_24h || 0;
       const change24h = c.price_change_percentage_24h || 0;
+      const change1h = c.price_change_percentage_1h_in_currency ?? null;   // v5.2: 可能为null(CoinGecko偶尔不给)
       const change7d = c.price_change_percentage_7d_in_currency || 0;
       const change30d = c.price_change_percentage_30d_in_currency || 0;
       const volMcRatio = c.market_cap > 0 ? (c.total_volume / c.market_cap) : 0;
@@ -1192,7 +1203,7 @@ async function performScan() {
         marketCap: c.market_cap,
         volume24h: c.total_volume,
         volMcRatio,
-        change24h, change7d, change30d,
+        change1h, change24h, change7d, change30d,
         high7d, low7d,
         ath: c.ath, atl: c.atl,
         athChange: c.ath_change_percentage,
@@ -1312,7 +1323,7 @@ async function loadCloudSnapshot() {
 function buildSnapshot() {
   if (!state.lastScan || !state.macro) return null;
   const m = state.macro;
-  const slim = t => ({ s: t.symbol.toUpperCase(), p: t.price, c24: t.change24h, c7: t.change7d, c30: t.change30d, rsi: Math.round(t.rsi) });
+  const slim = t => ({ s: t.symbol.toUpperCase(), id: t.id, p: t.price, c1h: t.change1h, c24: t.change24h, c7: t.change7d, c30: t.change30d, rsi: Math.round(t.rsi) });
   const withPat = (t, p) => ({ ...slim(t), code: p.code, tag: PATTERNS[p.code]?.name || p.code, score: p.score, reason: p.reason, vetoed: !!p.vetoed, softened: !!p.srrSoftened });
   const byType = (type) => {
     const out = [];
@@ -1336,6 +1347,8 @@ function buildSnapshot() {
     gate: { closed: !!m.isDowntrend, priceDowntrend: !!m.priceDowntrend, monetaryTight: !!m.monetaryTight, stale: m.monetaryStale || null, anchor: getMonetaryAnchor() },
     covered: state.tokens.length,
     srr, longs: byType('long'), avoid: byType('avoid'), shorts: byType('short'), watch,
+    // v5.2: 全部非锚定标的的精简行情(含1h),云端按阈值筛异动
+    all: state.tokens.filter(t => !isPeggedAsset(t)).map(t => ({ ...slim(t), tags: t.patterns.map(p => PATTERNS[p.code]?.name || p.code) })),
     report: state.report,
   };
 }
@@ -1408,6 +1421,7 @@ function getFiltered() {
   else if (s === '24h_down')  arr.sort((a, b) => a.change24h - b.change24h);
   else if (s === '7d_up')     arr.sort((a, b) => b.change7d - a.change7d);
   else if (s === 'rsi')       arr.sort((a, b) => a.rsi - b.rsi);
+  else if (s === '1h')        arr.sort((a, b) => Math.abs(b.change1h || 0) - Math.abs(a.change1h || 0));
 
   return arr;
 }
@@ -1465,7 +1479,7 @@ function renderHeader() {
         <div class="header-left">
           <div class="brand">
             <span class="brand-dot ${dotClass}"></span>
-            <span>QUANT//v5.1</span>
+            <span>QUANT//v5.2</span>
           </div>
           ${regimeHtml}
         </div>
@@ -1506,6 +1520,9 @@ function renderTokenRow(t) {
       : '';
     return `<span class="tag ${pat.color}"${vetoMark}>${escapeHtml(pat.name)}·${p.score}</span>`;
   }).join('');
+  // v5.2: 1小时异动徽标
+  const hourTag = (t.change1h != null && Math.abs(t.change1h) >= HOUR_MOVE_PCT && !isPeggedAsset(t))
+    ? `<span class="tag ${t.change1h >= 0 ? 'emerald' : 'rose'}">1h ${fmtPct(t.change1h)}</span>` : '';
   const moreTags = t.patterns.length > 3 ? `<span class="tag-more">+${t.patterns.length - 3}</span>` : '';
   // v4.4: warning badges (microcap / post-pump / extended)
   const warnTags = (t.warnings || []).map(w =>
@@ -1540,6 +1557,10 @@ function renderTokenRow(t) {
     detail = `
       <div class="token-detail">
         <div class="metrics-grid">
+          <div class="metric"><div class="label">1h</div><div class="value ${(t.change1h || 0) >= 0 ? 'up' : 'down'}">${t.change1h == null ? '—' : fmtPct(t.change1h)}</div></div>
+          <div class="metric"><div class="label">24h</div><div class="value ${ch24Cls}">${fmtPct(t.change24h)}</div></div>
+          <div class="metric"><div class="label">RSI</div><div class="value">${t.rsi.toFixed(0)}</div></div>
+          <div class="metric"><div class="label">距7d高</div><div class="value down">${t.high7d ? ((t.price / t.high7d - 1) * 100).toFixed(1) : '0'}%</div></div>
           <div class="metric"><div class="label">高7d</div><div class="value">$${fmtPrice(t.high7d)}</div></div>
           <div class="metric"><div class="label">低7d</div><div class="value">$${fmtPrice(t.low7d)}</div></div>
           <div class="metric"><div class="label">7d</div><div class="value ${ch7Cls}">${fmtPct(t.change7d)}</div></div>
@@ -1558,6 +1579,7 @@ function renderTokenRow(t) {
           </button>
           <a class="action-btn" href="https://www.coingecko.com/zh/币种/${encodeURIComponent(t.id)}" target="_blank" rel="noopener">CoinGecko →</a>
           <a class="action-btn" href="https://www.binance.com/zh-CN/futures/${escapeHtml(t.symbol.toUpperCase())}USDT" target="_blank" rel="noopener">币安期货 →</a>
+          <a class="action-btn" href="https://www.tradingview.com/chart/?symbol=BINANCE%3A${escapeHtml(t.symbol.toUpperCase())}USDT.P" target="_blank" rel="noopener">TV图表 →</a>
         </div>
       </div>
     `;
@@ -1579,7 +1601,7 @@ function renderTokenRow(t) {
           <div class="token-rsi-value ${rsiCls}">${t.rsi.toFixed(0)}</div>
         </div>
         <div class="token-tags-col">
-          <div class="token-tags">${tags}${warnTags}${moreTags}</div>
+          <div class="token-tags">${hourTag}${tags}${warnTags}${moreTags}</div>
         </div>
         ${ICONS.chevron}
       </button>
@@ -1591,7 +1613,7 @@ function renderTokenRow(t) {
 function renderScanTab() {
   const filtered = getFiltered();
   const filters = [['all','全部'],['tagged','有标记'],['long','多头'],['short','空头'],['avoid','避免'],['watch','关注']];
-  const sorts = [['score','评分↓'],['vol','成交↓'],['24h_up','24h↑'],['24h_down','24h↓'],['7d_up','7d↑'],['rsi','RSI↑']];
+  const sorts = [['score','评分↓'],['vol','成交↓'],['24h_up','24h↑'],['24h_down','24h↓'],['7d_up','7d↑'],['rsi','RSI↑'],['1h','1h异动']];
 
   return `
     ${renderCloudBanner()}
@@ -1735,12 +1757,12 @@ function renderHelpTab() {
       </div>
 
       <div class="help-footer">
-        QUANT TERMINAL v5.1 (手机App · 定时刷新 · 邮件推送)<br>
+        QUANT TERMINAL v5.2 (手机App · 定时刷新 · 邮件推送 · 1小时异动)<br>
         覆盖: CoinGecko Top${TOP_N}标的(按24h成交量)<br>
         数据源: api.coingecko.com (免费公共API，全球可访问)<br>
         本地存储: 浏览器localStorage / 最近${HISTORY_LIMIT}次扫描历史<br><br>
         <strong>v4.3：</strong> TBR(三重底)+VEX(量爆发)+SER(板块echo)，基于LIT/GRASS/DEXE三例。<br>
-        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><br>
+        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><strong>v5.2：</strong>①新增1小时涨跌幅(CoinGecko 1h字段):列表里≥3%的标的带"1h"徽标,可按"1h异动"排序,报告和邮件单列;②云端改为每小时扫描,1小时涨跌超过3%的币即时推送;③展开行增加TradingView链接。1h数据<em>只展示和推送,不参与任何模式判定</em>。<br><br>
         ⚠️ 注意：CoinGecko免费API限流10-30次/分钟，开启自动刷新前请确认网络稳定。<br>
         若遇429限流错误，关掉自动刷新等60秒。
       </div>

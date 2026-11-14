@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.1)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.2)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -110,6 +110,14 @@ function computeAlerts(snap, prev, cfg) {
     (snap.watch || []).filter((w) => Math.abs(w.c24) >= a.watchMove24hPct).forEach((w) =>
       out.push({ key: `watch:${w.s}:${w.c24 > 0 ? 'up' : 'down'}`, text: `自选 ${w.s} 24h ${pct(w.c24)},现价 $${fmtPrice(w.p)}` }));
 
+  // v5.2: 1小时异动。key里带"小时",所以同一小时内重跑不会重复推;下一小时仍超阈值会再推一次(那是新的一小时)。
+  if (a.hourlyMovePct) {
+    const hourKey = snap.time.slice(0, 13);
+    (snap.all || []).filter((t) => t.c1h != null && Math.abs(t.c1h) >= a.hourlyMovePct)
+      .sort((x, y) => Math.abs(y.c1h) - Math.abs(x.c1h))
+      .forEach((t) => out.push({ key: `h1:${t.s}:${hourKey}`, text: `${t.s} 1小时 ${pct(t.c1h)},现价 $${fmtPrice(t.p)}`, mover: t }));
+  }
+
   return out;
 }
 
@@ -145,8 +153,12 @@ const bjTime = (iso) => new Date(iso).toLocaleString('zh-CN', { timeZone: 'Asia/
 
 function buildEmail(snap, alerts, isDigest) {
   const gate = snap.gate;
+  const movers = alerts.filter((a) => a.mover).map((a) => a.mover);
+  const others = alerts.filter((a) => !a.mover);
+  const sgn = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
   const kind = isDigest ? (alerts.length ? '定时简报+提醒' : '定时简报') : (alerts.length ? '提醒' : '测试');
-  const subject = `${alerts.length ? '⚠️ ' : ''}QUANT ${kind}｜BTC $${fmtPrice(snap.btc?.p)} (24h ${snap.btc?.c24 >= 0 ? '+' : ''}${snap.btc?.c24?.toFixed(1)}%)｜${snap.regime}｜总闸${gate.closed ? '关' : '开'}｜SRR ${snap.srr.length}`;
+  const moverSubj = movers.length ? `1h异动${movers.length}个: ${movers.slice(0, 3).map((m) => `${m.s} ${sgn(m.c1h)}`).join(' ')}${movers.length > 3 ? ' 等' : ''}｜` : '';
+  const subject = `${alerts.length ? '⚠️ ' : ''}QUANT ${kind}｜${moverSubj}BTC $${fmtPrice(snap.btc?.p)} (24h ${snap.btc?.c24 >= 0 ? '+' : ''}${snap.btc?.c24?.toFixed(1)}%)｜${snap.regime}｜总闸${gate.closed ? '关' : '开'}｜SRR ${snap.srr.length}`;
 
   const th = 'padding:6px 8px;border-bottom:2px solid #ddd;text-align:left;font-size:12px;color:#666;white-space:nowrap';
   const td = 'padding:6px 8px;border-bottom:1px solid #eee;font-size:13px;vertical-align:top';
@@ -167,13 +179,22 @@ function buildEmail(snap, alerts, isDigest) {
   html += `<div style="font-size:13px;color:#555">价格因子:${gate.priceDowntrend ? '下跌趋势' : '正常'} ｜ 货币因子:${gate.monetaryTight ? '紧缩(手动设定)' : '中性/宽松(手动设定)'}${gate.closed ? ' ｜ 多头信号已降分,最多试探仓' : ''}</div>`;
 
   if (alerts.length) {
+    const lines = others.map((a) => esc(a.text));
+    if (movers.length) lines.push(`1小时涨跌超过阈值的标的 ${movers.length} 个(见下表)`);
     html += `<div style="margin:14px 0;padding:10px 12px;background:#fff7e6;border-left:4px solid #f0a020;font-size:13px">
-      <b>本次触发的提醒</b><ul style="margin:6px 0 0;padding-left:18px">${alerts.map((a) => `<li>${esc(a.text)}</li>`).join('')}</ul></div>`;
+      <b>本次触发的提醒</b><ul style="margin:6px 0 0;padding-left:18px">${lines.map((l) => `<li>${l}</li>`).join('')}</ul></div>`;
+  }
+  if (movers.length) {
+    const link = (m) => `<a href="https://www.coingecko.com/en/coins/${encodeURIComponent(m.id)}" style="color:#111;font-weight:700">${esc(m.s)}</a>`;
+    html += h2(`1小时异动(${movers.length})`);
+    html += table(['标的', '价格', '1h', '24h', '7d', 'RSI', '标记'], movers.map((m) =>
+      [link(m), `$${fmtPrice(m.p)}`, pctHtml(m.c1h), pctHtml(m.c24), pctHtml(m.c7), m.rsi, esc((m.tags || []).join(' ') || '—')]));
+    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">1小时涨跌只说明"正在动",不是买卖信号。是否可做看"标记"一列和总闸状态。</div>`;
   }
 
   html += h2('宏观');
-  html += table(['', '价格', '24h', '7d', '30d', 'RSI'], [snap.btc, snap.eth].filter(Boolean).map((x) =>
-    [`<b>${esc(x.s)}</b>`, `$${fmtPrice(x.p)}`, pctHtml(x.c24), pctHtml(x.c7), pctHtml(x.c30), x.rsi]));
+  html += table(['', '价格', '1h', '24h', '7d', '30d', 'RSI'], [snap.btc, snap.eth].filter(Boolean).map((x) =>
+    [`<b>${esc(x.s)}</b>`, `$${fmtPrice(x.p)}`, x.c1h == null ? '—' : pctHtml(x.c1h), pctHtml(x.c24), pctHtml(x.c7), pctHtml(x.c30), x.rsi]));
 
   html += h2(`SRR 4/4 结构性重估(${snap.srr.length})`);
   html += snap.srr.length ? table(patHead, patRows(snap.srr, 10))

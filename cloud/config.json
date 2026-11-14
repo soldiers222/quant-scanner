@@ -19,7 +19,8 @@
     "gateStale": true,
     "newSRR": true,
     "btcMove24hPct": 5,
-    "watchMove24hPct": 10
+    "watchMove24hPct": 10,
+    "hourlyMovePct": 3
   },
-  "_alerts": "提醒规则。regimeChange=市场状态变化;gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。同一条提醒只在刚触发时发一次,不会每两小时重复轰炸。"
+  "_alerts": "提醒规则。regimeChange=市场状态变化;gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。hourlyMovePct=任意标的1小时涨跌超过该百分比就推送(填0关闭;嫌多就调到5)。除1小时异动外,同一条提醒只在刚触发时发一次。"
 }
