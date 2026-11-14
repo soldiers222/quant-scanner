@@ -7,6 +7,9 @@
   "monetaryAnchor": null,
   "_monetaryAnchor": "关闸起算点,用于陈旧度提醒。留null=首次云端扫描时自动起算。要手动指定就写 {\"since\":\"2026-06-17T00:00:00Z\",\"btc\":100000}",
 
+  "poolSize": 250,
+  "_poolSize": "云端扫描池:50 / 100 / 250(按24h成交量排名)。50是此前回测的口径;更大的池子会带进小市值标的,信号未经回测。和App里的'扫描池'互不同步。",
+
   "watchlist": [],
   "_watchlist": "自选标的(小写symbol),例如 [\"sol\",\"ena\",\"render\"]。邮件里会单列,并按下面的阈值触发提醒。",
 
@@ -20,7 +23,8 @@
     "newSRR": true,
     "btcMove24hPct": 5,
     "watchMove24hPct": 10,
-    "hourlyMovePct": 3
+    "hourlyMovePct": 3,
+    "hourlyMinMcapUsd": 0
   },
-  "_alerts": "提醒规则。regimeChange=市场状态变化;gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。hourlyMovePct=任意标的1小时涨跌超过该百分比就推送(填0关闭;嫌多就调到5)。除1小时异动外,同一条提醒只在刚触发时发一次。"
+  "_alerts": "提醒规则。regimeChange=市场状态变化;gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。hourlyMovePct=任意标的1小时涨跌超过该百分比就推送(填0关闭;嫌多就调到5)。hourlyMinMcapUsd=1小时异动只推市值不低于该金额(美元)的标的,0=不限;池子扩到250后小币异动很多,邮件太吵就填 150000000(1.5亿,滤掉NANO和MICRO)。除1小时异动外,同一条提醒只在刚触发时发一次。"
 }

@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.2)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.3)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -41,12 +41,13 @@ async function runScan(cfg, prev) {
     const ctx = await browser.newContext({ locale: 'zh-CN', timezoneId: 'Asia/Shanghai' });
     // 把云端设置灌进页面的 localStorage(页面本来就从那里读货币闸和自选)
     const anchor = cfg.monetaryTight ? (cfg.monetaryAnchor || prev?.gate?.anchor || null) : null;
-    await ctx.addInitScript(({ tight, anchor, watch }) => {
+    await ctx.addInitScript(({ tight, anchor, watch, pool }) => {
+      localStorage.setItem('qs_pool', JSON.stringify(pool));
       localStorage.setItem('qs_monetary_tight', JSON.stringify(tight));
       if (anchor) localStorage.setItem('qs_monetary_anchor', JSON.stringify(anchor));
       else localStorage.removeItem('qs_monetary_anchor');
       localStorage.setItem('qs_watchlist', JSON.stringify(watch));
-    }, { tight: !!cfg.monetaryTight, anchor, watch: (cfg.watchlist || []).map((s) => String(s).toLowerCase()) });
+    }, { tight: !!cfg.monetaryTight, anchor, watch: (cfg.watchlist || []).map((s) => String(s).toLowerCase()), pool: [50, 100, 250].includes(cfg.poolSize) ? cfg.poolSize : 50 });
 
     const page = await ctx.newPage();
     if (env.QS_MOCK) {
@@ -113,7 +114,7 @@ function computeAlerts(snap, prev, cfg) {
   // v5.2: 1小时异动。key里带"小时",所以同一小时内重跑不会重复推;下一小时仍超阈值会再推一次(那是新的一小时)。
   if (a.hourlyMovePct) {
     const hourKey = snap.time.slice(0, 13);
-    (snap.all || []).filter((t) => t.c1h != null && Math.abs(t.c1h) >= a.hourlyMovePct)
+    (snap.all || []).filter((t) => t.c1h != null && Math.abs(t.c1h) >= a.hourlyMovePct && (t.mc || 0) >= (a.hourlyMinMcapUsd || 0))
       .sort((x, y) => Math.abs(y.c1h) - Math.abs(x.c1h))
       .forEach((t) => out.push({ key: `h1:${t.s}:${hourKey}`, text: `${t.s} 1小时 ${pct(t.c1h)},现价 $${fmtPrice(t.p)}`, mover: t }));
   }
@@ -174,7 +175,7 @@ function buildEmail(snap, alerts, isDigest) {
   const patHead = ['标的', '价格', '24h', '7d', '信号', '依据'];
 
   let html = `<div style="font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;max-width:680px;margin:0 auto;color:#222;line-height:1.55">`;
-  html += `<div style="font-size:12px;color:#888">QUANT Terminal v${esc(snap.version)} · 扫描时间 ${esc(bjTime(snap.time))} (北京)</div>`;
+  html += `<div style="font-size:12px;color:#888">QUANT Terminal v${esc(snap.version)} · 扫描时间 ${esc(bjTime(snap.time))} (北京) · 扫描池 Top${esc(snap.pool)}</div>`;
   html += `<div style="font-size:20px;font-weight:700;margin:4px 0 2px">${esc(snap.regime)} · 总闸${gate.closed ? '关闭' : '打开'}</div>`;
   html += `<div style="font-size:13px;color:#555">价格因子:${gate.priceDowntrend ? '下跌趋势' : '正常'} ｜ 货币因子:${gate.monetaryTight ? '紧缩(手动设定)' : '中性/宽松(手动设定)'}${gate.closed ? ' ｜ 多头信号已降分,最多试探仓' : ''}</div>`;
 
@@ -186,10 +187,14 @@ function buildEmail(snap, alerts, isDigest) {
   }
   if (movers.length) {
     const link = (m) => `<a href="https://www.coingecko.com/en/coins/${encodeURIComponent(m.id)}" style="color:#111;font-weight:700">${esc(m.s)}</a>`;
+    const MAX_ROWS = 20;
+    const mcap = (v) => !v ? '—' : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
+    const warn = (m) => (m.warn || []).length ? ` <span style="color:#c0392b;font-size:11px">⚠${esc(m.warn.join('/'))}</span>` : '';
     html += h2(`1小时异动(${movers.length})`);
-    html += table(['标的', '价格', '1h', '24h', '7d', 'RSI', '标记'], movers.map((m) =>
-      [link(m), `$${fmtPrice(m.p)}`, pctHtml(m.c1h), pctHtml(m.c24), pctHtml(m.c7), m.rsi, esc((m.tags || []).join(' ') || '—')]));
-    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">1小时涨跌只说明"正在动",不是买卖信号。是否可做看"标记"一列和总闸状态。</div>`;
+    html += table(['标的', '价格', '1h', '24h', '7d', '市值', '标记'], movers.slice(0, MAX_ROWS).map((m) =>
+      [link(m) + warn(m), `$${fmtPrice(m.p)}`, pctHtml(m.c1h), pctHtml(m.c24), pctHtml(m.c7), mcap(m.mc), esc((m.tags || []).join(' ') || '—')]));
+    if (movers.length > MAX_ROWS) html += `<div style="font-size:12px;color:#777;margin:-8px 0 8px">按幅度只列前 ${MAX_ROWS} 个,另有 ${movers.length - MAX_ROWS} 个未列出。</div>`;
+    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">1小时涨跌只说明"正在动",不是买卖信号。是否可做看"标记"一列和总闸状态。⚠NANO/MICRO = 市值低于5000万/1.5亿美元,极易插针。</div>`;
   }
 
   html += h2('宏观');
@@ -258,7 +263,7 @@ const prev = await readJson(path.join(DATA, 'latest.json'));
 const state = await readJson(path.join(DATA, 'state.json'), {});
 
 const snap = await runScan(cfg, prev);
-console.log(`扫描完成:${snap.regime} · BTC $${fmtPrice(snap.btc?.p)} · 覆盖${snap.covered} · SRR ${snap.srr.length} · 多头${snap.longs.length} · 回避/偏空${snap.avoid.length + snap.shorts.length}`);
+console.log(`扫描完成(Top${snap.pool}):${snap.regime} · BTC $${fmtPrice(snap.btc?.p)} · 覆盖${snap.covered} · SRR ${snap.srr.length} · 多头${snap.longs.length} · 回避/偏空${snap.avoid.length + snap.shorts.length}`);
 
 const active = computeAlerts(snap, prev, cfg);
 const prevKeys = new Set(state.activeAlertKeys || []);
