@@ -1,0 +1,8663 @@
+{
+ "version": "5.4",
+ "time": "2026-11-14T17:00:37.303Z",
+ "regime": "Risk-Off",
+ "btc": {
+  "s": "BTC",
+  "id": "bitcoin",
+  "p": 65400,
+  "mc": 1315312609569,
+  "warn": [],
+  "c1h": -0.274,
+  "c24": -4.74694,
+  "c7": -13.5941,
+  "c30": -20.5996,
+  "rsi": 22
+ },
+ "eth": {
+  "s": "ETH",
+  "id": "ethereum",
+  "p": 1826.31,
+  "mc": 223208562789,
+  "warn": [],
+  "c1h": -0.5846,
+  "c24": -5.22762,
+  "c7": -18.2903,
+  "c30": -25.1266,
+  "rsi": 26
+ },
+ "gate": {
+  "closed": true,
+  "priceDowntrend": true,
+  "monetaryTight": true,
+  "stale": null,
+  "anchor": {
+   "since": "2026-11-14T17:00:37.297Z",
+   "btc": 65400
+  }
+ },
+ "covered": 250,
+ "pool": 250,
+ "srr": [],
+ "longs": [
+  {
+   "s": "SHELL",
+   "id": "myshell",
+   "p": 0.02641939,
+   "mc": 7133236,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -4.3388,
+   "c24": 8.71064,
+   "c7": 28.3195,
+   "c30": 19.9128,
+   "rsi": 50,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 4,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手1445.6% | 24h +8.7% | RSI 50",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SOPH",
+   "id": "sophon",
+   "p": 0.00213047,
+   "mc": 11075037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 16.2091,
+   "c24": 9.39891,
+   "c7": 61.9915,
+   "c30": -16.7006,
+   "rsi": 51,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 4,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手680.8% | 24h +9.4% | RSI 51",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "UP",
+   "id": "unitas",
+   "p": 0.152032,
+   "mc": 32839001,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.0269,
+   "c24": 7.7312,
+   "c7": 36.3668,
+   "c30": -1.6619,
+   "rsi": 44,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 4,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手55.3% | 24h +7.7% | RSI 44",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BANANAS31",
+   "id": "banana-for-scale-2",
+   "p": 0.00423088,
+   "mc": 42308813,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -6.9482,
+   "c24": 6.86633,
+   "c7": -27.815,
+   "c30": -35.1746,
+   "rsi": 58,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 4,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手41.4% | 24h +6.9% | RSI 58",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ORBS",
+   "id": "orbs",
+   "p": 0.00648391,
+   "mc": 32549235,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.4294,
+   "c24": 8.10836,
+   "c7": 6.6929,
+   "c30": -6.3592,
+   "rsi": 58,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 4,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手43.4% | 24h +8.1% | RSI 58",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "WLFI",
+   "id": "world-liberty-financial",
+   "p": 0.04651324,
+   "mc": 1478210401,
+   "warn": [],
+   "c1h": -1.6577,
+   "c24": -2.5139,
+   "c7": 0.6457,
+   "c30": -19.6957,
+   "rsi": 47,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 47 中性 | 7d +0.6% | 30d -19.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GATO",
+   "id": "gato-the-cat",
+   "p": 0.01076551,
+   "mc": 0,
+   "warn": [],
+   "c1h": -12.3224,
+   "c24": 0,
+   "c7": 0,
+   "c30": 0,
+   "rsi": 50,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 50 中性 | 7d +0.0% | 30d +0.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BMT",
+   "id": "bubblemaps",
+   "p": 0.02282395,
+   "mc": 17519824,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.8011,
+   "c24": -5.02364,
+   "c7": 1.4934,
+   "c30": 29.1262,
+   "rsi": 49,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 49 中性 | 7d +1.5% | 30d +29.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AI",
+   "id": "sleepless-ai",
+   "p": 0.0167273,
+   "mc": 2174548,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.5273,
+   "c24": 9.41497,
+   "c7": 3.3705,
+   "c30": -11.498,
+   "rsi": 68,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手898.3% | 24h +9.4% | RSI 68",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SOXSB",
+   "id": "direxion-semiconductor-bear-3x-etf-bstocks-tokenized-stock",
+   "p": 54.01,
+   "mc": 7417489,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.215,
+   "c24": 1.90448,
+   "c7": -24.8522,
+   "c30": 20.0098,
+   "rsi": 71,
+   "code": "RPE3",
+   "tag": "RPE-3",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌30.3%企稳中",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MITO",
+   "id": "mitosis",
+   "p": 0.00685653,
+   "mc": 3295136,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.162,
+   "c24": 4.04016,
+   "c7": -16.6117,
+   "c30": -50.1586,
+   "rsi": 43,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手360.0% | 24h +4.0% | RSI 43",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RAIN",
+   "id": "rain",
+   "p": 0.0036684,
+   "mc": 2620737787,
+   "warn": [],
+   "c1h": 0.9339,
+   "c24": -1.78973,
+   "c7": -34.5437,
+   "c30": -59.0504,
+   "rsi": 16,
+   "code": "RPE3",
+   "tag": "RPE-3",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌35.1%企稳中",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MIHAO",
+   "id": "ni-hao-cat-2",
+   "p": 0.01474303,
+   "mc": 13870700,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 3.1665,
+   "c24": -0.39804,
+   "c7": 0,
+   "c30": 0,
+   "rsi": 44,
+   "code": "RPE3",
+   "tag": "RPE-3",
+   "score": 3,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌39.7%企稳中",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PEPE",
+   "id": "pepe",
+   "p": 0.0000039,
+   "mc": 1639817577,
+   "warn": [],
+   "c1h": -3.6677,
+   "c24": -12.219,
+   "c7": -20.1001,
+   "c30": -6.1879,
+   "rsi": 19,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AKE",
+   "id": "akedo",
+   "p": 0.01280251,
+   "mc": 291849269,
+   "warn": [
+    "EXTENDED"
+   ],
+   "c1h": -4.5015,
+   "c24": 13.68727,
+   "c7": 114.4035,
+   "c30": -59.3574,
+   "rsi": 68,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +114.4% RSI仅68",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ENA",
+   "id": "ethena",
+   "p": 0.119198,
+   "mc": 1609176236,
+   "warn": [],
+   "c1h": -2.8007,
+   "c24": -11.871,
+   "c7": -24.5957,
+   "c30": -40.4697,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调24.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AAVE",
+   "id": "aave",
+   "p": 102.9,
+   "mc": 1588832885,
+   "warn": [],
+   "c1h": -1.0601,
+   "c24": -7.18014,
+   "c7": -22.1584,
+   "c30": -34.297,
+   "rsi": 30,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "WLD",
+   "id": "worldcoin-wld",
+   "p": 0.262582,
+   "mc": 993954333,
+   "warn": [],
+   "c1h": -3.0698,
+   "c24": -10.94563,
+   "c7": -21.7576,
+   "c30": -47.7553,
+   "rsi": 25,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ARB",
+   "id": "arbitrum",
+   "p": 0.133985,
+   "mc": 923437390,
+   "warn": [],
+   "c1h": -2.933,
+   "c24": -8.11266,
+   "c7": -19.1264,
+   "c30": -29.3695,
+   "rsi": 37,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调27.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ONDO",
+   "id": "ondo-finance",
+   "p": 0.307279,
+   "mc": 1496242305,
+   "warn": [],
+   "c1h": -2.1224,
+   "c24": -9.71635,
+   "c7": -15.3172,
+   "c30": -33.12,
+   "rsi": 25,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "TIA",
+   "id": "celestia",
+   "p": 0.351219,
+   "mc": 348194656,
+   "warn": [],
+   "c1h": -2.5941,
+   "c24": -12.67268,
+   "c7": -20.5024,
+   "c30": -41.624,
+   "rsi": 16,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "QNT",
+   "id": "quant-network",
+   "p": 151.34,
+   "mc": 2202938291,
+   "warn": [],
+   "c1h": -1.3733,
+   "c24": -7.26546,
+   "c7": -23.8575,
+   "c30": -27.2042,
+   "rsi": 39,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调25.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NIGHT",
+   "id": "midnight-3",
+   "p": 0.04807242,
+   "mc": 798357909,
+   "warn": [],
+   "c1h": -3.5796,
+   "c24": 5.95093,
+   "c7": 20.6686,
+   "c30": 10.7269,
+   "rsi": 71,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +20.7% RSI仅71",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BERA",
+   "id": "berachain-bera",
+   "p": 0.100369,
+   "mc": 36714621,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.158,
+   "c24": -5.16551,
+   "c7": -11.8014,
+   "c30": -56.0225,
+   "rsi": 36,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调24.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DODO",
+   "id": "dodo",
+   "p": 0.03271405,
+   "mc": 32714047,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 4.2754,
+   "c24": 15.97685,
+   "c7": 47.2825,
+   "c30": 56.8366,
+   "rsi": 50,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +47.3% RSI仅50",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CRV",
+   "id": "curve-dao-token",
+   "p": 0.211141,
+   "mc": 335031610,
+   "warn": [],
+   "c1h": -2.4022,
+   "c24": -8.49335,
+   "c7": -20.5546,
+   "c30": -40.3746,
+   "rsi": 26,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DASH",
+   "id": "dash",
+   "p": 37.56,
+   "mc": 484270356,
+   "warn": [],
+   "c1h": -1.9051,
+   "c24": -8.23634,
+   "c7": -18.2355,
+   "c30": -23.5641,
+   "rsi": 32,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "APT",
+   "id": "aptos",
+   "p": 0.473747,
+   "mc": 421158649,
+   "warn": [],
+   "c1h": -2.9713,
+   "c24": -11.95335,
+   "c7": -21.061,
+   "c30": -42.6442,
+   "rsi": 21,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ETHFI",
+   "id": "ether-fi",
+   "p": 0.50567,
+   "mc": 504929619,
+   "warn": [],
+   "c1h": -3.613,
+   "c24": -13.57451,
+   "c7": -13.5723,
+   "c30": -22.8358,
+   "rsi": 19,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ARIA",
+   "id": "aria-ai",
+   "p": 0.197134,
+   "mc": 36075562,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 3.2288,
+   "c24": -10.1276,
+   "c7": 29.5337,
+   "c30": 438.2801,
+   "rsi": 41,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +29.5% RSI仅41",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AERO",
+   "id": "aerodrome-finance",
+   "p": 0.438963,
+   "mc": 120092260,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.764,
+   "c24": -7.49844,
+   "c7": -25.7934,
+   "c30": -51.1277,
+   "rsi": 39,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "XPL",
+   "id": "plasma",
+   "p": 0.04545102,
+   "mc": 216397335,
+   "warn": [],
+   "c1h": -4.4515,
+   "c24": -8.52011,
+   "c7": -20.7197,
+   "c30": -46.3324,
+   "rsi": 35,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CAP",
+   "id": "cap-4",
+   "p": 0.111409,
+   "mc": 173797469,
+   "warn": [],
+   "c1h": 2.0007,
+   "c24": 4.69837,
+   "c7": 9.0894,
+   "c30": 40.1146,
+   "rsi": 51,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手14.3% | 24h +4.7% | RSI 51",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MRNAB",
+   "id": "moderna-bstocks-tokenized-stock",
+   "p": 220.34,
+   "mc": 2091217,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.2163,
+   "c24": -2.62065,
+   "c7": -14.0696,
+   "c30": -7.3054,
+   "rsi": 37,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BARD",
+   "id": "lombard-protocol",
+   "p": 0.12366,
+   "mc": 49039086,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 4.414,
+   "c24": -17.27659,
+   "c7": 11.3408,
+   "c30": 10.7134,
+   "rsi": 30,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调26.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MSTRC",
+   "id": "microstrategy-coinbase-tokenized-stock",
+   "p": 102.37,
+   "mc": 2063917,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.446,
+   "c24": -6.30353,
+   "c7": -19.7477,
+   "c30": -31.0876,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RAY",
+   "id": "raydium",
+   "p": 1.39,
+   "mc": 375718344,
+   "warn": [],
+   "c1h": -2.3142,
+   "c24": -8.35465,
+   "c7": -20.8666,
+   "c30": -24.8174,
+   "rsi": 29,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AGT",
+   "id": "alaya-ai",
+   "p": 0.03426259,
+   "mc": 0,
+   "warn": [
+    "POST-PUMP"
+   ],
+   "c1h": -3.8864,
+   "c24": -33.53426,
+   "c7": 35.0895,
+   "c30": 56.1728,
+   "rsi": 26,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +35.1% RSI仅26",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PIEVERSE",
+   "id": "pieverse",
+   "p": 1.79,
+   "mc": 491833528,
+   "warn": [],
+   "c1h": 1.5484,
+   "c24": 7.59518,
+   "c7": 29.0051,
+   "c30": 51.0067,
+   "rsi": 52,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +29.0% RSI仅52",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GRASS",
+   "id": "grass",
+   "p": 0.384065,
+   "mc": 277280319,
+   "warn": [],
+   "c1h": -5.4581,
+   "c24": -10.2631,
+   "c7": -23.2709,
+   "c30": -44.3,
+   "rsi": 34,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调25.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AERO",
+   "id": "aero",
+   "p": 0.438568,
+   "mc": 317345814,
+   "warn": [],
+   "c1h": -2.7055,
+   "c24": -7.41833,
+   "c7": -25.6774,
+   "c30": 0,
+   "rsi": 38,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PEARL",
+   "id": "pearl-2",
+   "p": 1.43,
+   "mc": 542853316,
+   "warn": [],
+   "c1h": -2.4334,
+   "c24": -1.28567,
+   "c7": -15.6773,
+   "c30": -20.5427,
+   "rsi": 45,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "W",
+   "id": "wormhole",
+   "p": 0.0089117,
+   "mc": 60582944,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.4461,
+   "c24": -10.37311,
+   "c7": -18.8062,
+   "c30": -40.2091,
+   "rsi": 20,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SOXLB",
+   "id": "semicon-bull-3x-etf-bstocks-tokenized-stock",
+   "p": 54.61,
+   "mc": 33443970,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.1608,
+   "c24": -1.16953,
+   "c7": 20.1826,
+   "c30": -47.5158,
+   "rsi": 29,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ERA",
+   "id": "caldera",
+   "p": 0.073778,
+   "mc": 12892700,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5478,
+   "c24": -1.92036,
+   "c7": 1.8918,
+   "c30": 24.4087,
+   "rsi": 42,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调27.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BAT",
+   "id": "basic-attention-token",
+   "p": 0.093298,
+   "mc": 139548294,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8345,
+   "c24": -16.23526,
+   "c7": -23.7122,
+   "c30": -51.7645,
+   "rsi": 12,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DOPE",
+   "id": "doge-pepe",
+   "p": 0.02839508,
+   "mc": 28395080,
+   "warn": [
+    "NANO",
+    "EXTENDED"
+   ],
+   "c1h": -23.5297,
+   "c24": 115519.64235,
+   "c7": 150923.4283,
+   "c30": 122.1047,
+   "rsi": 93,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MSTRB",
+   "id": "strategy-tokenized-bstocks",
+   "p": 102.2,
+   "mc": 37335213,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4088,
+   "c24": -6.57195,
+   "c7": -19.8463,
+   "c30": -31.2334,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "METAC",
+   "id": "meta-coinbase-tokenized-stock",
+   "p": 632.67,
+   "mc": 5366731,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4771,
+   "c24": 0.14612,
+   "c7": 3.3592,
+   "c30": -13.8547,
+   "rsi": 52,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 52 中性 | 7d +3.4% | 30d -13.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AR",
+   "id": "arweave",
+   "p": 2.62,
+   "mc": 172074501,
+   "warn": [],
+   "c1h": -2.2471,
+   "c24": -13.13561,
+   "c7": -17.0594,
+   "c30": -32.7861,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "TAC",
+   "id": "tac",
+   "p": 0.00108786,
+   "mc": 6697220,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.4037,
+   "c24": -3.15123,
+   "c7": 9.2652,
+   "c30": -12.6795,
+   "rsi": 49,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调26.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "USELESS",
+   "id": "useless-3",
+   "p": 0.10352,
+   "mc": 103513830,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -4.5349,
+   "c24": -18.25177,
+   "c7": -19.2032,
+   "c30": -38.2753,
+   "rsi": 23,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调27.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MOW",
+   "id": "mowcat",
+   "p": 0.157982,
+   "mc": 0,
+   "warn": [],
+   "c1h": 22.9161,
+   "c24": 14.83638,
+   "c7": 64.2396,
+   "c30": 50.5193,
+   "rsi": 64,
+   "code": "MOMENTUM",
+   "tag": "MOM+",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d +64.2% RSI仅64",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MET",
+   "id": "meteora",
+   "p": 0.269639,
+   "mc": 152506283,
+   "warn": [],
+   "c1h": -2.3284,
+   "c24": -5.90581,
+   "c7": -12.7766,
+   "c30": -27.3979,
+   "rsi": 28,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MERL",
+   "id": "merlin-chain",
+   "p": 0.03187118,
+   "mc": 45569770,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.6129,
+   "c24": 3.94601,
+   "c7": 9.5015,
+   "c30": 16.0528,
+   "rsi": 69,
+   "code": "VEX",
+   "tag": "VEX",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 日换手26.5% | 24h +3.9% | RSI 69",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "STX",
+   "id": "blockstack",
+   "p": 0.268394,
+   "mc": 505251229,
+   "warn": [],
+   "c1h": -1.9549,
+   "c24": -7.6227,
+   "c7": -21.484,
+   "c30": -34.8305,
+   "rsi": 36,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DOS",
+   "id": "dappos",
+   "p": 0.156562,
+   "mc": 31312495,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1791,
+   "c24": -1.46288,
+   "c7": -21.3237,
+   "c30": -15.1416,
+   "rsi": 41,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BNCB",
+   "id": "cea-industries-bstocks-tokenized-stock",
+   "p": 3.77,
+   "mc": 30405184,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.7491,
+   "c24": -8.76463,
+   "c7": -22.7639,
+   "c30": -20.208,
+   "rsi": 15,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "APE",
+   "id": "apecoin",
+   "p": 0.084003,
+   "mc": 84003296,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.3973,
+   "c24": -9.95647,
+   "c7": -21.1615,
+   "c30": -40.9459,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CLAUDIA",
+   "id": "claudia-4",
+   "p": 0.00057402,
+   "mc": 574018,
+   "warn": [
+    "NANO",
+    "EXTENDED"
+   ],
+   "c1h": -0.5358,
+   "c24": 44.95692,
+   "c7": 23466.4985,
+   "c30": 10598.9485,
+   "rsi": 74,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NES",
+   "id": "nesa",
+   "p": 0.134143,
+   "mc": 40049855,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.0731,
+   "c24": -6.18729,
+   "c7": -12.2762,
+   "c30": -5.2581,
+   "rsi": 36,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "KORUB",
+   "id": "south-korea-bull-3x-etf-bstocks-tokenized-stock",
+   "p": 6.99,
+   "mc": 12791379,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.0967,
+   "c24": -4.09607,
+   "c7": 0.1227,
+   "c30": -40.4305,
+   "rsi": 29,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BIGTIME",
+   "id": "big-time",
+   "p": 0.00452679,
+   "mc": 13254019,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.2812,
+   "c24": -8.68805,
+   "c7": -21.6351,
+   "c30": -36.0214,
+   "rsi": 25,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RSR",
+   "id": "reserve-rights-token",
+   "p": 0.00136781,
+   "mc": 85561124,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.7822,
+   "c24": -6.37418,
+   "c7": -11.9331,
+   "c30": -31.5029,
+   "rsi": 38,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调25.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "IMX",
+   "id": "immutable-x",
+   "p": 0.09832,
+   "mc": 88927318,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.438,
+   "c24": -10.14457,
+   "c7": -17.7222,
+   "c30": -40.4743,
+   "rsi": 29,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DRV",
+   "id": "derive",
+   "p": 0.25682,
+   "mc": 272808854,
+   "warn": [],
+   "c1h": 0.0268,
+   "c24": -14.46145,
+   "c7": -18.4859,
+   "c30": -36.5683,
+   "rsi": 13,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BOME",
+   "id": "book-of-meme",
+   "p": 0.00049981,
+   "mc": 34486830,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.2341,
+   "c24": -12.69744,
+   "c7": -18.4175,
+   "c30": -28.4464,
+   "rsi": 24,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "0G",
+   "id": "zero-gravity",
+   "p": 0.151878,
+   "mc": 93473887,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.0257,
+   "c24": -2.41237,
+   "c7": 3.4488,
+   "c30": -39.2796,
+   "rsi": 46,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 46 中性 | 7d +3.4% | 30d -39.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RE",
+   "id": "re",
+   "p": 0.222088,
+   "mc": 35445302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6549,
+   "c24": -12.93744,
+   "c7": -24.618,
+   "c30": -46.6917,
+   "rsi": 17,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调26.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PARTI",
+   "id": "particle-network",
+   "p": 0.03522259,
+   "mc": 8206864,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4873,
+   "c24": -2.71515,
+   "c7": -25.9405,
+   "c30": -4.9192,
+   "rsi": 41,
+   "code": "RPE2",
+   "tag": "RPE-2",
+   "score": 2,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调28.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ETH",
+   "id": "ethereum",
+   "p": 1826.31,
+   "mc": 223208562789,
+   "warn": [],
+   "c1h": -0.5846,
+   "c24": -5.22762,
+   "c7": -18.2903,
+   "c30": -25.1266,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调18.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SOL",
+   "id": "solana",
+   "p": 72.5,
+   "mc": 42890287422,
+   "warn": [],
+   "c1h": -1.6469,
+   "c24": -8.87502,
+   "c7": -18.9543,
+   "c30": -31.5695,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "XRP",
+   "id": "ripple",
+   "p": 0.957487,
+   "mc": 60816322740,
+   "warn": [],
+   "c1h": -1.2267,
+   "c24": -5.82307,
+   "c7": -17.28,
+   "c30": -28.4325,
+   "rsi": 30,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "HYPE",
+   "id": "hyperliquid",
+   "p": 66.04,
+   "mc": 15699943755,
+   "warn": [],
+   "c1h": -2.3236,
+   "c24": -9.13665,
+   "c7": -14.6679,
+   "c30": -19.0123,
+   "rsi": 33,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BNB",
+   "id": "binancecoin",
+   "p": 586.96,
+   "mc": 77191233599,
+   "warn": [],
+   "c1h": -1.7534,
+   "c24": -6.9371,
+   "c7": -15.3414,
+   "c30": -19.9238,
+   "rsi": 22,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DOGE",
+   "id": "dogecoin",
+   "p": 0.060012,
+   "mc": 9405699018,
+   "warn": [],
+   "c1h": -1.582,
+   "c24": -7.60612,
+   "c7": -16.1285,
+   "c30": -26.2469,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NEAR",
+   "id": "near",
+   "p": 3.11,
+   "mc": 4081665044,
+   "warn": [],
+   "c1h": -3.0684,
+   "c24": -11.17863,
+   "c7": -15.4069,
+   "c30": -39.1062,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SUI",
+   "id": "sui",
+   "p": 0.725608,
+   "mc": 3003323805,
+   "warn": [],
+   "c1h": -2.0176,
+   "c24": -9.42814,
+   "c7": -15.3453,
+   "c30": -29.5704,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "LINK",
+   "id": "chainlink",
+   "p": 9.08,
+   "mc": 6963004878,
+   "warn": [],
+   "c1h": -1.8947,
+   "c24": -7.975,
+   "c7": -16.2386,
+   "c30": -27.6138,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ADA",
+   "id": "cardano",
+   "p": 0.154885,
+   "mc": 5818558132,
+   "warn": [],
+   "c1h": -1.286,
+   "c24": -9.29356,
+   "c7": -14.7294,
+   "c30": -32.8057,
+   "rsi": 22,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AVAX",
+   "id": "avalanche-2",
+   "p": 7.5,
+   "mc": 3347542169,
+   "warn": [],
+   "c1h": -2.0844,
+   "c24": -9.72534,
+   "c7": -8.662,
+   "c30": -24.9107,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "XMR",
+   "id": "monero",
+   "p": 510.06,
+   "mc": 9604891776,
+   "warn": [],
+   "c1h": -1.1054,
+   "c24": -4.01086,
+   "c7": -16.3298,
+   "c30": -6.0309,
+   "rsi": 35,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BCH",
+   "id": "bitcoin-cash",
+   "p": 207.98,
+   "mc": 4183779226,
+   "warn": [],
+   "c1h": -1.7653,
+   "c24": -6.67187,
+   "c7": -18.9611,
+   "c30": -24.5337,
+   "rsi": 33,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PUMP",
+   "id": "pump-fun",
+   "p": 0.00301788,
+   "mc": 1383892919,
+   "warn": [],
+   "c1h": -3.5827,
+   "c24": -12.63911,
+   "c7": -17.192,
+   "c30": -33.3206,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "TRUMP",
+   "id": "official-trump",
+   "p": 0.978648,
+   "mc": 275849593,
+   "warn": [],
+   "c1h": -1.895,
+   "c24": -10.91321,
+   "c7": -17.2351,
+   "c30": -47.8648,
+   "rsi": 20,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PENGU",
+   "id": "pudgy-penguins",
+   "p": 0.00514461,
+   "mc": 323391970,
+   "warn": [],
+   "c1h": -2.5324,
+   "c24": -15.33893,
+   "c7": -19.5368,
+   "c30": -32.961,
+   "rsi": 16,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "FIL",
+   "id": "filecoin",
+   "p": 0.654701,
+   "mc": 554206593,
+   "warn": [],
+   "c1h": -1.3323,
+   "c24": -9.37906,
+   "c7": -17.6772,
+   "c30": -39.207,
+   "rsi": 22,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "DOT",
+   "id": "polkadot",
+   "p": 0.749206,
+   "mc": 1282706487,
+   "warn": [],
+   "c1h": -1.8666,
+   "c24": -9.02122,
+   "c7": -16.1695,
+   "c30": -32.6657,
+   "rsi": 25,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "LIT",
+   "id": "lighter",
+   "p": 2.86,
+   "mc": 715960039,
+   "warn": [],
+   "c1h": -4.5971,
+   "c24": -10.89104,
+   "c7": -10.1116,
+   "c30": -7.3163,
+   "rsi": 35,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调18.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "HBAR",
+   "id": "hedera-hashgraph",
+   "p": 0.057884,
+   "mc": 2565846919,
+   "warn": [],
+   "c1h": -1.3356,
+   "c24": -7.86399,
+   "c7": -13.9053,
+   "c30": -30.6228,
+   "rsi": 31,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "FET",
+   "id": "fetch-ai",
+   "p": 0.13035,
+   "mc": 301306151,
+   "warn": [],
+   "c1h": -2.7551,
+   "c24": -11.54233,
+   "c7": -10.1995,
+   "c30": -37.5975,
+   "rsi": 21,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.8% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RUNE",
+   "id": "thorchain",
+   "p": 0.516849,
+   "mc": 170113471,
+   "warn": [],
+   "c1h": -1.6761,
+   "c24": -5.64139,
+   "c7": -12.6239,
+   "c30": -20.6636,
+   "rsi": 32,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NVDAB",
+   "id": "nvidia-bstocks",
+   "p": 159.4,
+   "mc": 154477915,
+   "warn": [],
+   "c1h": -0.4734,
+   "c24": -0.601,
+   "c7": -15.174,
+   "c30": -26.8025,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ICP",
+   "id": "internet-computer",
+   "p": 2.28,
+   "mc": 1276394412,
+   "warn": [],
+   "c1h": -2.1418,
+   "c24": -12.28437,
+   "c7": -5.7669,
+   "c30": -25.4153,
+   "rsi": 25,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.3% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "KAVA",
+   "id": "kava",
+   "p": 0.0395446,
+   "mc": 42820744,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5278,
+   "c24": -41.79956,
+   "c7": -42.0753,
+   "c30": -42.8466,
+   "rsi": 15,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.4% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SHIB",
+   "id": "shiba-inu",
+   "p": 0.00000396,
+   "mc": 2335281436,
+   "warn": [],
+   "c1h": -1.6236,
+   "c24": -7.2088,
+   "c7": -11.3338,
+   "c30": -22.3966,
+   "rsi": 26,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅4.6% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GRAM",
+   "id": "the-open-network",
+   "p": 1.054,
+   "mc": 3012222179,
+   "warn": [],
+   "c1h": -0.6733,
+   "c24": -6.44918,
+   "c7": -3.4213,
+   "c30": -23.3731,
+   "rsi": 30,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "POL",
+   "id": "polygon-ecosystem-token",
+   "p": 0.080362,
+   "mc": 855820066,
+   "warn": [],
+   "c1h": -1.5428,
+   "c24": -7.36522,
+   "c7": -11.2559,
+   "c30": -15.9093,
+   "rsi": 28,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅6.2% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "VIRTUAL",
+   "id": "virtual-protocol",
+   "p": 0.456074,
+   "mc": 300272383,
+   "warn": [],
+   "c1h": -3.3014,
+   "c24": -11.63143,
+   "c7": -18.9616,
+   "c30": -32.7713,
+   "rsi": 25,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CAKE",
+   "id": "pancakeswap-token",
+   "p": 1.59,
+   "mc": 547849721,
+   "warn": [],
+   "c1h": -1.3115,
+   "c24": -7.7294,
+   "c7": -16.1311,
+   "c30": -29.317,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ALGO",
+   "id": "algorand",
+   "p": 0.079823,
+   "mc": 724757154,
+   "warn": [],
+   "c1h": -1.2601,
+   "c24": -7.24748,
+   "c7": -14.7057,
+   "c30": -30.0923,
+   "rsi": 21,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "STRK",
+   "id": "starknet",
+   "p": 0.03344073,
+   "mc": 256317446,
+   "warn": [],
+   "c1h": -2.9954,
+   "c24": -9.53024,
+   "c7": -17.1001,
+   "c30": -65.3005,
+   "rsi": 28,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "OP",
+   "id": "optimism",
+   "p": 0.083333,
+   "mc": 190897932,
+   "warn": [],
+   "c1h": -2.1321,
+   "c24": -10.36435,
+   "c7": -18.4152,
+   "c30": -39.9819,
+   "rsi": 22,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ATOM",
+   "id": "cosmos",
+   "p": 1.3,
+   "mc": 702521625,
+   "warn": [],
+   "c1h": -1.6448,
+   "c24": -6.80469,
+   "c7": -5.6583,
+   "c30": -24.8918,
+   "rsi": 32,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.0% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SEI",
+   "id": "sei-network",
+   "p": 0.03897754,
+   "mc": 262448744,
+   "warn": [],
+   "c1h": -2.2806,
+   "c24": -10.1894,
+   "c7": -14.8554,
+   "c30": -36.541,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SAND",
+   "id": "the-sandbox",
+   "p": 0.03614798,
+   "mc": 106189739,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9241,
+   "c24": -10.37125,
+   "c7": -14.9977,
+   "c30": -34.7926,
+   "rsi": 19,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "WIF",
+   "id": "dogwifcoin",
+   "p": 0.135648,
+   "mc": 135502085,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5589,
+   "c24": -9.57273,
+   "c7": -15.4119,
+   "c30": -32.7174,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "VVV",
+   "id": "venice-token",
+   "p": 17.5,
+   "mc": 857243162,
+   "warn": [],
+   "c1h": -2.649,
+   "c24": -6.34022,
+   "c7": -13.8455,
+   "c30": -29.8097,
+   "rsi": 40,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BONK",
+   "id": "bonk",
+   "p": 0.0000024,
+   "mc": 210962087,
+   "warn": [],
+   "c1h": -3.0393,
+   "c24": -11.28147,
+   "c7": -14.2619,
+   "c30": -22.7342,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SNDKC",
+   "id": "sandisk-coinbase-tokenized-stock",
+   "p": 845.36,
+   "mc": 2362811,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.2345,
+   "c24": -2.04975,
+   "c7": 1.3104,
+   "c30": -38.1116,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ETC",
+   "id": "ethereum-classic",
+   "p": 6.03,
+   "mc": 959551686,
+   "warn": [],
+   "c1h": -1.6922,
+   "c24": -7.34645,
+   "c7": -12.7076,
+   "c30": -24.9526,
+   "rsi": 26,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.6% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NVDA",
+   "id": "nvidia-robinhood-tokenized-stock",
+   "p": 159.54,
+   "mc": 20585226,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4732,
+   "c24": -0.53602,
+   "c7": -15.1341,
+   "c30": -26.7358,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "S",
+   "id": "sonic-3",
+   "p": 0.03399039,
+   "mc": 132069571,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.047,
+   "c24": -9.58129,
+   "c7": -11.1695,
+   "c30": -38.1616,
+   "rsi": 25,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.3% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PYTH",
+   "id": "pyth-network",
+   "p": 0.056041,
+   "mc": 441319633,
+   "warn": [],
+   "c1h": -3.1146,
+   "c24": -12.62959,
+   "c7": -12.8456,
+   "c30": -42.3767,
+   "rsi": 19,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MNT",
+   "id": "mantle",
+   "p": 0.385422,
+   "mc": 1276518086,
+   "warn": [],
+   "c1h": -1.3598,
+   "c24": -4.82277,
+   "c7": -15.1127,
+   "c30": -27.0082,
+   "rsi": 25,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "INIT",
+   "id": "initia",
+   "p": 0.096235,
+   "mc": 21098341,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2741,
+   "c24": -19.20272,
+   "c7": -22.4994,
+   "c30": -23.4341,
+   "rsi": 21,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅6.8% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "OKB",
+   "id": "okb",
+   "p": 87.09,
+   "mc": 1828957811,
+   "warn": [],
+   "c1h": -1.6268,
+   "c24": -7.58192,
+   "c7": -15.2698,
+   "c30": -26.4533,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NVDAX",
+   "id": "nvidia-xstock",
+   "p": 159.77,
+   "mc": 93413202,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.4099,
+   "c24": -0.46575,
+   "c7": -15.0766,
+   "c30": -26.711,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AXS",
+   "id": "axie-infinity",
+   "p": 0.692056,
+   "mc": 121523381,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1997,
+   "c24": -8.219,
+   "c7": -16.3164,
+   "c30": -34.6953,
+   "rsi": 25,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CHZ",
+   "id": "chiliz",
+   "p": 0.00994994,
+   "mc": 105581496,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.5164,
+   "c24": -7.23481,
+   "c7": -11.9851,
+   "c30": -30.2885,
+   "rsi": 24,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅1.1% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "LDO",
+   "id": "lido-dao",
+   "p": 0.275171,
+   "mc": 228273398,
+   "warn": [],
+   "c1h": -1.9952,
+   "c24": -8.61202,
+   "c7": -15.0583,
+   "c30": -31.9471,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "1INCH",
+   "id": "1inch",
+   "p": 0.066971,
+   "mc": 94132646,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.4366,
+   "c24": -6.26998,
+   "c7": -15.9213,
+   "c30": -29.23,
+   "rsi": 26,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GUN",
+   "id": "gunz",
+   "p": 0.00155565,
+   "mc": 6286905,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9966,
+   "c24": -7.858,
+   "c7": -14.2365,
+   "c30": -36.3049,
+   "rsi": 38,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "STO",
+   "id": "stakestone",
+   "p": 0.02450572,
+   "mc": 5521956,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2601,
+   "c24": -7.0121,
+   "c7": -10.1813,
+   "c30": -31.8052,
+   "rsi": 44,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.8%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NVDAC",
+   "id": "nvidia-coinbase-tokenized-stock",
+   "p": 159.55,
+   "mc": 7826671,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.408,
+   "c24": -0.58649,
+   "c7": -15.1355,
+   "c30": -26.6945,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "EIGEN",
+   "id": "eigenlayer",
+   "p": 0.136338,
+   "mc": 139200439,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1719,
+   "c24": -11.59945,
+   "c7": -19.2725,
+   "c30": -45.0245,
+   "rsi": 22,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "COTI",
+   "id": "coti",
+   "p": 0.00831301,
+   "mc": 24769118,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.3504,
+   "c24": -8.47957,
+   "c7": -9.8606,
+   "c30": -26.6343,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "WXT",
+   "id": "weex-token",
+   "p": 0.01395259,
+   "mc": 0,
+   "warn": [],
+   "c1h": -0.9333,
+   "c24": -6.14789,
+   "c7": -15.419,
+   "c30": -25.0062,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BTT",
+   "id": "bittorrent",
+   "p": 3.14154e-7,
+   "mc": 304217173,
+   "warn": [],
+   "c1h": -0.9492,
+   "c24": -2.88526,
+   "c7": -11.4845,
+   "c30": -10.0913,
+   "rsi": 26,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅9.2% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "TRB",
+   "id": "tellor",
+   "p": 13.21,
+   "mc": 37475516,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2829,
+   "c24": -9.59763,
+   "c7": -14.9817,
+   "c30": -27.5503,
+   "rsi": 17,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "JTO",
+   "id": "jito-governance-token",
+   "p": 0.273999,
+   "mc": 148969912,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.3755,
+   "c24": -11.15597,
+   "c7": -18.5714,
+   "c30": -41.736,
+   "rsi": 21,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BUBI",
+   "id": "bullbit",
+   "p": 0.0149258,
+   "mc": 4873417,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.0196,
+   "c24": -8.3985,
+   "c7": -17.4299,
+   "c30": -46.4569,
+   "rsi": 18,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SNDKB",
+   "id": "sandisk-bstocks-tokenized-stock",
+   "p": 844.94,
+   "mc": 71508755,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.0849,
+   "c24": -2.01387,
+   "c7": 1.9024,
+   "c30": -38.2372,
+   "rsi": 29,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.1%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PHA",
+   "id": "pha",
+   "p": 0.02950382,
+   "mc": 25631852,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.348,
+   "c24": -6.99541,
+   "c7": -17.7353,
+   "c30": -41.6887,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CRCLB",
+   "id": "circle-internet-group-bstock",
+   "p": 58.5,
+   "mc": 129903077,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.7053,
+   "c24": -5.52465,
+   "c7": -12.9832,
+   "c30": -30.78,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ALICE",
+   "id": "my-neighbor-alice",
+   "p": 0.10736,
+   "mc": 10730234,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.856,
+   "c24": -8.50054,
+   "c7": -11.2178,
+   "c30": -29.3132,
+   "rsi": 22,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.3% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "FARTCOIN",
+   "id": "fartcoin",
+   "p": 0.095922,
+   "mc": 95914135,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9193,
+   "c24": -10.35228,
+   "c7": -17.0657,
+   "c30": -39.2268,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.6%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "FLOKI",
+   "id": "floki",
+   "p": 0.00001823,
+   "mc": 175803386,
+   "warn": [],
+   "c1h": -2.0851,
+   "c24": -8.1982,
+   "c7": -14.2271,
+   "c30": -25.6636,
+   "rsi": 26,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.3% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "UAI",
+   "id": "unifai-network",
+   "p": 0.03156897,
+   "mc": 7544984,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.858,
+   "c24": -19.44324,
+   "c7": -74.7377,
+   "c30": -90.695,
+   "rsi": 33,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.8% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "WIN",
+   "id": "wink",
+   "p": 0.00005586,
+   "mc": 51745848,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.1217,
+   "c24": -5.49808,
+   "c7": -13.5186,
+   "c30": 1.6927,
+   "rsi": 37,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GRT",
+   "id": "the-graph",
+   "p": 0.01634786,
+   "mc": 178867168,
+   "warn": [],
+   "c1h": -2.0468,
+   "c24": -7.20441,
+   "c7": -14.5801,
+   "c30": -34.7612,
+   "rsi": 38,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "GALA",
+   "id": "gala",
+   "p": 0.00135612,
+   "mc": 69507345,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1665,
+   "c24": -7.74649,
+   "c7": -12.7938,
+   "c30": -33.6012,
+   "rsi": 27,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.2% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "COMP",
+   "id": "compound-governance-token",
+   "p": 18.55,
+   "mc": 185453716,
+   "warn": [],
+   "c1h": -1.2228,
+   "c24": -6.2374,
+   "c7": -8.2441,
+   "c30": -16.6944,
+   "rsi": 28,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅2.2% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PCI",
+   "id": "pay-coin",
+   "p": 0.03358479,
+   "mc": 34343013,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -4.9591,
+   "c24": -7.18009,
+   "c7": -2.1319,
+   "c30": -11.9498,
+   "rsi": 56,
+   "code": "QCI",
+   "tag": "QCI",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | RSI 56 中性 | 7d -2.1% | 30d -11.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PLUME",
+   "id": "plume",
+   "p": 0.01240745,
+   "mc": 84597229,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9681,
+   "c24": -10.032,
+   "c7": -6.0968,
+   "c30": -36.1289,
+   "rsi": 31,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.0% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ZORA",
+   "id": "zora",
+   "p": 0.00444921,
+   "mc": 19887988,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.7712,
+   "c24": -10.12006,
+   "c7": -13.3595,
+   "c30": -33.413,
+   "rsi": 31,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.1% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "牛来",
+   "id": "niu-lai",
+   "p": 0.052718,
+   "mc": 52717653,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.2826,
+   "c24": -13.99147,
+   "c7": -8.6303,
+   "c30": -21.9383,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调18.9%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "PEOPLE",
+   "id": "constitutiondao",
+   "p": 0.00495278,
+   "mc": 25093185,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2835,
+   "c24": -9.43661,
+   "c7": -17.9542,
+   "c30": -35.4666,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调18.4%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "MANA",
+   "id": "decentraland",
+   "p": 0.061478,
+   "mc": 120392160,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.0821,
+   "c24": -8.13042,
+   "c7": -13.5938,
+   "c30": -30.4792,
+   "rsi": 24,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "KAITO",
+   "id": "kaito",
+   "p": 0.185323,
+   "mc": 44735000,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.9725,
+   "c24": -9.55392,
+   "c7": -14.2186,
+   "c30": -38.2389,
+   "rsi": 22,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅6.4% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ZK",
+   "id": "zksync",
+   "p": 0.00806726,
+   "mc": 88904067,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5045,
+   "c24": -10.02147,
+   "c7": -13.1931,
+   "c30": -54.2428,
+   "rsi": 27,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅2.5% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "XT",
+   "id": "xtcom-token",
+   "p": 3.74,
+   "mc": 22633542,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9679,
+   "c24": -6.23522,
+   "c7": -16.1391,
+   "c30": -24.2677,
+   "rsi": 23,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.5%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SUN",
+   "id": "sun-token",
+   "p": 0.01490279,
+   "mc": 286356309,
+   "warn": [],
+   "c1h": -0.4803,
+   "c24": -1.25899,
+   "c7": -3.5572,
+   "c30": -9.5033,
+   "rsi": 44,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.0% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ENS",
+   "id": "ethereum-name-service",
+   "p": 3.92,
+   "mc": 166062507,
+   "warn": [],
+   "c1h": -1.7881,
+   "c24": -8.28823,
+   "c7": -13.9645,
+   "c30": -31.8159,
+   "rsi": 27,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅4.7% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ORDI",
+   "id": "ordinals",
+   "p": 2.8,
+   "mc": 58723225,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9029,
+   "c24": -11.85539,
+   "c7": -13.3269,
+   "c30": -29.5617,
+   "rsi": 24,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅2.9% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ALT",
+   "id": "altlayer",
+   "p": 0.00482255,
+   "mc": 36689891,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4017,
+   "c24": -8.0391,
+   "c7": -10.7503,
+   "c30": -37.6689,
+   "rsi": 31,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.7% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "C98",
+   "id": "coin98",
+   "p": 0.01045026,
+   "mc": 10450245,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.5257,
+   "c24": -7.45143,
+   "c7": -11.0616,
+   "c30": -34.4474,
+   "rsi": 26,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.2% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "KMNO",
+   "id": "kamino",
+   "p": 0.02907189,
+   "mc": 174192379,
+   "warn": [],
+   "c1h": -1.5943,
+   "c24": -2.90581,
+   "c7": -13.7594,
+   "c30": -22.5934,
+   "rsi": 38,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ONE",
+   "id": "harmony",
+   "p": 0.00128472,
+   "mc": 19104037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9118,
+   "c24": -11.37427,
+   "c7": -37.0696,
+   "c30": -18.0613,
+   "rsi": 29,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅0.3% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "NIL",
+   "id": "nillion",
+   "p": 0.050101,
+   "mc": 27974315,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.3054,
+   "c24": -8.67548,
+   "c7": -14.8449,
+   "c30": -42.2988,
+   "rsi": 25,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.7%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "CYBER",
+   "id": "cyberconnect",
+   "p": 0.225076,
+   "mc": 13746451,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.1415,
+   "c24": -9.4174,
+   "c7": -28.651,
+   "c30": -31.939,
+   "rsi": 23,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅1.4% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "SKY",
+   "id": "sky",
+   "p": 0.054657,
+   "mc": 1279786994,
+   "warn": [],
+   "c1h": -1.5284,
+   "c24": -4.82578,
+   "c7": -14.255,
+   "c30": -23.1192,
+   "rsi": 35,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ATH",
+   "id": "aethir",
+   "p": 0.00404228,
+   "mc": 81366013,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.2706,
+   "c24": -8.18111,
+   "c7": -18.5238,
+   "c30": -32.2848,
+   "rsi": 31,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BEAM",
+   "id": "beam-2",
+   "p": 0.00418916,
+   "mc": 210781291,
+   "warn": [],
+   "c1h": -1.3757,
+   "c24": -5.63749,
+   "c7": 2.7569,
+   "c30": 43.9887,
+   "rsi": 33,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅9.5% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "ZEN",
+   "id": "zencash",
+   "p": 4.13,
+   "mc": 76389026,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.7619,
+   "c24": -7.17257,
+   "c7": -18.2697,
+   "c30": -31.9028,
+   "rsi": 28,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "LAYER",
+   "id": "solayer",
+   "p": 0.04517222,
+   "mc": 9486165,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4634,
+   "c24": -7.41865,
+   "c7": -15.8092,
+   "c30": -33.6279,
+   "rsi": 27,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.0%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "LINEA",
+   "id": "linea",
+   "p": 0.00188332,
+   "mc": 46192347,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9852,
+   "c24": -7.21629,
+   "c7": -13.8756,
+   "c30": -36.6015,
+   "rsi": 19,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅4.0% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "Q",
+   "id": "quack-ai",
+   "p": 0.02641037,
+   "mc": 130270638,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.4377,
+   "c24": -8.81281,
+   "c7": -6.0022,
+   "c30": -48.89,
+   "rsi": 32,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.2%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "BSV",
+   "id": "bitcoin-cash-sv",
+   "p": 14.73,
+   "mc": 296261541,
+   "warn": [],
+   "c1h": -0.5111,
+   "c24": -4.22763,
+   "c7": -11.9453,
+   "c30": -20.2519,
+   "rsi": 31,
+   "code": "NEAR_ATL",
+   "tag": "ATL-N",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅3.0% 历史底部区域",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "RIF",
+   "id": "rif-token",
+   "p": 0.05051,
+   "mc": 50509572,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8235,
+   "c24": -8.73317,
+   "c7": -14.9298,
+   "c30": -37.7522,
+   "rsi": 16,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.3%",
+   "vetoed": true,
+   "softened": false
+  },
+  {
+   "s": "AUDIO",
+   "id": "audius",
+   "p": 0.01074893,
+   "mc": 15828203,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.7916,
+   "c24": -7.06634,
+   "c7": -7.2559,
+   "c30": -30.5712,
+   "rsi": 42,
+   "code": "RPE1",
+   "tag": "RPE-1",
+   "score": 1,
+   "reason": "⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.2%",
+   "vetoed": true,
+   "softened": false
+  }
+ ],
+ "avoid": [
+  {
+   "s": "FIGR_HELOC",
+   "id": "figure-heloc",
+   "p": 1.046,
+   "mc": 27899722826,
+   "warn": [],
+   "c1h": -0.0066,
+   "c24": 4.433,
+   "c7": 2.3941,
+   "c30": 0.7575,
+   "rsi": 92,
+   "code": "HCEP",
+   "tag": "HCEP",
+   "score": 9,
+   "reason": "RSI 92 超买，等回落65",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "EVAA",
+   "id": "evaa-protocol",
+   "p": 1.85,
+   "mc": 12249302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5007,
+   "c24": 69.62892,
+   "c7": 36.9275,
+   "c30": 203.8139,
+   "rsi": 86,
+   "code": "HCEP",
+   "tag": "HCEP",
+   "score": 9,
+   "reason": "RSI 86 超买，等回落65",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "DOPE",
+   "id": "doge-pepe",
+   "p": 0.02839508,
+   "mc": 28395080,
+   "warn": [
+    "NANO",
+    "EXTENDED"
+   ],
+   "c1h": -23.5297,
+   "c24": 115519.64235,
+   "c7": 150923.4283,
+   "c30": 122.1047,
+   "rsi": 93,
+   "code": "HCEP",
+   "tag": "HCEP",
+   "score": 9,
+   "reason": "RSI 93 超买，等回落65",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "NEAR",
+   "id": "near",
+   "p": 3.11,
+   "mc": 4081665044,
+   "warn": [],
+   "c1h": -3.0684,
+   "c24": -11.17863,
+   "c7": -15.4069,
+   "c30": -39.1062,
+   "rsi": 27,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "UNI",
+   "id": "uniswap",
+   "p": 4.95,
+   "mc": 3007103770,
+   "warn": [],
+   "c1h": -3.2376,
+   "c24": -14.14419,
+   "c7": -29.4321,
+   "c30": -34.3176,
+   "rsi": 21,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-14.1% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PEPE",
+   "id": "pepe",
+   "p": 0.0000039,
+   "mc": 1639817577,
+   "warn": [],
+   "c1h": -3.6677,
+   "c24": -12.219,
+   "c7": -20.1001,
+   "c30": -6.1879,
+   "rsi": 19,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ENA",
+   "id": "ethena",
+   "p": 0.119198,
+   "mc": 1609176236,
+   "warn": [],
+   "c1h": -2.8007,
+   "c24": -11.871,
+   "c7": -24.5957,
+   "c30": -40.4697,
+   "rsi": 24,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "INJ",
+   "id": "injective-protocol",
+   "p": 7.19,
+   "mc": 718644234,
+   "warn": [],
+   "c1h": -5.9329,
+   "c24": -11.61328,
+   "c7": -11.3451,
+   "c30": -10.0318,
+   "rsi": 42,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "TAO",
+   "id": "bittensor",
+   "p": 192.88,
+   "mc": 2261825092,
+   "warn": [],
+   "c1h": -2.6674,
+   "c24": -10.35325,
+   "c7": -13.3071,
+   "c30": -29.388,
+   "rsi": 29,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "WLD",
+   "id": "worldcoin-wld",
+   "p": 0.262582,
+   "mc": 993954333,
+   "warn": [],
+   "c1h": -3.0698,
+   "c24": -10.94563,
+   "c7": -21.7576,
+   "c30": -47.7553,
+   "rsi": 25,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PUMP",
+   "id": "pump-fun",
+   "p": 0.00301788,
+   "mc": 1383892919,
+   "warn": [],
+   "c1h": -3.5827,
+   "c24": -12.63911,
+   "c7": -17.192,
+   "c30": -33.3206,
+   "rsi": 23,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "TRUMP",
+   "id": "official-trump",
+   "p": 0.978648,
+   "mc": 275849593,
+   "warn": [],
+   "c1h": -1.895,
+   "c24": -10.91321,
+   "c7": -17.2351,
+   "c30": -47.8648,
+   "rsi": 20,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PENGU",
+   "id": "pudgy-penguins",
+   "p": 0.00514461,
+   "mc": 323391970,
+   "warn": [],
+   "c1h": -2.5324,
+   "c24": -15.33893,
+   "c7": -19.5368,
+   "c30": -32.961,
+   "rsi": 16,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-15.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "LIT",
+   "id": "lighter",
+   "p": 2.86,
+   "mc": 715960039,
+   "warn": [],
+   "c1h": -4.5971,
+   "c24": -10.89104,
+   "c7": -10.1116,
+   "c30": -7.3163,
+   "rsi": 35,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "TIA",
+   "id": "celestia",
+   "p": 0.351219,
+   "mc": 348194656,
+   "warn": [],
+   "c1h": -2.5941,
+   "c24": -12.67268,
+   "c7": -20.5024,
+   "c30": -41.624,
+   "rsi": 16,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.7% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "FET",
+   "id": "fetch-ai",
+   "p": 0.13035,
+   "mc": 301306151,
+   "warn": [],
+   "c1h": -2.7551,
+   "c24": -11.54233,
+   "c7": -10.1995,
+   "c30": -37.5975,
+   "rsi": 21,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.5% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ICP",
+   "id": "internet-computer",
+   "p": 2.28,
+   "mc": 1276394412,
+   "warn": [],
+   "c1h": -2.1418,
+   "c24": -12.28437,
+   "c7": -5.7669,
+   "c30": -25.4153,
+   "rsi": 25,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "KAVA",
+   "id": "kava",
+   "p": 0.0395446,
+   "mc": 42820744,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5278,
+   "c24": -41.79956,
+   "c7": -42.0753,
+   "c30": -42.8466,
+   "rsi": 15,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-41.8% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "APT",
+   "id": "aptos",
+   "p": 0.473747,
+   "mc": 421158649,
+   "warn": [],
+   "c1h": -2.9713,
+   "c24": -11.95335,
+   "c7": -21.061,
+   "c30": -42.6442,
+   "rsi": 21,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.0% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "VIRTUAL",
+   "id": "virtual-protocol",
+   "p": 0.456074,
+   "mc": 300272383,
+   "warn": [],
+   "c1h": -3.3014,
+   "c24": -11.63143,
+   "c7": -18.9616,
+   "c30": -32.7713,
+   "rsi": 25,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "IDOL",
+   "id": "meet48",
+   "p": 0.01808342,
+   "mc": 41169245,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6465,
+   "c24": -29.79193,
+   "c7": -45.4854,
+   "c30": 133.2351,
+   "rsi": 38,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-29.8% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ETHFI",
+   "id": "ether-fi",
+   "p": 0.50567,
+   "mc": 504929619,
+   "warn": [],
+   "c1h": -3.613,
+   "c24": -13.57451,
+   "c7": -13.5723,
+   "c30": -22.8358,
+   "rsi": 19,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-13.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "OP",
+   "id": "optimism",
+   "p": 0.083333,
+   "mc": 190897932,
+   "warn": [],
+   "c1h": -2.1321,
+   "c24": -10.36435,
+   "c7": -18.4152,
+   "c30": -39.9819,
+   "rsi": 22,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "SEI",
+   "id": "sei-network",
+   "p": 0.03897754,
+   "mc": 262448744,
+   "warn": [],
+   "c1h": -2.2806,
+   "c24": -10.1894,
+   "c7": -14.8554,
+   "c30": -36.541,
+   "rsi": 27,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "SAND",
+   "id": "the-sandbox",
+   "p": 0.03614798,
+   "mc": 106189739,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9241,
+   "c24": -10.37125,
+   "c7": -14.9977,
+   "c30": -34.7926,
+   "rsi": 19,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ARIA",
+   "id": "aria-ai",
+   "p": 0.197134,
+   "mc": 36075562,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 3.2288,
+   "c24": -10.1276,
+   "c7": 29.5337,
+   "c30": 438.2801,
+   "rsi": 41,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.1% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BONK",
+   "id": "bonk",
+   "p": 0.0000024,
+   "mc": 210962087,
+   "warn": [],
+   "c1h": -3.0393,
+   "c24": -11.28147,
+   "c7": -14.2619,
+   "c30": -22.7342,
+   "rsi": 26,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "JCT",
+   "id": "janction",
+   "p": 0.00190032,
+   "mc": 21841662,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1021,
+   "c24": -10.71963,
+   "c7": -36.4694,
+   "c30": -3.8886,
+   "rsi": 31,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.7% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BARD",
+   "id": "lombard-protocol",
+   "p": 0.12366,
+   "mc": 49039086,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 4.414,
+   "c24": -17.27659,
+   "c7": 11.3408,
+   "c30": 10.7134,
+   "rsi": 30,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-17.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PYTH",
+   "id": "pyth-network",
+   "p": 0.056041,
+   "mc": 441319633,
+   "warn": [],
+   "c1h": -3.1146,
+   "c24": -12.62959,
+   "c7": -12.8456,
+   "c30": -42.3767,
+   "rsi": 19,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "INIT",
+   "id": "initia",
+   "p": 0.096235,
+   "mc": 21098341,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2741,
+   "c24": -19.20272,
+   "c7": -22.4994,
+   "c30": -23.4341,
+   "rsi": 21,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-19.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "AGT",
+   "id": "alaya-ai",
+   "p": 0.03426259,
+   "mc": 0,
+   "warn": [
+    "POST-PUMP"
+   ],
+   "c1h": -3.8864,
+   "c24": -33.53426,
+   "c7": 35.0895,
+   "c30": 56.1728,
+   "rsi": 26,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-33.5% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PONS",
+   "id": "pons",
+   "p": 0.120681,
+   "mc": 80832339,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -3.5208,
+   "c24": -16.19847,
+   "c7": -34.5439,
+   "c30": -64.7544,
+   "rsi": 23,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-16.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "GRASS",
+   "id": "grass",
+   "p": 0.384065,
+   "mc": 277280319,
+   "warn": [],
+   "c1h": -5.4581,
+   "c24": -10.2631,
+   "c7": -23.2709,
+   "c30": -44.3,
+   "rsi": 34,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "W",
+   "id": "wormhole",
+   "p": 0.0089117,
+   "mc": 60582944,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.4461,
+   "c24": -10.37311,
+   "c7": -18.8062,
+   "c30": -40.2091,
+   "rsi": 20,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BTW",
+   "id": "bitway",
+   "p": 0.697858,
+   "mc": 1050825311,
+   "warn": [],
+   "c1h": -0.4411,
+   "c24": -16.30659,
+   "c7": -37.8305,
+   "c30": -63.338,
+   "rsi": 42,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-16.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BAT",
+   "id": "basic-attention-token",
+   "p": 0.093298,
+   "mc": 139548294,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8345,
+   "c24": -16.23526,
+   "c7": -23.7122,
+   "c30": -51.7645,
+   "rsi": 12,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-16.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "EIGEN",
+   "id": "eigenlayer",
+   "p": 0.136338,
+   "mc": 139200439,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1719,
+   "c24": -11.59945,
+   "c7": -19.2725,
+   "c30": -45.0245,
+   "rsi": 22,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.6% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "JTO",
+   "id": "jito-governance-token",
+   "p": 0.273999,
+   "mc": 148969912,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.3755,
+   "c24": -11.15597,
+   "c7": -18.5714,
+   "c30": -41.736,
+   "rsi": 21,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.2% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "AR",
+   "id": "arweave",
+   "p": 2.62,
+   "mc": 172074501,
+   "warn": [],
+   "c1h": -2.2471,
+   "c24": -13.13561,
+   "c7": -17.0594,
+   "c30": -32.7861,
+   "rsi": 24,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-13.1% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "USELESS",
+   "id": "useless-3",
+   "p": 0.10352,
+   "mc": 103513830,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -4.5349,
+   "c24": -18.25177,
+   "c7": -19.2032,
+   "c30": -38.2753,
+   "rsi": 23,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-18.3% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "FARTCOIN",
+   "id": "fartcoin",
+   "p": 0.095922,
+   "mc": 95914135,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9193,
+   "c24": -10.35228,
+   "c7": -17.0657,
+   "c30": -39.2268,
+   "rsi": 24,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "UAI",
+   "id": "unifai-network",
+   "p": 0.03156897,
+   "mc": 7544984,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.858,
+   "c24": -19.44324,
+   "c7": -74.7377,
+   "c30": -90.695,
+   "rsi": 33,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-19.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PLUME",
+   "id": "plume",
+   "p": 0.01240745,
+   "mc": 84597229,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9681,
+   "c24": -10.032,
+   "c7": -6.0968,
+   "c30": -36.1289,
+   "rsi": 31,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.0% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ZORA",
+   "id": "zora",
+   "p": 0.00444921,
+   "mc": 19887988,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.7712,
+   "c24": -10.12006,
+   "c7": -13.3595,
+   "c30": -33.413,
+   "rsi": 31,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.1% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "牛来",
+   "id": "niu-lai",
+   "p": 0.052718,
+   "mc": 52717653,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.2826,
+   "c24": -13.99147,
+   "c7": -8.6303,
+   "c30": -21.9383,
+   "rsi": 27,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-14.0% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "CARDS",
+   "id": "collector-crypt",
+   "p": 0.168218,
+   "mc": 149867784,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8065,
+   "c24": -16.78743,
+   "c7": -25.417,
+   "c30": -50.3894,
+   "rsi": 29,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-16.8% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ZK",
+   "id": "zksync",
+   "p": 0.00806726,
+   "mc": 88904067,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5045,
+   "c24": -10.02147,
+   "c7": -13.1931,
+   "c30": -54.2428,
+   "rsi": 27,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.0% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ORDI",
+   "id": "ordinals",
+   "p": 2.8,
+   "mc": 58723225,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9029,
+   "c24": -11.85539,
+   "c7": -13.3269,
+   "c30": -29.5617,
+   "rsi": 24,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ONE",
+   "id": "harmony",
+   "p": 0.00128472,
+   "mc": 19104037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9118,
+   "c24": -11.37427,
+   "c7": -37.0696,
+   "c30": -18.0613,
+   "rsi": 29,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-11.4% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "IMX",
+   "id": "immutable-x",
+   "p": 0.09832,
+   "mc": 88927318,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.438,
+   "c24": -10.14457,
+   "c7": -17.7222,
+   "c30": -40.4743,
+   "rsi": 29,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-10.1% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "DRV",
+   "id": "derive",
+   "p": 0.25682,
+   "mc": 272808854,
+   "warn": [],
+   "c1h": 0.0268,
+   "c24": -14.46145,
+   "c7": -18.4859,
+   "c30": -36.5683,
+   "rsi": 13,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-14.5% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BOME",
+   "id": "book-of-meme",
+   "p": 0.00049981,
+   "mc": 34486830,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.2341,
+   "c24": -12.69744,
+   "c7": -18.4175,
+   "c30": -28.4464,
+   "rsi": 24,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.7% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "RE",
+   "id": "re",
+   "p": 0.222088,
+   "mc": 35445302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6549,
+   "c24": -12.93744,
+   "c7": -24.618,
+   "c30": -46.6917,
+   "rsi": 17,
+   "code": "RPE_CRASH",
+   "tag": "CRASH",
+   "score": 8,
+   "reason": "24h急跌-12.9% 看支撑别接刀",
+   "vetoed": false,
+   "softened": false
+  }
+ ],
+ "shorts": [
+  {
+   "s": "HYPE",
+   "id": "hyperliquid",
+   "p": 66.04,
+   "mc": 15699943755,
+   "warn": [],
+   "c1h": -2.3236,
+   "c24": -9.13665,
+   "c7": -14.6679,
+   "c30": -19.0123,
+   "rsi": 33,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ZEC",
+   "id": "zcash",
+   "p": 861.15,
+   "mc": 14673332523,
+   "warn": [],
+   "c1h": -2.4118,
+   "c24": -9.11515,
+   "c7": -31.5201,
+   "c30": -27.0198,
+   "rsi": 32,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -31.5% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "UNI",
+   "id": "uniswap",
+   "p": 4.95,
+   "mc": 3007103770,
+   "warn": [],
+   "c1h": -3.2376,
+   "c24": -14.14419,
+   "c7": -29.4321,
+   "c30": -34.3176,
+   "rsi": 21,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -29.4% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ENA",
+   "id": "ethena",
+   "p": 0.119198,
+   "mc": 1609176236,
+   "warn": [],
+   "c1h": -2.8007,
+   "c24": -11.871,
+   "c7": -24.5957,
+   "c30": -40.4697,
+   "rsi": 24,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -24.6% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "QNT",
+   "id": "quant-network",
+   "p": 151.34,
+   "mc": 2202938291,
+   "warn": [],
+   "c1h": -1.3733,
+   "c24": -7.26546,
+   "c7": -23.8575,
+   "c30": -27.2042,
+   "rsi": 39,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -23.9% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "JUP",
+   "id": "jupiter-exchange-solana",
+   "p": 0.25098,
+   "mc": 833096320,
+   "warn": [],
+   "c1h": -2.2109,
+   "c24": -3.76557,
+   "c7": 4.0858,
+   "c30": -19.7798,
+   "rsi": 43,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "KAVA",
+   "id": "kava",
+   "p": 0.0395446,
+   "mc": 42820744,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5278,
+   "c24": -41.79956,
+   "c7": -42.0753,
+   "c30": -42.8466,
+   "rsi": 15,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -42.1% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "IDOL",
+   "id": "meet48",
+   "p": 0.01808342,
+   "mc": 41169245,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6465,
+   "c24": -29.79193,
+   "c7": -45.4854,
+   "c30": 133.2351,
+   "rsi": 38,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -45.5% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "AERO",
+   "id": "aerodrome-finance",
+   "p": 0.438963,
+   "mc": 120092260,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.764,
+   "c24": -7.49844,
+   "c7": -25.7934,
+   "c30": -51.1277,
+   "rsi": 39,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -25.8% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "JCT",
+   "id": "janction",
+   "p": 0.00190032,
+   "mc": 21841662,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1021,
+   "c24": -10.71963,
+   "c7": -36.4694,
+   "c30": -3.8886,
+   "rsi": 31,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -36.5% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "DGAI",
+   "id": "dgrid-ai",
+   "p": 0.700131,
+   "mc": 105019586,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.0879,
+   "c24": -3.75498,
+   "c7": -5.8651,
+   "c30": -22.8612,
+   "rsi": 34,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "S",
+   "id": "sonic-3",
+   "p": 0.03399039,
+   "mc": 132069571,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.047,
+   "c24": -9.58129,
+   "c7": -11.1695,
+   "c30": -38.1616,
+   "rsi": 25,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PONS",
+   "id": "pons",
+   "p": 0.120681,
+   "mc": 80832339,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -3.5208,
+   "c24": -16.19847,
+   "c7": -34.5439,
+   "c30": -64.7544,
+   "rsi": 23,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -34.5% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "AERO",
+   "id": "aero",
+   "p": 0.438568,
+   "mc": 317345814,
+   "warn": [],
+   "c1h": -2.7055,
+   "c24": -7.41833,
+   "c7": -25.6774,
+   "c30": 0,
+   "rsi": 38,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -25.7% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BANANAS31",
+   "id": "banana-for-scale-2",
+   "p": 0.00423088,
+   "mc": 42308813,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -6.9482,
+   "c24": 6.86633,
+   "c7": -27.815,
+   "c30": -35.1746,
+   "rsi": 58,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -27.8% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BTW",
+   "id": "bitway",
+   "p": 0.697858,
+   "mc": 1050825311,
+   "warn": [],
+   "c1h": -0.4411,
+   "c24": -16.30659,
+   "c7": -37.8305,
+   "c30": -63.338,
+   "rsi": 42,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -37.8% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BAT",
+   "id": "basic-attention-token",
+   "p": 0.093298,
+   "mc": 139548294,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8345,
+   "c24": -16.23526,
+   "c7": -23.7122,
+   "c30": -51.7645,
+   "rsi": 12,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -23.7% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "SOXSB",
+   "id": "direxion-semiconductor-bear-3x-etf-bstocks-tokenized-stock",
+   "p": 54.01,
+   "mc": 7417489,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.215,
+   "c24": 1.90448,
+   "c7": -24.8522,
+   "c30": 20.0098,
+   "rsi": 71,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -24.9% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "UAI",
+   "id": "unifai-network",
+   "p": 0.03156897,
+   "mc": 7544984,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.858,
+   "c24": -19.44324,
+   "c7": -74.7377,
+   "c30": -90.695,
+   "rsi": 33,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -74.7% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "RAIN",
+   "id": "rain",
+   "p": 0.0036684,
+   "mc": 2620737787,
+   "warn": [],
+   "c1h": 0.9339,
+   "c24": -1.78973,
+   "c7": -34.5437,
+   "c30": -59.0504,
+   "rsi": 16,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -34.5% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "KITE",
+   "id": "kite-2",
+   "p": 0.126691,
+   "mc": 302944097,
+   "warn": [],
+   "c1h": -1.3797,
+   "c24": -1.43409,
+   "c7": 18.2372,
+   "c30": 0.7464,
+   "rsi": 51,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "CARDS",
+   "id": "collector-crypt",
+   "p": 0.168218,
+   "mc": 149867784,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8065,
+   "c24": -16.78743,
+   "c7": -25.417,
+   "c30": -50.3894,
+   "rsi": 29,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -25.4% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ZK",
+   "id": "zksync",
+   "p": 0.00806726,
+   "mc": 88904067,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5045,
+   "c24": -10.02147,
+   "c7": -13.1931,
+   "c30": -54.2428,
+   "rsi": 27,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "ONE",
+   "id": "harmony",
+   "p": 0.00128472,
+   "mc": 19104037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9118,
+   "c24": -11.37427,
+   "c7": -37.0696,
+   "c30": -18.0613,
+   "rsi": 29,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -37.1% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "NIL",
+   "id": "nillion",
+   "p": 0.050101,
+   "mc": 27974315,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.3054,
+   "c24": -8.67548,
+   "c7": -14.8449,
+   "c30": -42.2988,
+   "rsi": 25,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "CYBER",
+   "id": "cyberconnect",
+   "p": 0.225076,
+   "mc": 13746451,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.1415,
+   "c24": -9.4174,
+   "c7": -28.651,
+   "c30": -31.939,
+   "rsi": 23,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -28.7% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "BEAM",
+   "id": "beam-2",
+   "p": 0.00418916,
+   "mc": 210781291,
+   "warn": [],
+   "c1h": -1.3757,
+   "c24": -5.63749,
+   "c7": 2.7569,
+   "c30": 43.9887,
+   "rsi": 33,
+   "code": "TRRP",
+   "tag": "TRRP?",
+   "score": 6,
+   "reason": "7d内顶部多次被拒",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "RE",
+   "id": "re",
+   "p": 0.222088,
+   "mc": 35445302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6549,
+   "c24": -12.93744,
+   "c7": -24.618,
+   "c30": -46.6917,
+   "rsi": 17,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -24.6% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  },
+  {
+   "s": "PARTI",
+   "id": "particle-network",
+   "p": 0.03522259,
+   "mc": 8206864,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4873,
+   "c24": -2.71515,
+   "c7": -25.9405,
+   "c30": -4.9192,
+   "rsi": 41,
+   "code": "WEAK",
+   "tag": "WEAK",
+   "score": 6,
+   "reason": "7d -25.9% vs BTC -13.6%",
+   "vetoed": false,
+   "softened": false
+  }
+ ],
+ "watch": [],
+ "all": [
+  {
+   "s": "BTC",
+   "id": "bitcoin",
+   "p": 65400,
+   "mc": 1315312609569,
+   "warn": [],
+   "c1h": -0.274,
+   "c24": -4.74694,
+   "c7": -13.5941,
+   "c30": -20.5996,
+   "rsi": 22,
+   "tags": []
+  },
+  {
+   "s": "ETH",
+   "id": "ethereum",
+   "p": 1826.31,
+   "mc": 223208562789,
+   "warn": [],
+   "c1h": -0.5846,
+   "c24": -5.22762,
+   "c7": -18.2903,
+   "c30": -25.1266,
+   "rsi": 26,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "SOL",
+   "id": "solana",
+   "p": 72.5,
+   "mc": 42890287422,
+   "warn": [],
+   "c1h": -1.6469,
+   "c24": -8.87502,
+   "c7": -18.9543,
+   "c30": -31.5695,
+   "rsi": 26,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "XRP",
+   "id": "ripple",
+   "p": 0.957487,
+   "mc": 60816322740,
+   "warn": [],
+   "c1h": -1.2267,
+   "c24": -5.82307,
+   "c7": -17.28,
+   "c30": -28.4325,
+   "rsi": 30,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "HYPE",
+   "id": "hyperliquid",
+   "p": 66.04,
+   "mc": 15699943755,
+   "warn": [],
+   "c1h": -2.3236,
+   "c24": -9.13665,
+   "c7": -14.6679,
+   "c30": -19.0123,
+   "rsi": 33,
+   "tags": [
+    "RPE-1",
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "BNB",
+   "id": "binancecoin",
+   "p": 586.96,
+   "mc": 77191233599,
+   "warn": [],
+   "c1h": -1.7534,
+   "c24": -6.9371,
+   "c7": -15.3414,
+   "c30": -19.9238,
+   "rsi": 22,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ZEC",
+   "id": "zcash",
+   "p": 861.15,
+   "mc": 14673332523,
+   "warn": [],
+   "c1h": -2.4118,
+   "c24": -9.11515,
+   "c7": -31.5201,
+   "c30": -27.0198,
+   "rsi": 32,
+   "tags": [
+    "WEAK"
+   ]
+  },
+  {
+   "s": "DOGE",
+   "id": "dogecoin",
+   "p": 0.060012,
+   "mc": 9405699018,
+   "warn": [],
+   "c1h": -1.582,
+   "c24": -7.60612,
+   "c7": -16.1285,
+   "c30": -26.2469,
+   "rsi": 27,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "NEAR",
+   "id": "near",
+   "p": 3.11,
+   "mc": 4081665044,
+   "warn": [],
+   "c1h": -3.0684,
+   "c24": -11.17863,
+   "c7": -15.4069,
+   "c30": -39.1062,
+   "rsi": 27,
+   "tags": [
+    "RPE-1",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "UNI",
+   "id": "uniswap",
+   "p": 4.95,
+   "mc": 3007103770,
+   "warn": [],
+   "c1h": -3.2376,
+   "c24": -14.14419,
+   "c7": -29.4321,
+   "c30": -34.3176,
+   "rsi": 21,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "SUI",
+   "id": "sui",
+   "p": 0.725608,
+   "mc": 3003323805,
+   "warn": [],
+   "c1h": -2.0176,
+   "c24": -9.42814,
+   "c7": -15.3453,
+   "c30": -29.5704,
+   "rsi": 26,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "PEPE",
+   "id": "pepe",
+   "p": 0.0000039,
+   "mc": 1639817577,
+   "warn": [],
+   "c1h": -3.6677,
+   "c24": -12.219,
+   "c7": -20.1001,
+   "c30": -6.1879,
+   "rsi": 19,
+   "tags": [
+    "RPE-2",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "AKE",
+   "id": "akedo",
+   "p": 0.01280251,
+   "mc": 291849269,
+   "warn": [
+    "EXTENDED"
+   ],
+   "c1h": -4.5015,
+   "c24": 13.68727,
+   "c7": 114.4035,
+   "c30": -59.3574,
+   "rsi": 68,
+   "tags": [
+    "MOM+",
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "TRX",
+   "id": "tron",
+   "p": 0.308741,
+   "mc": 29342211230,
+   "warn": [],
+   "c1h": -0.3013,
+   "c24": -1.37836,
+   "c7": -3.343,
+   "c30": -6.782,
+   "rsi": 30,
+   "tags": []
+  },
+  {
+   "s": "ENA",
+   "id": "ethena",
+   "p": 0.119198,
+   "mc": 1609176236,
+   "warn": [],
+   "c1h": -2.8007,
+   "c24": -11.871,
+   "c7": -24.5957,
+   "c30": -40.4697,
+   "rsi": 24,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "LINK",
+   "id": "chainlink",
+   "p": 9.08,
+   "mc": 6963004878,
+   "warn": [],
+   "c1h": -1.8947,
+   "c24": -7.975,
+   "c7": -16.2386,
+   "c30": -27.6138,
+   "rsi": 27,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ADA",
+   "id": "cardano",
+   "p": 0.154885,
+   "mc": 5818558132,
+   "warn": [],
+   "c1h": -1.286,
+   "c24": -9.29356,
+   "c7": -14.7294,
+   "c30": -32.8057,
+   "rsi": 22,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "FIGR_HELOC",
+   "id": "figure-heloc",
+   "p": 1.046,
+   "mc": 27899722826,
+   "warn": [],
+   "c1h": -0.0066,
+   "c24": 4.433,
+   "c7": 2.3941,
+   "c30": 0.7575,
+   "rsi": 92,
+   "tags": [
+    "HCEP"
+   ]
+  },
+  {
+   "s": "AVAX",
+   "id": "avalanche-2",
+   "p": 7.5,
+   "mc": 3347542169,
+   "warn": [],
+   "c1h": -2.0844,
+   "c24": -9.72534,
+   "c7": -8.662,
+   "c30": -24.9107,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "LTC",
+   "id": "litecoin",
+   "p": 45.63,
+   "mc": 3551482369,
+   "warn": [],
+   "c1h": -0.811,
+   "c24": -7.07195,
+   "c7": -11.9121,
+   "c30": -24.5929,
+   "rsi": 25,
+   "tags": []
+  },
+  {
+   "s": "XLM",
+   "id": "stellar",
+   "p": 0.137254,
+   "mc": 4859824575,
+   "warn": [],
+   "c1h": -1.6338,
+   "c24": -6.53389,
+   "c7": -9.3214,
+   "c30": -25.8119,
+   "rsi": 32,
+   "tags": []
+  },
+  {
+   "s": "AAVE",
+   "id": "aave",
+   "p": 102.9,
+   "mc": 1588832885,
+   "warn": [],
+   "c1h": -1.0601,
+   "c24": -7.18014,
+   "c7": -22.1584,
+   "c30": -34.297,
+   "rsi": 30,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "WBT",
+   "id": "whitebit",
+   "p": 63.67,
+   "mc": 7554705318,
+   "warn": [],
+   "c1h": -0.3343,
+   "c24": -4.30704,
+   "c7": -12.452,
+   "c30": -21.141,
+   "rsi": 25,
+   "tags": []
+  },
+  {
+   "s": "INJ",
+   "id": "injective-protocol",
+   "p": 7.19,
+   "mc": 718644234,
+   "warn": [],
+   "c1h": -5.9329,
+   "c24": -11.61328,
+   "c7": -11.3451,
+   "c30": -10.0318,
+   "rsi": 42,
+   "tags": [
+    "CRASH"
+   ]
+  },
+  {
+   "s": "TAO",
+   "id": "bittensor",
+   "p": 192.88,
+   "mc": 2261825092,
+   "warn": [],
+   "c1h": -2.6674,
+   "c24": -10.35325,
+   "c7": -13.3071,
+   "c30": -29.388,
+   "rsi": 29,
+   "tags": [
+    "CRASH"
+   ]
+  },
+  {
+   "s": "WLD",
+   "id": "worldcoin-wld",
+   "p": 0.262582,
+   "mc": 993954333,
+   "warn": [],
+   "c1h": -3.0698,
+   "c24": -10.94563,
+   "c7": -21.7576,
+   "c30": -47.7553,
+   "rsi": 25,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "ARB",
+   "id": "arbitrum",
+   "p": 0.133985,
+   "mc": 923437390,
+   "warn": [],
+   "c1h": -2.933,
+   "c24": -8.11266,
+   "c7": -19.1264,
+   "c30": -29.3695,
+   "rsi": 37,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "XMR",
+   "id": "monero",
+   "p": 510.06,
+   "mc": 9604891776,
+   "warn": [],
+   "c1h": -1.1054,
+   "c24": -4.01086,
+   "c7": -16.3298,
+   "c30": -6.0309,
+   "rsi": 35,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "BCH",
+   "id": "bitcoin-cash",
+   "p": 207.98,
+   "mc": 4183779226,
+   "warn": [],
+   "c1h": -1.7653,
+   "c24": -6.67187,
+   "c7": -18.9611,
+   "c30": -24.5337,
+   "rsi": 33,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SHELL",
+   "id": "myshell",
+   "p": 0.02641939,
+   "mc": 7133236,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -4.3388,
+   "c24": 8.71064,
+   "c7": 28.3195,
+   "c30": 19.9128,
+   "rsi": 50,
+   "tags": [
+    "RPE-3",
+    "MOM+",
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ONDO",
+   "id": "ondo-finance",
+   "p": 0.307279,
+   "mc": 1496242305,
+   "warn": [],
+   "c1h": -2.1224,
+   "c24": -9.71635,
+   "c7": -15.3172,
+   "c30": -33.12,
+   "rsi": 25,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "PUMP",
+   "id": "pump-fun",
+   "p": 0.00301788,
+   "mc": 1383892919,
+   "warn": [],
+   "c1h": -3.5827,
+   "c24": -12.63911,
+   "c7": -17.192,
+   "c30": -33.3206,
+   "rsi": 23,
+   "tags": [
+    "RPE-1",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "TRUMP",
+   "id": "official-trump",
+   "p": 0.978648,
+   "mc": 275849593,
+   "warn": [],
+   "c1h": -1.895,
+   "c24": -10.91321,
+   "c7": -17.2351,
+   "c30": -47.8648,
+   "rsi": 20,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "PENGU",
+   "id": "pudgy-penguins",
+   "p": 0.00514461,
+   "mc": 323391970,
+   "warn": [],
+   "c1h": -2.5324,
+   "c24": -15.33893,
+   "c7": -19.5368,
+   "c30": -32.961,
+   "rsi": 16,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "FIL",
+   "id": "filecoin",
+   "p": 0.654701,
+   "mc": 554206593,
+   "warn": [],
+   "c1h": -1.3323,
+   "c24": -9.37906,
+   "c7": -17.6772,
+   "c30": -39.207,
+   "rsi": 22,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ASTER",
+   "id": "aster-2",
+   "p": 0.621292,
+   "mc": 1597875264,
+   "warn": [],
+   "c1h": -1.5576,
+   "c24": -5.83541,
+   "c7": -8.0434,
+   "c30": -11.9584,
+   "rsi": 39,
+   "tags": []
+  },
+  {
+   "s": "DOT",
+   "id": "polkadot",
+   "p": 0.749206,
+   "mc": 1282706487,
+   "warn": [],
+   "c1h": -1.8666,
+   "c24": -9.02122,
+   "c7": -16.1695,
+   "c30": -32.6657,
+   "rsi": 25,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SOPH",
+   "id": "sophon",
+   "p": 0.00213047,
+   "mc": 11075037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 16.2091,
+   "c24": 9.39891,
+   "c7": 61.9915,
+   "c30": -16.7006,
+   "rsi": 51,
+   "tags": [
+    "MOM+",
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ZRO",
+   "id": "layerzero",
+   "p": 1.5,
+   "mc": 601745061,
+   "warn": [],
+   "c1h": -3.0766,
+   "c24": -5.23003,
+   "c7": -8.0545,
+   "c30": -29.0289,
+   "rsi": 50,
+   "tags": []
+  },
+  {
+   "s": "LIT",
+   "id": "lighter",
+   "p": 2.86,
+   "mc": 715960039,
+   "warn": [],
+   "c1h": -4.5971,
+   "c24": -10.89104,
+   "c7": -10.1116,
+   "c30": -7.3163,
+   "rsi": 35,
+   "tags": [
+    "RPE-1",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "TIA",
+   "id": "celestia",
+   "p": 0.351219,
+   "mc": 348194656,
+   "warn": [],
+   "c1h": -2.5941,
+   "c24": -12.67268,
+   "c7": -20.5024,
+   "c30": -41.624,
+   "rsi": 16,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "HBAR",
+   "id": "hedera-hashgraph",
+   "p": 0.057884,
+   "mc": 2565846919,
+   "warn": [],
+   "c1h": -1.3356,
+   "c24": -7.86399,
+   "c7": -13.9053,
+   "c30": -30.6228,
+   "rsi": 31,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "QNT",
+   "id": "quant-network",
+   "p": 151.34,
+   "mc": 2202938291,
+   "warn": [],
+   "c1h": -1.3733,
+   "c24": -7.26546,
+   "c7": -23.8575,
+   "c30": -27.2042,
+   "rsi": 39,
+   "tags": [
+    "RPE-2",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "FET",
+   "id": "fetch-ai",
+   "p": 0.13035,
+   "mc": 301306151,
+   "warn": [],
+   "c1h": -2.7551,
+   "c24": -11.54233,
+   "c7": -10.1995,
+   "c30": -37.5975,
+   "rsi": 21,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "RUNE",
+   "id": "thorchain",
+   "p": 0.516849,
+   "mc": 170113471,
+   "warn": [],
+   "c1h": -1.6761,
+   "c24": -5.64139,
+   "c7": -12.6239,
+   "c30": -20.6636,
+   "rsi": 32,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "HTX",
+   "id": "htx-dao",
+   "p": 0.00000149,
+   "mc": 1323602717,
+   "warn": [],
+   "c1h": -0.1991,
+   "c24": -1.24405,
+   "c7": -3.8564,
+   "c30": -9.7753,
+   "rsi": 35,
+   "tags": []
+  },
+  {
+   "s": "JUP",
+   "id": "jupiter-exchange-solana",
+   "p": 0.25098,
+   "mc": 833096320,
+   "warn": [],
+   "c1h": -2.2109,
+   "c24": -3.76557,
+   "c7": 4.0858,
+   "c30": -19.7798,
+   "rsi": 43,
+   "tags": [
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "NVDAB",
+   "id": "nvidia-bstocks",
+   "p": 159.4,
+   "mc": 154477915,
+   "warn": [],
+   "c1h": -0.4734,
+   "c24": -0.601,
+   "c7": -15.174,
+   "c30": -26.8025,
+   "rsi": 27,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ICP",
+   "id": "internet-computer",
+   "p": 2.28,
+   "mc": 1276394412,
+   "warn": [],
+   "c1h": -2.1418,
+   "c24": -12.28437,
+   "c7": -5.7669,
+   "c30": -25.4153,
+   "rsi": 25,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "MPRA",
+   "id": "maya-preferred-223",
+   "p": 5931448009,
+   "mc": 0,
+   "warn": [],
+   "c1h": 0.5574,
+   "c24": 0.09981,
+   "c7": -0.8058,
+   "c30": -0.9965,
+   "rsi": 53,
+   "tags": []
+  },
+  {
+   "s": "KAVA",
+   "id": "kava",
+   "p": 0.0395446,
+   "mc": 42820744,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5278,
+   "c24": -41.79956,
+   "c7": -42.0753,
+   "c30": -42.8466,
+   "rsi": 15,
+   "tags": [
+    "ATL-N",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "SHIB",
+   "id": "shiba-inu",
+   "p": 0.00000396,
+   "mc": 2335281436,
+   "warn": [],
+   "c1h": -1.6236,
+   "c24": -7.2088,
+   "c7": -11.3338,
+   "c30": -22.3966,
+   "rsi": 26,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "NIGHT",
+   "id": "midnight-3",
+   "p": 0.04807242,
+   "mc": 798357909,
+   "warn": [],
+   "c1h": -3.5796,
+   "c24": 5.95093,
+   "c7": 20.6686,
+   "c30": 10.7269,
+   "rsi": 71,
+   "tags": [
+    "MOM+"
+   ]
+  },
+  {
+   "s": "BERA",
+   "id": "berachain-bera",
+   "p": 0.100369,
+   "mc": 36714621,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.158,
+   "c24": -5.16551,
+   "c7": -11.8014,
+   "c30": -56.0225,
+   "rsi": 36,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "GRAM",
+   "id": "the-open-network",
+   "p": 1.054,
+   "mc": 3012222179,
+   "warn": [],
+   "c1h": -0.6733,
+   "c24": -6.44918,
+   "c7": -3.4213,
+   "c30": -23.3731,
+   "rsi": 30,
+   "tags": [
+    "RPE-1",
+    "DRY"
+   ]
+  },
+  {
+   "s": "ZIG",
+   "id": "zignaly",
+   "p": 0.0342636,
+   "mc": 48275385,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.7578,
+   "c24": -1.86664,
+   "c7": -12.7976,
+   "c30": -38.0338,
+   "rsi": 22,
+   "tags": []
+  },
+  {
+   "s": "POL",
+   "id": "polygon-ecosystem-token",
+   "p": 0.080362,
+   "mc": 855820066,
+   "warn": [],
+   "c1h": -1.5428,
+   "c24": -7.36522,
+   "c7": -11.2559,
+   "c30": -15.9093,
+   "rsi": 28,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SPCXB",
+   "id": "spacex-bstocks-tokenized-stock",
+   "p": 134.84,
+   "mc": 164621436,
+   "warn": [],
+   "c1h": -0.3173,
+   "c24": -2.54579,
+   "c7": 0.1688,
+   "c30": -8.0929,
+   "rsi": 32,
+   "tags": []
+  },
+  {
+   "s": "PENDLE",
+   "id": "pendle",
+   "p": 1.44,
+   "mc": 251357531,
+   "warn": [],
+   "c1h": -2.7471,
+   "c24": -6.19343,
+   "c7": -11.972,
+   "c30": -30.3966,
+   "rsi": 44,
+   "tags": []
+  },
+  {
+   "s": "DODO",
+   "id": "dodo",
+   "p": 0.03271405,
+   "mc": 32714047,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 4.2754,
+   "c24": 15.97685,
+   "c7": 47.2825,
+   "c30": 56.8366,
+   "rsi": 50,
+   "tags": [
+    "MOM+",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "RENDER",
+   "id": "render-token",
+   "p": 1.41,
+   "mc": 786489621,
+   "warn": [],
+   "c1h": -3.7435,
+   "c24": -7.25252,
+   "c7": -9.2984,
+   "c30": -28.3859,
+   "rsi": 40,
+   "tags": []
+  },
+  {
+   "s": "CRV",
+   "id": "curve-dao-token",
+   "p": 0.211141,
+   "mc": 335031610,
+   "warn": [],
+   "c1h": -2.4022,
+   "c24": -8.49335,
+   "c7": -20.5546,
+   "c30": -40.3746,
+   "rsi": 26,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "DASH",
+   "id": "dash",
+   "p": 37.56,
+   "mc": 484270356,
+   "warn": [],
+   "c1h": -1.9051,
+   "c24": -8.23634,
+   "c7": -18.2355,
+   "c30": -23.5641,
+   "rsi": 32,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "APT",
+   "id": "aptos",
+   "p": 0.473747,
+   "mc": 421158649,
+   "warn": [],
+   "c1h": -2.9713,
+   "c24": -11.95335,
+   "c7": -21.061,
+   "c30": -42.6442,
+   "rsi": 21,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "WLFI",
+   "id": "world-liberty-financial",
+   "p": 0.04651324,
+   "mc": 1478210401,
+   "warn": [],
+   "c1h": -1.6577,
+   "c24": -2.5139,
+   "c7": 0.6457,
+   "c30": -19.6957,
+   "rsi": 47,
+   "tags": [
+    "QCI"
+   ]
+  },
+  {
+   "s": "VIRTUAL",
+   "id": "virtual-protocol",
+   "p": 0.456074,
+   "mc": 300272383,
+   "warn": [],
+   "c1h": -3.3014,
+   "c24": -11.63143,
+   "c7": -18.9616,
+   "c30": -32.7713,
+   "rsi": 25,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "IDOL",
+   "id": "meet48",
+   "p": 0.01808342,
+   "mc": 41169245,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6465,
+   "c24": -29.79193,
+   "c7": -45.4854,
+   "c30": 133.2351,
+   "rsi": 38,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "CAKE",
+   "id": "pancakeswap-token",
+   "p": 1.59,
+   "mc": 547849721,
+   "warn": [],
+   "c1h": -1.3115,
+   "c24": -7.7294,
+   "c7": -16.1311,
+   "c30": -29.317,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ALGO",
+   "id": "algorand",
+   "p": 0.079823,
+   "mc": 724757154,
+   "warn": [],
+   "c1h": -1.2601,
+   "c24": -7.24748,
+   "c7": -14.7057,
+   "c30": -30.0923,
+   "rsi": 21,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "STRK",
+   "id": "starknet",
+   "p": 0.03344073,
+   "mc": 256317446,
+   "warn": [],
+   "c1h": -2.9954,
+   "c24": -9.53024,
+   "c7": -17.1001,
+   "c30": -65.3005,
+   "rsi": 28,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ETHFI",
+   "id": "ether-fi",
+   "p": 0.50567,
+   "mc": 504929619,
+   "warn": [],
+   "c1h": -3.613,
+   "c24": -13.57451,
+   "c7": -13.5723,
+   "c30": -22.8358,
+   "rsi": 19,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "OP",
+   "id": "optimism",
+   "p": 0.083333,
+   "mc": 190897932,
+   "warn": [],
+   "c1h": -2.1321,
+   "c24": -10.36435,
+   "c7": -18.4152,
+   "c30": -39.9819,
+   "rsi": 22,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "TTWO",
+   "id": "take-two-interactive-software-backpack-securities",
+   "p": 229.59,
+   "mc": 4365689,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.013,
+   "c24": 0.32361,
+   "c7": 6.4463,
+   "c30": 10.2113,
+   "rsi": 58,
+   "tags": []
+  },
+  {
+   "s": "ATOM",
+   "id": "cosmos",
+   "p": 1.3,
+   "mc": 702521625,
+   "warn": [],
+   "c1h": -1.6448,
+   "c24": -6.80469,
+   "c7": -5.6583,
+   "c30": -24.8918,
+   "rsi": 32,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SEI",
+   "id": "sei-network",
+   "p": 0.03897754,
+   "mc": 262448744,
+   "warn": [],
+   "c1h": -2.2806,
+   "c24": -10.1894,
+   "c7": -14.8554,
+   "c30": -36.541,
+   "rsi": 27,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "SAND",
+   "id": "the-sandbox",
+   "p": 0.03614798,
+   "mc": 106189739,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9241,
+   "c24": -10.37125,
+   "c7": -14.9977,
+   "c30": -34.7926,
+   "rsi": 19,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "ARIA",
+   "id": "aria-ai",
+   "p": 0.197134,
+   "mc": 36075562,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 3.2288,
+   "c24": -10.1276,
+   "c7": 29.5337,
+   "c30": 438.2801,
+   "rsi": 41,
+   "tags": [
+    "MOM+",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "WIF",
+   "id": "dogwifcoin",
+   "p": 0.135648,
+   "mc": 135502085,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5589,
+   "c24": -9.57273,
+   "c7": -15.4119,
+   "c30": -32.7174,
+   "rsi": 23,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "JST",
+   "id": "just",
+   "p": 0.144436,
+   "mc": 1158087001,
+   "warn": [],
+   "c1h": -0.6481,
+   "c24": 0.38078,
+   "c7": 0.7706,
+   "c30": 7.5358,
+   "rsi": 46,
+   "tags": []
+  },
+  {
+   "s": "VVV",
+   "id": "venice-token",
+   "p": 17.5,
+   "mc": 857243162,
+   "warn": [],
+   "c1h": -2.649,
+   "c24": -6.34022,
+   "c7": -13.8455,
+   "c30": -29.8097,
+   "rsi": 40,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "DNA",
+   "id": "neosoul",
+   "p": 0.157152,
+   "mc": 20429755,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9668,
+   "c24": -6.71401,
+   "c7": -2.5792,
+   "c30": 0,
+   "rsi": 37,
+   "tags": []
+  },
+  {
+   "s": "BONK",
+   "id": "bonk",
+   "p": 0.0000024,
+   "mc": 210962087,
+   "warn": [],
+   "c1h": -3.0393,
+   "c24": -11.28147,
+   "c7": -14.2619,
+   "c30": -22.7342,
+   "rsi": 26,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "SNDKC",
+   "id": "sandisk-coinbase-tokenized-stock",
+   "p": 845.36,
+   "mc": 2362811,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.2345,
+   "c24": -2.04975,
+   "c7": 1.3104,
+   "c30": -38.1116,
+   "rsi": 27,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ETC",
+   "id": "ethereum-classic",
+   "p": 6.03,
+   "mc": 959551686,
+   "warn": [],
+   "c1h": -1.6922,
+   "c24": -7.34645,
+   "c7": -12.7076,
+   "c30": -24.9526,
+   "rsi": 26,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "AERO",
+   "id": "aerodrome-finance",
+   "p": 0.438963,
+   "mc": 120092260,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.764,
+   "c24": -7.49844,
+   "c7": -25.7934,
+   "c30": -51.1277,
+   "rsi": 39,
+   "tags": [
+    "RPE-2",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "XPL",
+   "id": "plasma",
+   "p": 0.04545102,
+   "mc": 216397335,
+   "warn": [],
+   "c1h": -4.4515,
+   "c24": -8.52011,
+   "c7": -20.7197,
+   "c30": -46.3324,
+   "rsi": 35,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "NVDA",
+   "id": "nvidia-robinhood-tokenized-stock",
+   "p": 159.54,
+   "mc": 20585226,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4732,
+   "c24": -0.53602,
+   "c7": -15.1341,
+   "c30": -26.7358,
+   "rsi": 26,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "JCT",
+   "id": "janction",
+   "p": 0.00190032,
+   "mc": 21841662,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1021,
+   "c24": -10.71963,
+   "c7": -36.4694,
+   "c30": -3.8886,
+   "rsi": 31,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "DGAI",
+   "id": "dgrid-ai",
+   "p": 0.700131,
+   "mc": 105019586,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.0879,
+   "c24": -3.75498,
+   "c7": -5.8651,
+   "c30": -22.8612,
+   "rsi": 34,
+   "tags": [
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "CAP",
+   "id": "cap-4",
+   "p": 0.111409,
+   "mc": 173797469,
+   "warn": [],
+   "c1h": 2.0007,
+   "c24": 4.69837,
+   "c7": 9.0894,
+   "c30": 40.1146,
+   "rsi": 51,
+   "tags": [
+    "VEX"
+   ]
+  },
+  {
+   "s": "S",
+   "id": "sonic-3",
+   "p": 0.03399039,
+   "mc": 132069571,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.047,
+   "c24": -9.58129,
+   "c7": -11.1695,
+   "c30": -38.1616,
+   "rsi": 25,
+   "tags": [
+    "ATL-N",
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "MRNAB",
+   "id": "moderna-bstocks-tokenized-stock",
+   "p": 220.34,
+   "mc": 2091217,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.2163,
+   "c24": -2.62065,
+   "c7": -14.0696,
+   "c30": -7.3054,
+   "rsi": 37,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "BARD",
+   "id": "lombard-protocol",
+   "p": 0.12366,
+   "mc": 49039086,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 4.414,
+   "c24": -17.27659,
+   "c7": 11.3408,
+   "c30": 10.7134,
+   "rsi": 30,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "PYTH",
+   "id": "pyth-network",
+   "p": 0.056041,
+   "mc": 441319633,
+   "warn": [],
+   "c1h": -3.1146,
+   "c24": -12.62959,
+   "c7": -12.8456,
+   "c30": -42.3767,
+   "rsi": 19,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "EURCV",
+   "id": "societe-generale-forge-eurcv",
+   "p": 1.1,
+   "mc": 188915016,
+   "warn": [],
+   "c1h": -0.0194,
+   "c24": -0.18481,
+   "c7": -1.1992,
+   "c30": -1.7558,
+   "rsi": 37,
+   "tags": []
+  },
+  {
+   "s": "GATO",
+   "id": "gato-the-cat",
+   "p": 0.01076551,
+   "mc": 0,
+   "warn": [],
+   "c1h": -12.3224,
+   "c24": 0,
+   "c7": 0,
+   "c30": 0,
+   "rsi": 50,
+   "tags": [
+    "QCI"
+   ]
+  },
+  {
+   "s": "MNT",
+   "id": "mantle",
+   "p": 0.385422,
+   "mc": 1276518086,
+   "warn": [],
+   "c1h": -1.3598,
+   "c24": -4.82277,
+   "c7": -15.1127,
+   "c30": -27.0082,
+   "rsi": 25,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "MSTRC",
+   "id": "microstrategy-coinbase-tokenized-stock",
+   "p": 102.37,
+   "mc": 2063917,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.446,
+   "c24": -6.30353,
+   "c7": -19.7477,
+   "c30": -31.0876,
+   "rsi": 24,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "SPY",
+   "id": "spdr-s-p-500-etf-trust-robinhood-tokenized-stock",
+   "p": 748.02,
+   "mc": 20082531,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.2399,
+   "c24": -0.47593,
+   "c7": 1.3723,
+   "c30": -3.0403,
+   "rsi": 31,
+   "tags": []
+  },
+  {
+   "s": "RAY",
+   "id": "raydium",
+   "p": 1.39,
+   "mc": 375718344,
+   "warn": [],
+   "c1h": -2.3142,
+   "c24": -8.35465,
+   "c7": -20.8666,
+   "c30": -24.8174,
+   "rsi": 29,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "INIT",
+   "id": "initia",
+   "p": 0.096235,
+   "mc": 21098341,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2741,
+   "c24": -19.20272,
+   "c7": -22.4994,
+   "c30": -23.4341,
+   "rsi": 21,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "OKB",
+   "id": "okb",
+   "p": 87.09,
+   "mc": 1828957811,
+   "warn": [],
+   "c1h": -1.6268,
+   "c24": -7.58192,
+   "c7": -15.2698,
+   "c30": -26.4533,
+   "rsi": 24,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "NVDAX",
+   "id": "nvidia-xstock",
+   "p": 159.77,
+   "mc": 93413202,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.4099,
+   "c24": -0.46575,
+   "c7": -15.0766,
+   "c30": -26.711,
+   "rsi": 26,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "BMT",
+   "id": "bubblemaps",
+   "p": 0.02282395,
+   "mc": 17519824,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.8011,
+   "c24": -5.02364,
+   "c7": 1.4934,
+   "c30": 29.1262,
+   "rsi": 49,
+   "tags": [
+    "QCI",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "AGT",
+   "id": "alaya-ai",
+   "p": 0.03426259,
+   "mc": 0,
+   "warn": [
+    "POST-PUMP"
+   ],
+   "c1h": -3.8864,
+   "c24": -33.53426,
+   "c7": 35.0895,
+   "c30": 56.1728,
+   "rsi": 26,
+   "tags": [
+    "MOM+",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "AXS",
+   "id": "axie-infinity",
+   "p": 0.692056,
+   "mc": 121523381,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1997,
+   "c24": -8.219,
+   "c7": -16.3164,
+   "c30": -34.6953,
+   "rsi": 25,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "PIEVERSE",
+   "id": "pieverse",
+   "p": 1.79,
+   "mc": 491833528,
+   "warn": [],
+   "c1h": 1.5484,
+   "c24": 7.59518,
+   "c7": 29.0051,
+   "c30": 51.0067,
+   "rsi": 52,
+   "tags": [
+    "RPE-1",
+    "MOM+"
+   ]
+  },
+  {
+   "s": "EVAA",
+   "id": "evaa-protocol",
+   "p": 1.85,
+   "mc": 12249302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5007,
+   "c24": 69.62892,
+   "c7": 36.9275,
+   "c30": 203.8139,
+   "rsi": 86,
+   "tags": [
+    "HCEP"
+   ]
+  },
+  {
+   "s": "PONS",
+   "id": "pons",
+   "p": 0.120681,
+   "mc": 80832339,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -3.5208,
+   "c24": -16.19847,
+   "c7": -34.5439,
+   "c30": -64.7544,
+   "rsi": 23,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "AI",
+   "id": "sleepless-ai",
+   "p": 0.0167273,
+   "mc": 2174548,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.5273,
+   "c24": 9.41497,
+   "c7": 3.3705,
+   "c30": -11.498,
+   "rsi": 68,
+   "tags": [
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "CHZ",
+   "id": "chiliz",
+   "p": 0.00994994,
+   "mc": 105581496,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.5164,
+   "c24": -7.23481,
+   "c7": -11.9851,
+   "c30": -30.2885,
+   "rsi": 24,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "LDO",
+   "id": "lido-dao",
+   "p": 0.275171,
+   "mc": 228273398,
+   "warn": [],
+   "c1h": -1.9952,
+   "c24": -8.61202,
+   "c7": -15.0583,
+   "c30": -31.9471,
+   "rsi": 26,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "GRASS",
+   "id": "grass",
+   "p": 0.384065,
+   "mc": 277280319,
+   "warn": [],
+   "c1h": -5.4581,
+   "c24": -10.2631,
+   "c7": -23.2709,
+   "c30": -44.3,
+   "rsi": 34,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "1INCH",
+   "id": "1inch",
+   "p": 0.066971,
+   "mc": 94132646,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.4366,
+   "c24": -6.26998,
+   "c7": -15.9213,
+   "c30": -29.23,
+   "rsi": 26,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "GUN",
+   "id": "gunz",
+   "p": 0.00155565,
+   "mc": 6286905,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9966,
+   "c24": -7.858,
+   "c7": -14.2365,
+   "c30": -36.3049,
+   "rsi": 38,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "UP",
+   "id": "unitas",
+   "p": 0.152032,
+   "mc": 32839001,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.0269,
+   "c24": 7.7312,
+   "c7": 36.3668,
+   "c30": -1.6619,
+   "rsi": 44,
+   "tags": [
+    "RPE-2",
+    "MOM+",
+    "VEX"
+   ]
+  },
+  {
+   "s": "AERO",
+   "id": "aero",
+   "p": 0.438568,
+   "mc": 317345814,
+   "warn": [],
+   "c1h": -2.7055,
+   "c24": -7.41833,
+   "c7": -25.6774,
+   "c30": 0,
+   "rsi": 38,
+   "tags": [
+    "RPE-2",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "PEARL",
+   "id": "pearl-2",
+   "p": 1.43,
+   "mc": 542853316,
+   "warn": [],
+   "c1h": -2.4334,
+   "c24": -1.28567,
+   "c7": -15.6773,
+   "c30": -20.5427,
+   "rsi": 45,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "W",
+   "id": "wormhole",
+   "p": 0.0089117,
+   "mc": 60582944,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.4461,
+   "c24": -10.37311,
+   "c7": -18.8062,
+   "c30": -40.2091,
+   "rsi": 20,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "STO",
+   "id": "stakestone",
+   "p": 0.02450572,
+   "mc": 5521956,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2601,
+   "c24": -7.0121,
+   "c7": -10.1813,
+   "c30": -31.8052,
+   "rsi": 44,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BANANAS31",
+   "id": "banana-for-scale-2",
+   "p": 0.00423088,
+   "mc": 42308813,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -6.9482,
+   "c24": 6.86633,
+   "c7": -27.815,
+   "c30": -35.1746,
+   "rsi": 58,
+   "tags": [
+    "RPE-2",
+    "VEX",
+    "ATL-N",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "BTW",
+   "id": "bitway",
+   "p": 0.697858,
+   "mc": 1050825311,
+   "warn": [],
+   "c1h": -0.4411,
+   "c24": -16.30659,
+   "c7": -37.8305,
+   "c30": -63.338,
+   "rsi": 42,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "SOXLB",
+   "id": "semicon-bull-3x-etf-bstocks-tokenized-stock",
+   "p": 54.61,
+   "mc": 33443970,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.1608,
+   "c24": -1.16953,
+   "c7": 20.1826,
+   "c30": -47.5158,
+   "rsi": 29,
+   "tags": [
+    "RPE-2",
+    "MOM+"
+   ]
+  },
+  {
+   "s": "ERA",
+   "id": "caldera",
+   "p": 0.073778,
+   "mc": 12892700,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.5478,
+   "c24": -1.92036,
+   "c7": 1.8918,
+   "c30": 24.4087,
+   "rsi": 42,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "TWT",
+   "id": "trust-wallet-token",
+   "p": 0.352435,
+   "mc": 146842184,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.4593,
+   "c24": -7.57402,
+   "c7": -12.9179,
+   "c30": -27.2155,
+   "rsi": 31,
+   "tags": []
+  },
+  {
+   "s": "BAT",
+   "id": "basic-attention-token",
+   "p": 0.093298,
+   "mc": 139548294,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8345,
+   "c24": -16.23526,
+   "c7": -23.7122,
+   "c30": -51.7645,
+   "rsi": 12,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "NVDAC",
+   "id": "nvidia-coinbase-tokenized-stock",
+   "p": 159.55,
+   "mc": 7826671,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.408,
+   "c24": -0.58649,
+   "c7": -15.1355,
+   "c30": -26.6945,
+   "rsi": 27,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "DOPE",
+   "id": "doge-pepe",
+   "p": 0.02839508,
+   "mc": 28395080,
+   "warn": [
+    "NANO",
+    "EXTENDED"
+   ],
+   "c1h": -23.5297,
+   "c24": 115519.64235,
+   "c7": 150923.4283,
+   "c30": 122.1047,
+   "rsi": 93,
+   "tags": [
+    "RPE-2",
+    "HCEP"
+   ]
+  },
+  {
+   "s": "EIGEN",
+   "id": "eigenlayer",
+   "p": 0.136338,
+   "mc": 139200439,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1719,
+   "c24": -11.59945,
+   "c7": -19.2725,
+   "c30": -45.0245,
+   "rsi": 22,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "GOMINING",
+   "id": "gmt-token",
+   "p": 0.361669,
+   "mc": 145557745,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.1482,
+   "c24": -2.21798,
+   "c7": -5.2458,
+   "c30": -5.0957,
+   "rsi": 23,
+   "tags": []
+  },
+  {
+   "s": "MSTRB",
+   "id": "strategy-tokenized-bstocks",
+   "p": 102.2,
+   "mc": 37335213,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4088,
+   "c24": -6.57195,
+   "c7": -19.8463,
+   "c30": -31.2334,
+   "rsi": 24,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "SOXSB",
+   "id": "direxion-semiconductor-bear-3x-etf-bstocks-tokenized-stock",
+   "p": 54.01,
+   "mc": 7417489,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.215,
+   "c24": 1.90448,
+   "c7": -24.8522,
+   "c30": 20.0098,
+   "rsi": 71,
+   "tags": [
+    "RPE-3",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "COTI",
+   "id": "coti",
+   "p": 0.00831301,
+   "mc": 24769118,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.3504,
+   "c24": -8.47957,
+   "c7": -9.8606,
+   "c30": -26.6343,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "METAC",
+   "id": "meta-coinbase-tokenized-stock",
+   "p": 632.67,
+   "mc": 5366731,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4771,
+   "c24": 0.14612,
+   "c7": 3.3592,
+   "c30": -13.8547,
+   "rsi": 52,
+   "tags": [
+    "QCI"
+   ]
+  },
+  {
+   "s": "APEPE",
+   "id": "ape-and-pepe",
+   "p": 0.00000122,
+   "mc": 256068735,
+   "warn": [],
+   "c1h": 0.731,
+   "c24": -0.80116,
+   "c7": 3.6397,
+   "c30": 3.676,
+   "rsi": 40,
+   "tags": []
+  },
+  {
+   "s": "WXT",
+   "id": "weex-token",
+   "p": 0.01395259,
+   "mc": 0,
+   "warn": [],
+   "c1h": -0.9333,
+   "c24": -6.14789,
+   "c7": -15.419,
+   "c30": -25.0062,
+   "rsi": 23,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "BTT",
+   "id": "bittorrent",
+   "p": 3.14154e-7,
+   "mc": 304217173,
+   "warn": [],
+   "c1h": -0.9492,
+   "c24": -2.88526,
+   "c7": -11.4845,
+   "c30": -10.0913,
+   "rsi": 26,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "TRB",
+   "id": "tellor",
+   "p": 13.21,
+   "mc": 37475516,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2829,
+   "c24": -9.59763,
+   "c7": -14.9817,
+   "c30": -27.5503,
+   "rsi": 17,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "JTO",
+   "id": "jito-governance-token",
+   "p": 0.273999,
+   "mc": 148969912,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.3755,
+   "c24": -11.15597,
+   "c7": -18.5714,
+   "c30": -41.736,
+   "rsi": 21,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "BUBI",
+   "id": "bullbit",
+   "p": 0.0149258,
+   "mc": 4873417,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.0196,
+   "c24": -8.3985,
+   "c7": -17.4299,
+   "c30": -46.4569,
+   "rsi": 18,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "AMZNC",
+   "id": "amazon-coinbase-tokenized-stock",
+   "p": 262,
+   "mc": 2052407,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4772,
+   "c24": -0.99969,
+   "c7": 0.9527,
+   "c30": 3.3111,
+   "rsi": 28,
+   "tags": []
+  },
+  {
+   "s": "AR",
+   "id": "arweave",
+   "p": 2.62,
+   "mc": 172074501,
+   "warn": [],
+   "c1h": -2.2471,
+   "c24": -13.13561,
+   "c7": -17.0594,
+   "c30": -32.7861,
+   "rsi": 24,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "XDP",
+   "id": "doppler-finance",
+   "p": 0.01770272,
+   "mc": 17702717,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1699,
+   "c24": 1.52958,
+   "c7": 11.3754,
+   "c30": -7.9066,
+   "rsi": 67,
+   "tags": []
+  },
+  {
+   "s": "ORBS",
+   "id": "orbs",
+   "p": 0.00648391,
+   "mc": 32549235,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.4294,
+   "c24": 8.10836,
+   "c7": 6.6929,
+   "c30": -6.3592,
+   "rsi": 58,
+   "tags": [
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "MON",
+   "id": "monad",
+   "p": 0.01564105,
+   "mc": 184958006,
+   "warn": [],
+   "c1h": -1.8701,
+   "c24": -4.94889,
+   "c7": -4.5364,
+   "c30": -33.6599,
+   "rsi": 40,
+   "tags": []
+  },
+  {
+   "s": "TAC",
+   "id": "tac",
+   "p": 0.00108786,
+   "mc": 6697220,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.4037,
+   "c24": -3.15123,
+   "c7": 9.2652,
+   "c30": -12.6795,
+   "rsi": 49,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SNDKB",
+   "id": "sandisk-bstocks-tokenized-stock",
+   "p": 844.94,
+   "mc": 71508755,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.0849,
+   "c24": -2.01387,
+   "c7": 1.9024,
+   "c30": -38.2372,
+   "rsi": 29,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "MORPHO",
+   "id": "morpho",
+   "p": 1.83,
+   "mc": 1291912601,
+   "warn": [],
+   "c1h": -1.6964,
+   "c24": -7.08481,
+   "c7": -12.6581,
+   "c30": -24.8269,
+   "rsi": 28,
+   "tags": []
+  },
+  {
+   "s": "PHA",
+   "id": "pha",
+   "p": 0.02950382,
+   "mc": 25631852,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.348,
+   "c24": -6.99541,
+   "c7": -17.7353,
+   "c30": -41.6887,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "USELESS",
+   "id": "useless-3",
+   "p": 0.10352,
+   "mc": 103513830,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -4.5349,
+   "c24": -18.25177,
+   "c7": -19.2032,
+   "c30": -38.2753,
+   "rsi": 23,
+   "tags": [
+    "RPE-2",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "CRCLB",
+   "id": "circle-internet-group-bstock",
+   "p": 58.5,
+   "mc": 129903077,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.7053,
+   "c24": -5.52465,
+   "c7": -12.9832,
+   "c30": -30.78,
+   "rsi": 23,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ALICE",
+   "id": "my-neighbor-alice",
+   "p": 0.10736,
+   "mc": 10730234,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.856,
+   "c24": -8.50054,
+   "c7": -11.2178,
+   "c30": -29.3132,
+   "rsi": 22,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "FARTCOIN",
+   "id": "fartcoin",
+   "p": 0.095922,
+   "mc": 95914135,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9193,
+   "c24": -10.35228,
+   "c7": -17.0657,
+   "c30": -39.2268,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "MOW",
+   "id": "mowcat",
+   "p": 0.157982,
+   "mc": 0,
+   "warn": [],
+   "c1h": 22.9161,
+   "c24": 14.83638,
+   "c7": 64.2396,
+   "c30": 50.5193,
+   "rsi": 64,
+   "tags": [
+    "MOM+"
+   ]
+  },
+  {
+   "s": "FLOKI",
+   "id": "floki",
+   "p": 0.00001823,
+   "mc": 175803386,
+   "warn": [],
+   "c1h": -2.0851,
+   "c24": -8.1982,
+   "c7": -14.2271,
+   "c30": -25.6636,
+   "rsi": 26,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BGB",
+   "id": "bitget-token",
+   "p": 1.59,
+   "mc": 1113271164,
+   "warn": [],
+   "c1h": -0.6668,
+   "c24": -3.17391,
+   "c7": -8.5279,
+   "c30": -17.6157,
+   "rsi": 37,
+   "tags": []
+  },
+  {
+   "s": "UAI",
+   "id": "unifai-network",
+   "p": 0.03156897,
+   "mc": 7544984,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.858,
+   "c24": -19.44324,
+   "c7": -74.7377,
+   "c30": -90.695,
+   "rsi": 33,
+   "tags": [
+    "ATL-N",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "WIN",
+   "id": "wink",
+   "p": 0.00005586,
+   "mc": 51745848,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.1217,
+   "c24": -5.49808,
+   "c7": -13.5186,
+   "c30": 1.6927,
+   "rsi": 37,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "MET",
+   "id": "meteora",
+   "p": 0.269639,
+   "mc": 152506283,
+   "warn": [],
+   "c1h": -2.3284,
+   "c24": -5.90581,
+   "c7": -12.7766,
+   "c30": -27.3979,
+   "rsi": 28,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "CC",
+   "id": "canton-network",
+   "p": 0.080735,
+   "mc": 3233714128,
+   "warn": [],
+   "c1h": -1.8847,
+   "c24": -6.88791,
+   "c7": -14.9638,
+   "c30": -26.7237,
+   "rsi": 28,
+   "tags": []
+  },
+  {
+   "s": "MERL",
+   "id": "merlin-chain",
+   "p": 0.03187118,
+   "mc": 45569770,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.6129,
+   "c24": 3.94601,
+   "c7": 9.5015,
+   "c30": 16.0528,
+   "rsi": 69,
+   "tags": [
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SPCX",
+   "id": "spacex-backpack-securities",
+   "p": 134.83,
+   "mc": 12654136,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.3301,
+   "c24": -2.59751,
+   "c7": 0.2256,
+   "c30": -7.9713,
+   "rsi": 32,
+   "tags": []
+  },
+  {
+   "s": "MITO",
+   "id": "mitosis",
+   "p": 0.00685653,
+   "mc": 3295136,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 1.162,
+   "c24": 4.04016,
+   "c7": -16.6117,
+   "c30": -50.1586,
+   "rsi": 43,
+   "tags": [
+    "RPE-2",
+    "VEX",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "RAIN",
+   "id": "rain",
+   "p": 0.0036684,
+   "mc": 2620737787,
+   "warn": [],
+   "c1h": 0.9339,
+   "c24": -1.78973,
+   "c7": -34.5437,
+   "c30": -59.0504,
+   "rsi": 16,
+   "tags": [
+    "RPE-3",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "STX",
+   "id": "blockstack",
+   "p": 0.268394,
+   "mc": 505251229,
+   "warn": [],
+   "c1h": -1.9549,
+   "c24": -7.6227,
+   "c7": -21.484,
+   "c30": -34.8305,
+   "rsi": 36,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SPCXC",
+   "id": "spacex-coinbase-tokenized-stock",
+   "p": 134.9,
+   "mc": 3529909,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.3696,
+   "c24": -2.47744,
+   "c7": 0.2492,
+   "c30": -8.0146,
+   "rsi": 31,
+   "tags": []
+  },
+  {
+   "s": "GRT",
+   "id": "the-graph",
+   "p": 0.01634786,
+   "mc": 178867168,
+   "warn": [],
+   "c1h": -2.0468,
+   "c24": -7.20441,
+   "c7": -14.5801,
+   "c30": -34.7612,
+   "rsi": 38,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "GALA",
+   "id": "gala",
+   "p": 0.00135612,
+   "mc": 69507345,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.1665,
+   "c24": -7.74649,
+   "c7": -12.7938,
+   "c30": -33.6012,
+   "rsi": 27,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "COMP",
+   "id": "compound-governance-token",
+   "p": 18.55,
+   "mc": 185453716,
+   "warn": [],
+   "c1h": -1.2228,
+   "c24": -6.2374,
+   "c7": -8.2441,
+   "c30": -16.6944,
+   "rsi": 28,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "DOS",
+   "id": "dappos",
+   "p": 0.156562,
+   "mc": 31312495,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.1791,
+   "c24": -1.46288,
+   "c7": -21.3237,
+   "c30": -15.1416,
+   "rsi": 41,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "KITE",
+   "id": "kite-2",
+   "p": 0.126691,
+   "mc": 302944097,
+   "warn": [],
+   "c1h": -1.3797,
+   "c24": -1.43409,
+   "c7": 18.2372,
+   "c30": 0.7464,
+   "rsi": 51,
+   "tags": [
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "KAS",
+   "id": "kaspa",
+   "p": 0.02684594,
+   "mc": 746523413,
+   "warn": [],
+   "c1h": -1.8709,
+   "c24": -6.34916,
+   "c7": -8.2326,
+   "c30": -25.3875,
+   "rsi": 31,
+   "tags": []
+  },
+  {
+   "s": "PCI",
+   "id": "pay-coin",
+   "p": 0.03358479,
+   "mc": 34343013,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -4.9591,
+   "c24": -7.18009,
+   "c7": -2.1319,
+   "c30": -11.9498,
+   "rsi": 56,
+   "tags": [
+    "QCI",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BNCB",
+   "id": "cea-industries-bstocks-tokenized-stock",
+   "p": 3.77,
+   "mc": 30405184,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.7491,
+   "c24": -8.76463,
+   "c7": -22.7639,
+   "c30": -20.208,
+   "rsi": 15,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "APE",
+   "id": "apecoin",
+   "p": 0.084003,
+   "mc": 84003296,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.3973,
+   "c24": -9.95647,
+   "c7": -21.1615,
+   "c30": -40.9459,
+   "rsi": 24,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "PLUME",
+   "id": "plume",
+   "p": 0.01240745,
+   "mc": 84597229,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.9681,
+   "c24": -10.032,
+   "c7": -6.0968,
+   "c30": -36.1289,
+   "rsi": 31,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "CLAUDIA",
+   "id": "claudia-4",
+   "p": 0.00057402,
+   "mc": 574018,
+   "warn": [
+    "NANO",
+    "EXTENDED"
+   ],
+   "c1h": -0.5358,
+   "c24": 44.95692,
+   "c7": 23466.4985,
+   "c30": 10598.9485,
+   "rsi": 74,
+   "tags": [
+    "RPE-2",
+    "MOM+",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "SPCX",
+   "id": "spacex-robinhood-tokenized-stock",
+   "p": 134.97,
+   "mc": 13262325,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.3155,
+   "c24": -2.52632,
+   "c7": 0.1913,
+   "c30": -8.0715,
+   "rsi": 30,
+   "tags": []
+  },
+  {
+   "s": "GOOGLC",
+   "id": "alphabet-coinbase-tokenized-stock",
+   "p": 289.27,
+   "mc": 10232225,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6881,
+   "c24": -1.69186,
+   "c7": 1.7226,
+   "c30": -17.2103,
+   "rsi": 25,
+   "tags": []
+  },
+  {
+   "s": "ARX",
+   "id": "arcium",
+   "p": 0.205052,
+   "mc": 42821339,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 0.8594,
+   "c24": -3.35986,
+   "c7": -7.4833,
+   "c30": -13.7946,
+   "rsi": 38,
+   "tags": []
+  },
+  {
+   "s": "ZORA",
+   "id": "zora",
+   "p": 0.00444921,
+   "mc": 19887988,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.7712,
+   "c24": -10.12006,
+   "c7": -13.3595,
+   "c30": -33.413,
+   "rsi": 31,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "BDX",
+   "id": "beldex",
+   "p": 0.07317,
+   "mc": 575988287,
+   "warn": [],
+   "c1h": -0.1324,
+   "c24": 0.30202,
+   "c7": 0.9828,
+   "c30": -7.7059,
+   "rsi": 43,
+   "tags": []
+  },
+  {
+   "s": "牛来",
+   "id": "niu-lai",
+   "p": 0.052718,
+   "mc": 52717653,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.2826,
+   "c24": -13.99147,
+   "c7": -8.6303,
+   "c30": -21.9383,
+   "rsi": 27,
+   "tags": [
+    "RPE-1",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "PEOPLE",
+   "id": "constitutiondao",
+   "p": 0.00495278,
+   "mc": 25093185,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.2835,
+   "c24": -9.43661,
+   "c7": -17.9542,
+   "c30": -35.4666,
+   "rsi": 23,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "MANA",
+   "id": "decentraland",
+   "p": 0.061478,
+   "mc": 120392160,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.0821,
+   "c24": -8.13042,
+   "c7": -13.5938,
+   "c30": -30.4792,
+   "rsi": 24,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "KAITO",
+   "id": "kaito",
+   "p": 0.185323,
+   "mc": 44735000,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.9725,
+   "c24": -9.55392,
+   "c7": -14.2186,
+   "c30": -38.2389,
+   "rsi": 22,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "CARDS",
+   "id": "collector-crypt",
+   "p": 0.168218,
+   "mc": 149867784,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8065,
+   "c24": -16.78743,
+   "c7": -25.417,
+   "c30": -50.3894,
+   "rsi": 29,
+   "tags": [
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "ZK",
+   "id": "zksync",
+   "p": 0.00806726,
+   "mc": 88904067,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.5045,
+   "c24": -10.02147,
+   "c7": -13.1931,
+   "c30": -54.2428,
+   "rsi": 27,
+   "tags": [
+    "ATL-N",
+    "CRASH",
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "XT",
+   "id": "xtcom-token",
+   "p": 3.74,
+   "mc": 22633542,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9679,
+   "c24": -6.23522,
+   "c7": -16.1391,
+   "c30": -24.2677,
+   "rsi": 23,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "SUN",
+   "id": "sun-token",
+   "p": 0.01490279,
+   "mc": 286356309,
+   "warn": [],
+   "c1h": -0.4803,
+   "c24": -1.25899,
+   "c7": -3.5572,
+   "c30": -9.5033,
+   "rsi": 44,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ENS",
+   "id": "ethereum-name-service",
+   "p": 3.92,
+   "mc": 166062507,
+   "warn": [],
+   "c1h": -1.7881,
+   "c24": -8.28823,
+   "c7": -13.9645,
+   "c30": -31.8159,
+   "rsi": 27,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "ORDI",
+   "id": "ordinals",
+   "p": 2.8,
+   "mc": 58723225,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.9029,
+   "c24": -11.85539,
+   "c7": -13.3269,
+   "c30": -29.5617,
+   "rsi": 24,
+   "tags": [
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "ALT",
+   "id": "altlayer",
+   "p": 0.00482255,
+   "mc": 36689891,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4017,
+   "c24": -8.0391,
+   "c7": -10.7503,
+   "c30": -37.6689,
+   "rsi": 31,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "C98",
+   "id": "coin98",
+   "p": 0.01045026,
+   "mc": 10450245,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.5257,
+   "c24": -7.45143,
+   "c7": -11.0616,
+   "c30": -34.4474,
+   "rsi": 26,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "KMNO",
+   "id": "kamino",
+   "p": 0.02907189,
+   "mc": 174192379,
+   "warn": [],
+   "c1h": -1.5943,
+   "c24": -2.90581,
+   "c7": -13.7594,
+   "c30": -22.5934,
+   "rsi": 38,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "ONE",
+   "id": "harmony",
+   "p": 0.00128472,
+   "mc": 19104037,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9118,
+   "c24": -11.37427,
+   "c7": -37.0696,
+   "c30": -18.0613,
+   "rsi": 29,
+   "tags": [
+    "ATL-N",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "NIL",
+   "id": "nillion",
+   "p": 0.050101,
+   "mc": 27974315,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -2.3054,
+   "c24": -8.67548,
+   "c7": -14.8449,
+   "c30": -42.2988,
+   "rsi": 25,
+   "tags": [
+    "RPE-1",
+    "ATL-N",
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "RGOOGL",
+   "id": "alphabet-rstock",
+   "p": 289.13,
+   "mc": 12455443,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.5779,
+   "c24": -1.73013,
+   "c7": 1.8964,
+   "c30": -17.2202,
+   "rsi": 25,
+   "tags": []
+  },
+  {
+   "s": "QQQB",
+   "id": "invesco-qqq-trust-bstocks-tokenized-stock",
+   "p": 670.15,
+   "mc": 1247380,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.296,
+   "c24": -0.7148,
+   "c7": 2.0944,
+   "c30": -7.5643,
+   "rsi": 26,
+   "tags": []
+  },
+  {
+   "s": "ZBCN",
+   "id": "zebec-network",
+   "p": 0.0016987,
+   "mc": 169867541,
+   "warn": [],
+   "c1h": -1.9454,
+   "c24": -6.70612,
+   "c7": -7.8643,
+   "c30": -24.1564,
+   "rsi": 41,
+   "tags": []
+  },
+  {
+   "s": "MIHAO",
+   "id": "ni-hao-cat-2",
+   "p": 0.01474303,
+   "mc": 13870700,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 3.1665,
+   "c24": -0.39804,
+   "c7": 0,
+   "c30": 0,
+   "rsi": 44,
+   "tags": [
+    "RPE-3"
+   ]
+  },
+  {
+   "s": "CYBER",
+   "id": "cyberconnect",
+   "p": 0.225076,
+   "mc": 13746451,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.1415,
+   "c24": -9.4174,
+   "c7": -28.651,
+   "c30": -31.939,
+   "rsi": 23,
+   "tags": [
+    "ATL-N",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "XDC",
+   "id": "xdce-crowd-sale",
+   "p": 0.02784838,
+   "mc": 555482975,
+   "warn": [],
+   "c1h": -0.9618,
+   "c24": -4.54598,
+   "c7": -10.6306,
+   "c30": -17.7761,
+   "rsi": 31,
+   "tags": []
+  },
+  {
+   "s": "SKY",
+   "id": "sky",
+   "p": 0.054657,
+   "mc": 1279786994,
+   "warn": [],
+   "c1h": -1.5284,
+   "c24": -4.82578,
+   "c7": -14.255,
+   "c30": -23.1192,
+   "rsi": 35,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "UNIFI",
+   "id": "unifi-2",
+   "p": 10.49,
+   "mc": 0,
+   "warn": [],
+   "c1h": -0.2142,
+   "c24": -4.72532,
+   "c7": -13.4944,
+   "c30": -20.5296,
+   "rsi": 22,
+   "tags": []
+  },
+  {
+   "s": "NES",
+   "id": "nesa",
+   "p": 0.134143,
+   "mc": 40049855,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.0731,
+   "c24": -6.18729,
+   "c7": -12.2762,
+   "c30": -5.2581,
+   "rsi": 36,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "ATH",
+   "id": "aethir",
+   "p": 0.00404228,
+   "mc": 81366013,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.2706,
+   "c24": -8.18111,
+   "c7": -18.5238,
+   "c30": -32.2848,
+   "rsi": 31,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BEAM",
+   "id": "beam-2",
+   "p": 0.00418916,
+   "mc": 210781291,
+   "warn": [],
+   "c1h": -1.3757,
+   "c24": -5.63749,
+   "c7": 2.7569,
+   "c30": 43.9887,
+   "rsi": 33,
+   "tags": [
+    "ATL-N",
+    "TRRP?"
+   ]
+  },
+  {
+   "s": "KORUB",
+   "id": "south-korea-bull-3x-etf-bstocks-tokenized-stock",
+   "p": 6.99,
+   "mc": 12791379,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.0967,
+   "c24": -4.09607,
+   "c7": 0.1227,
+   "c30": -40.4305,
+   "rsi": 29,
+   "tags": [
+    "RPE-2"
+   ]
+  },
+  {
+   "s": "MSFTC",
+   "id": "microsoft-coinbase-tokenized-stock",
+   "p": 519.5,
+   "mc": 1400939,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.2511,
+   "c24": -0.56424,
+   "c7": -2.1782,
+   "c30": -3.2878,
+   "rsi": 64,
+   "tags": []
+  },
+  {
+   "s": "ZEN",
+   "id": "zencash",
+   "p": 4.13,
+   "mc": 76389026,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.7619,
+   "c24": -7.17257,
+   "c7": -18.2697,
+   "c30": -31.9028,
+   "rsi": 28,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BIGTIME",
+   "id": "big-time",
+   "p": 0.00452679,
+   "mc": 13254019,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.2812,
+   "c24": -8.68805,
+   "c7": -21.6351,
+   "c30": -36.0214,
+   "rsi": 25,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "LAYER",
+   "id": "solayer",
+   "p": 0.04517222,
+   "mc": 9486165,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.4634,
+   "c24": -7.41865,
+   "c7": -15.8092,
+   "c30": -33.6279,
+   "rsi": 27,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "RSR",
+   "id": "reserve-rights-token",
+   "p": 0.00136781,
+   "mc": 85561124,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.7822,
+   "c24": -6.37418,
+   "c7": -11.9331,
+   "c30": -31.5029,
+   "rsi": 38,
+   "tags": [
+    "RPE-2",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "IMX",
+   "id": "immutable-x",
+   "p": 0.09832,
+   "mc": 88927318,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.438,
+   "c24": -10.14457,
+   "c7": -17.7222,
+   "c30": -40.4743,
+   "rsi": 29,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "LINEA",
+   "id": "linea",
+   "p": 0.00188332,
+   "mc": 46192347,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.9852,
+   "c24": -7.21629,
+   "c7": -13.8756,
+   "c30": -36.6015,
+   "rsi": 19,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "Q",
+   "id": "quack-ai",
+   "p": 0.02641037,
+   "mc": 130270638,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -0.4377,
+   "c24": -8.81281,
+   "c7": -6.0022,
+   "c30": -48.89,
+   "rsi": 32,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "DRV",
+   "id": "derive",
+   "p": 0.25682,
+   "mc": 272808854,
+   "warn": [],
+   "c1h": 0.0268,
+   "c24": -14.46145,
+   "c7": -18.4859,
+   "c30": -36.5683,
+   "rsi": 13,
+   "tags": [
+    "RPE-2",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "BSV",
+   "id": "bitcoin-cash-sv",
+   "p": 14.73,
+   "mc": 296261541,
+   "warn": [],
+   "c1h": -0.5111,
+   "c24": -4.22763,
+   "c7": -11.9453,
+   "c30": -20.2519,
+   "rsi": 31,
+   "tags": [
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "BOME",
+   "id": "book-of-meme",
+   "p": 0.00049981,
+   "mc": 34486830,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -3.2341,
+   "c24": -12.69744,
+   "c7": -18.4175,
+   "c30": -28.4464,
+   "rsi": 24,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "CRASH"
+   ]
+  },
+  {
+   "s": "MPRD",
+   "id": "maya-preferred-mprd",
+   "p": 397321,
+   "mc": 0,
+   "warn": [],
+   "c1h": -0.4288,
+   "c24": -0.18566,
+   "c7": 1.0796,
+   "c30": 34.4771,
+   "rsi": 49,
+   "tags": []
+  },
+  {
+   "s": "0G",
+   "id": "zero-gravity",
+   "p": 0.151878,
+   "mc": 93473887,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -2.0257,
+   "c24": -2.41237,
+   "c7": 3.4488,
+   "c30": -39.2796,
+   "rsi": 46,
+   "tags": [
+    "QCI",
+    "ATL-N"
+   ]
+  },
+  {
+   "s": "RE",
+   "id": "re",
+   "p": 0.222088,
+   "mc": 35445302,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.6549,
+   "c24": -12.93744,
+   "c7": -24.618,
+   "c30": -46.6917,
+   "rsi": 17,
+   "tags": [
+    "RPE-2",
+    "CRASH",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "PARTI",
+   "id": "particle-network",
+   "p": 0.03522259,
+   "mc": 8206864,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.4873,
+   "c24": -2.71515,
+   "c7": -25.9405,
+   "c30": -4.9192,
+   "rsi": 41,
+   "tags": [
+    "RPE-2",
+    "ATL-N",
+    "WEAK"
+   ]
+  },
+  {
+   "s": "WASTED",
+   "id": "wasted-3",
+   "p": 0.00349675,
+   "mc": 3496753,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": 5.1211,
+   "c24": 0,
+   "c7": 0,
+   "c30": 0,
+   "rsi": 62,
+   "tags": []
+  },
+  {
+   "s": "RIF",
+   "id": "rif-token",
+   "p": 0.05051,
+   "mc": 50509572,
+   "warn": [
+    "MICRO"
+   ],
+   "c1h": -1.8235,
+   "c24": -8.73317,
+   "c7": -14.9298,
+   "c30": -37.7522,
+   "rsi": 16,
+   "tags": [
+    "RPE-1"
+   ]
+  },
+  {
+   "s": "AVGOX",
+   "id": "broadcom-xstock",
+   "p": 338.39,
+   "mc": 7001553,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -0.5498,
+   "c24": -0.71658,
+   "c7": 14.2769,
+   "c30": -0.8399,
+   "rsi": 33,
+   "tags": []
+  },
+  {
+   "s": "AUDIO",
+   "id": "audius",
+   "p": 0.01074893,
+   "mc": 15828203,
+   "warn": [
+    "NANO"
+   ],
+   "c1h": -1.7916,
+   "c24": -7.06634,
+   "c7": -7.2559,
+   "c30": -30.5712,
+   "rsi": 42,
+   "tags": [
+    "RPE-1",
+    "ATL-N"
+   ]
+  }
+ ],
+ "report": "# 🟢 QUANT TERMINAL v5.4 — 扫描报告\n\n**时间**: 2026/11/15 01:00:37 (北京)  \n**数据源**: CoinGecko (Top250 by 24h volume)  \n**覆盖**: 250 标的\n\n> 扫描池为 Top250。此前所有验证(SRR 4/4、回避信号)都基于 Top50;排名50以后的标的上的多头信号**没有回测依据**,带 NANO/MICRO 标记的尤其要当心。\n\n---\n\n## 🌐 STEP 1｜宏观环境\n\n| 指标 | 值 |\n|---|---|\n| BTC | $65400 (-4.7%) |\n| ETH | $1826 (-5.2%) |\n| BTC RSI | 22 |\n| ETH RSI | 26 |\n| ETH/BTC | 0.02793 |\n| BTC 7d | -13.6% |\n| **市场状态** | **Risk-Off** |\n\n> 🛑 **总闸否决已激活 (价格下跌 + 货币紧缩)** — 多头信号(TBR/VEX/SER/QCI)降权5分。\n> **v4.9例外:标注SRR(4/4满分结构性重估)的标的只降3分** —— 实测依据:8/29-9/12的4/4组跑赢BTC,3/4组跑输16.5pp,故阈值已收紧至四项全中,且跑输大盘或顶部被拒者一票否决。\n> 双因子否决:价格下跌 OR 货币紧缩,任一成立即否决多头。**此环境优先看避免/做空清单,但SRR标的值得单独看。**\n\n---\n\n## ⚡ 1小时异动(涨跌 ≥ 3%)\n\n- **DOPE** $0.0284 | 1h-23.5% | 24h+115519.6% | 7d+150923.4% | 市值$28.4M ⚠NANO/EXTENDED | RPE-2 HCEP\n- **MOW** $0.1580 | 1h+22.9% | 24h+14.8% | 7d+64.2% | 市值$0 | MOM+\n- **SOPH** $0.002130 | 1h+16.2% | 24h+9.4% | 7d+62.0% | 市值$11.1M ⚠NANO | MOM+ VEX ATL-N\n- **GATO** $0.0108 | 1h-12.3% | 24h+0.0% | 7d+0.0% | 市值$0 | QCI\n- **BANANAS31** $0.004231 | 1h-6.9% | 24h+6.9% | 7d-27.8% | 市值$42.3M ⚠NANO | RPE-2 VEX ATL-N WEAK\n- **INJ** $7.19 | 1h-5.9% | 24h-11.6% | 7d-11.3% | 市值$718.6M | CRASH\n- **GRASS** $0.3841 | 1h-5.5% | 24h-10.3% | 7d-23.3% | 市值$277.3M | RPE-2 ATL-N CRASH\n- **WASTED** $0.003497 | 1h+5.1% | 24h+0.0% | 7d+0.0% | 市值$3.5M ⚠NANO\n- **PCI** $0.0336 | 1h-5.0% | 24h-7.2% | 7d-2.1% | 市值$34.3M ⚠NANO | QCI ATL-N\n- **LIT** $2.86 | 1h-4.6% | 24h-10.9% | 7d-10.1% | 市值$716.0M | RPE-1 CRASH\n- **USELESS** $0.1035 | 1h-4.5% | 24h-18.3% | 7d-19.2% | 市值$103.5M ⚠MICRO | RPE-2 CRASH\n- **AKE** $0.0128 | 1h-4.5% | 24h+13.7% | 7d+114.4% | 市值$291.8M ⚠EXTENDED | MOM+ VEX ATL-N\n- **XPL** $0.0455 | 1h-4.5% | 24h-8.5% | 7d-20.7% | 市值$216.4M | RPE-2 ATL-N\n- **BARD** $0.1237 | 1h+4.4% | 24h-17.3% | 7d+11.3% | 市值$49.0M ⚠NANO | RPE-2 ATL-N CRASH\n- **SHELL** $0.0264 | 1h-4.3% | 24h+8.7% | 7d+28.3% | 市值$7.1M ⚠NANO | RPE-3 MOM+ VEX ATL-N\n- …另有 20 个未列出\n\n> 1小时涨跌只是\"正在动\"的提示,不是信号。是否可做仍看下面的模式标记和总闸状态。\n\n---\n\n## 🟢 STEP 2A｜多头候选\n\n### VEX — 量爆发触发 量3x + 价升 (10)\n- **SHELL** $0.0264 | 24h+8.7% | ⭐4/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手1445.6% | 24h +8.7% | RSI 50\n- **SOPH** $0.002130 | 24h+9.4% | ⭐4/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手680.8% | 24h +9.4% | RSI 51\n- **UP** $0.1520 | 24h+7.7% | ⭐4/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手55.3% | 24h +7.7% | RSI 44\n- **BANANAS31** $0.004231 | 24h+6.9% | ⭐4/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手41.4% | 24h +6.9% | RSI 58\n- **ORBS** $0.006484 | 24h+8.1% | ⭐4/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手43.4% | 24h +8.1% | RSI 58\n- **AI** $0.0167 | 24h+9.4% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手898.3% | 24h +9.4% | RSI 68\n- **MITO** $0.006857 | 24h+4.0% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手360.0% | 24h +4.0% | RSI 43\n- **AKE** $0.0128 | 24h+13.7% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手109.2% | 24h +13.7% | RSI 68\n\n### QCI — Quiet Coil 静默积累 (6)\n- **WLFI** $0.0465 | 24h-2.5% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 47 中性 | 7d +0.6% | 30d -19.7%\n- **GATO** $0.0108 | 24h+0.0% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 50 中性 | 7d +0.0% | 30d +0.0%\n- **BMT** $0.0228 | 24h-5.0% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 49 中性 | 7d +1.5% | 30d +29.1%\n- **METAC** $632.67 | 24h+0.1% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 52 中性 | 7d +3.4% | 30d -13.9%\n- **0G** $0.1519 | 24h-2.4% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 46 中性 | 7d +3.4% | 30d -39.3%\n- **PCI** $0.0336 | 24h-7.2% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | RSI 56 中性 | 7d -2.1% | 30d -11.9%\n\n### RPE-3 — 深跌三级 >30%企稳 (4)\n- **SHELL** $0.0264 | 24h+8.7% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌35.7%企稳中\n- **SOXSB** $54.01 | 24h+1.9% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌30.3%企稳中\n- **RAIN** $0.003668 | 24h-1.8% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌35.1%企稳中\n- **MIHAO** $0.0147 | 24h-0.4% | ⭐3/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d深跌39.7%企稳中\n\n### RPE-2 — 回调二级 20-30% (49)\n- **PEPE** $0.000004 | 24h-12.2% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调29.7%\n- **ENA** $0.1192 | 24h-11.9% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调24.9%\n- **AAVE** $102.90 | 24h-7.2% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调23.0%\n- **WLD** $0.2626 | 24h-10.9% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调22.0%\n- **ARB** $0.1340 | 24h-8.1% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调27.6%\n- **ONDO** $0.3073 | 24h-9.7% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调20.9%\n- **TIA** $0.3512 | 24h-12.7% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调21.4%\n- **QNT** $151.34 | 24h-7.3% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调25.4%\n\n### RPE-1 — 回调一级 15-20% (71)\n- **ETH** $1826 | 24h-5.2% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调18.4%\n- **SOL** $72.50 | 24h-8.9% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调19.2%\n- **XRP** $0.9575 | 24h-5.8% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.8%\n- **HYPE** $66.04 | 24h-9.1% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调15.1%\n- **BNB** $586.96 | 24h-6.9% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.1%\n- **DOGE** $0.0600 | 24h-7.6% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.6%\n- **NEAR** $3.11 | 24h-11.2% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调17.8%\n- **SUI** $0.7256 | 24h-9.4% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d高点回调16.3%\n\n### MOM+ — 强势动量 7d>20% RSI<75 (12)\n- **AKE** $0.0128 | 24h+13.7% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +114.4% RSI仅68\n- **SHELL** $0.0264 | 24h+8.7% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +28.3% RSI仅50\n- **SOPH** $0.002130 | 24h+9.4% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +62.0% RSI仅51\n- **NIGHT** $0.0481 | 24h+6.0% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +20.7% RSI仅71\n- **DODO** $0.0327 | 24h+16.0% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +47.3% RSI仅50\n- **ARIA** $0.1971 | 24h-10.1% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +29.5% RSI仅41\n- **AGT** $0.0343 | 24h-33.5% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +35.1% RSI仅26\n- **PIEVERSE** $1.79 | 24h+7.6% | ⭐2/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 7d +29.0% RSI仅52\n\n### DRY — 成交量萎缩 量价背离 (1)\n- **GRAM** $1.05 | 24h-6.4% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 日换手1.5% 极低 | 30d -23.4%\n\n### ATL-N — 接近历史低点 -90% (107)\n- **DOGE** $0.0600 | 24h-7.6% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅8.2% 历史底部区域\n- **AKE** $0.0128 | 24h+13.7% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅8.7% 历史底部区域\n- **ENA** $0.1192 | 24h-11.9% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅7.8% 历史底部区域\n- **ADA** $0.1549 | 24h-9.3% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.0% 历史底部区域\n- **AVAX** $7.50 | 24h-9.7% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.2% 历史底部区域\n- **WLD** $0.2626 | 24h-10.9% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅2.2% 历史底部区域\n- **ARB** $0.1340 | 24h-8.1% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.6% 历史底部区域\n- **BCH** $207.98 | 24h-6.7% | ⭐1/10\n  ⚠️下跌趋势+货币紧缩·多头已否决 | 距ATH仅5.5% 历史底部区域\n\n---\n\n## 🔴 STEP 2B｜做空候选\n\n### WEAK — 7d显著跑输BTC (21)\n- **ZEC** $861.15 | 24h-9.1% | ⭐6/10\n  7d -31.5% vs BTC -13.6%\n- **UNI** $4.95 | 24h-14.1% | ⭐6/10\n  7d -29.4% vs BTC -13.6%\n- **ENA** $0.1192 | 24h-11.9% | ⭐6/10\n  7d -24.6% vs BTC -13.6%\n- **QNT** $151.34 | 24h-7.3% | ⭐6/10\n  7d -23.9% vs BTC -13.6%\n- **KAVA** $0.0395 | 24h-41.8% | ⭐6/10\n  7d -42.1% vs BTC -13.6%\n- **IDOL** $0.0181 | 24h-29.8% | ⭐6/10\n  7d -45.5% vs BTC -13.6%\n- **AERO** $0.4390 | 24h-7.5% | ⭐6/10\n  7d -25.8% vs BTC -13.6%\n- **JCT** $0.001900 | 24h-10.7% | ⭐6/10\n  7d -36.5% vs BTC -13.6%\n\n### TRRP? — 近期多次拒绝同一价位 (8)\n- **HYPE** $66.04 | 24h-9.1% | ⭐6/10\n  7d内顶部多次被拒\n- **JUP** $0.2510 | 24h-3.8% | ⭐6/10\n  7d内顶部多次被拒\n- **DGAI** $0.7001 | 24h-3.8% | ⭐6/10\n  7d内顶部多次被拒\n- **S** $0.0340 | 24h-9.6% | ⭐6/10\n  7d内顶部多次被拒\n- **KITE** $0.1267 | 24h-1.4% | ⭐6/10\n  7d内顶部多次被拒\n- **ZK** $0.008067 | 24h-10.0% | ⭐6/10\n  7d内顶部多次被拒\n- **NIL** $0.0501 | 24h-8.7% | ⭐6/10\n  7d内顶部多次被拒\n- **BEAM** $0.004189 | 24h-5.6% | ⭐6/10\n  7d内顶部多次被拒\n\n---\n\n## ⚠️ STEP 3｜避免触碰\n\n### HCEP — RSI高位 不要追 (3)\n- **FIGR_HELOC** $1.05 | 24h+4.4% | ⭐9/10\n  RSI 92 超买，等回落65\n- **EVAA** $1.85 | 24h+69.6% | ⭐9/10\n  RSI 86 超买，等回落65\n- **DOPE** $0.0284 | 24h+115519.6% | ⭐9/10\n  RSI 93 超买，等回落65\n\n### CRASH — 急跌警告 24h<-10% (51)\n- **NEAR** $3.11 | 24h-11.2% | ⭐8/10\n  24h急跌-11.2% 看支撑别接刀\n- **UNI** $4.95 | 24h-14.1% | ⭐8/10\n  24h急跌-14.1% 看支撑别接刀\n- **PEPE** $0.000004 | 24h-12.2% | ⭐8/10\n  24h急跌-12.2% 看支撑别接刀\n- **ENA** $0.1192 | 24h-11.9% | ⭐8/10\n  24h急跌-11.9% 看支撑别接刀\n- **INJ** $7.19 | 24h-11.6% | ⭐8/10\n  24h急跌-11.6% 看支撑别接刀\n- **TAO** $192.88 | 24h-10.4% | ⭐8/10\n  24h急跌-10.4% 看支撑别接刀\n- **WLD** $0.2626 | 24h-10.9% | ⭐8/10\n  24h急跌-10.9% 看支撑别接刀\n- **PUMP** $0.003018 | 24h-12.6% | ⭐8/10\n  24h急跌-12.6% 看支撑别接刀\n\n---\n\n## 📊 STEP 4｜24h涨幅Top10\n\n- **DOPE** $0.0284 | +115519.6% | RSI 93 | RPE-2 / HCEP\n- **EVAA** $1.85 | +69.6% | RSI 86 | HCEP\n- **CLAUDIA** $0.000574 | +45.0% | RSI 74 | RPE-2 / MOM+ / ATL-N\n- **DODO** $0.0327 | +16.0% | RSI 50 | MOM+ / ATL-N\n- **MOW** $0.1580 | +14.8% | RSI 64 | MOM+\n- **AKE** $0.0128 | +13.7% | RSI 68 | MOM+ / VEX / ATL-N\n- **AI** $0.0167 | +9.4% | RSI 68 | VEX / ATL-N\n- **SOPH** $0.002130 | +9.4% | RSI 51 | MOM+ / VEX / ATL-N\n- **SHELL** $0.0264 | +8.7% | RSI 50 | RPE-3 / MOM+ / VEX / ATL-N\n- **ORBS** $0.006484 | +8.1% | RSI 58 | VEX / ATL-N\n\n---\n\n## 📉 STEP 5｜24h跌幅Top10\n\n- **KAVA** $0.0395 | -41.8% | RSI 15 | ATL-N / CRASH / WEAK\n- **AGT** $0.0343 | -33.5% | RSI 26 | MOM+ / CRASH\n- **IDOL** $0.0181 | -29.8% | RSI 38 | CRASH / WEAK\n- **UAI** $0.0316 | -19.4% | RSI 33 | ATL-N / CRASH / WEAK\n- **INIT** $0.0962 | -19.2% | RSI 21 | ATL-N / CRASH\n- **USELESS** $0.1035 | -18.3% | RSI 23 | RPE-2 / CRASH\n- **BARD** $0.1237 | -17.3% | RSI 30 | RPE-2 / ATL-N / CRASH\n- **CARDS** $0.1682 | -16.8% | RSI 29 | CRASH / WEAK\n- **BTW** $0.6979 | -16.3% | RSI 42 | CRASH / WEAK\n- **BAT** $0.0933 | -16.2% | RSI 12 | RPE-2 / ATL-N / CRASH / WEAK\n\n---\n\n*数据源: CoinGecko公共API（含资金费/OI的部分模式需手动复核新闻+链上）*",
+ "alerts": [
+  "DOPE 1小时 -23.5%,现价 $0.0284",
+  "MOW 1小时 +22.9%,现价 $0.1580",
+  "SOPH 1小时 +16.2%,现价 $0.002130",
+  "GATO 1小时 -12.3%,现价 $0.0108",
+  "BANANAS31 1小时 -6.9%,现价 $0.004231",
+  "INJ 1小时 -5.9%,现价 $7.19",
+  "GRASS 1小时 -5.5%,现价 $0.3841",
+  "WASTED 1小时 +5.1%,现价 $0.003497",
+  "PCI 1小时 -5.0%,现价 $0.0336",
+  "LIT 1小时 -4.6%,现价 $2.86",
+  "USELESS 1小时 -4.5%,现价 $0.1035",
+  "AKE 1小时 -4.5%,现价 $0.0128",
+  "XPL 1小时 -4.5%,现价 $0.0455",
+  "BARD 1小时 +4.4%,现价 $0.1237",
+  "SHELL 1小时 -4.3%,现价 $0.0264",
+  "DODO 1小时 +4.3%,现价 $0.0327",
+  "AGT 1小时 -3.9%,现价 $0.0343",
+  "RENDER 1小时 -3.7%,现价 $1.41",
+  "PEPE 1小时 -3.7%,现价 $0.000004",
+  "ETHFI 1小时 -3.6%,现价 $0.5057",
+  "PUMP 1小时 -3.6%,现价 $0.003018",
+  "NIGHT 1小时 -3.6%,现价 $0.0481",
+  "PONS 1小时 -3.5%,现价 $0.1207",
+  "ORBS 1小时 -3.4%,现价 $0.006484",
+  "VIRTUAL 1小时 -3.3%,现价 $0.4561",
+  "UNI 1小时 -3.2%,现价 $4.95",
+  "BOME 1小时 -3.2%,现价 $0.000500",
+  "ARIA 1小时 +3.2%,现价 $0.1971",
+  "MIHAO 1小时 +3.2%,现价 $0.0147",
+  "PYTH 1小时 -3.1%,现价 $0.0560",
+  "KORUB 1小时 -3.1%,现价 $6.99",
+  "ZRO 1小时 -3.1%,现价 $1.50",
+  "WLD 1小时 -3.1%,现价 $0.2626",
+  "NEAR 1小时 -3.1%,现价 $3.11",
+  "BONK 1小时 -3.0%,现价 $0.000002"
+ ],
+ "emailed": false
+}
