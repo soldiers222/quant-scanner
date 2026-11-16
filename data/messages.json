@@ -1,5 +1,37 @@
 [
  {
+  "id": "cloud:2026-11-16T01:46:22.766Z",
+  "time": "2026-11-16T01:46:22.766Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "简报｜市场状态变化:震荡 → Risk-On 等10条",
+  "lines": [
+   "Risk-On · BTC $64742 (24h +4.2%) · 总闸关 · SRR 0 · 多头175 · 回避/偏空40",
+   "市场状态变化:震荡 → Risk-On",
+   "VINE 1h -13.5% · $0.0102 · 24h +134.7% ⚠NANO · RPE-2 ATL-N HCEP",
+   "SOPH 1h -9.7% · $0.001029 · 24h -57.5% ⚠NANO · ATL-N CRASH",
+   "NCT 1h -7.9% · $0.008134 · 24h -8.0% ⚠NANO · RPE-2 ATL-N",
+   "SANC 1h +7.6% · $0.0721 · 24h -0.0% ⚠NANO · RPE-3 MOM+",
+   "ZIL 1h -5.3% · $0.001052 · 24h -19.1% ⚠NANO · ATL-N CRASH WEAK",
+   "GLMR 1h -4.7% · $0.006401 · 24h +13.8% ⚠NANO · RPE-2 VEX ATL-N",
+   "SNT 1h +4.3% · $0.006121 · 24h +7.8% ⚠NANO · VEX ATL-N",
+   "IDOL 1h -3.3% · $0.0188 · 24h +11.5% ⚠NANO · RPE-3 VEX WEAK",
+   "0G 1h -3.0% · $0.1259 · 24h -6.3% ⚠MICRO · RPE-2 ATL-N"
+  ],
+  "keys": [
+   "regime:Risk-On",
+   "h1:VINE:2026-11-16T01",
+   "h1:SOPH:2026-11-16T01",
+   "h1:NCT:2026-11-16T01",
+   "h1:SANC:2026-11-16T01",
+   "h1:ZIL:2026-11-16T01",
+   "h1:GLMR:2026-11-16T01",
+   "h1:SNT:2026-11-16T01",
+   "h1:IDOL:2026-11-16T01",
+   "h1:0G:2026-11-16T01"
+  ]
+ },
+ {
   "id": "cloud:2026-11-15T21:43:21.307Z",
   "time": "2026-11-15T21:43:21.307Z",
   "src": "cloud",
