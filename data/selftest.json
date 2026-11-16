@@ -1,0 +1,51 @@
+{
+ "time": "2026-11-16T03:22:50.486Z",
+ "ok": true,
+ "exitCode": 0,
+ "scan": {
+  "version": "5.6",
+  "time": "2026-11-16T03:22:49.715Z",
+  "regime": "震荡",
+  "pool": 250,
+  "covered": 218,
+  "dropped": {
+   "stock": 29,
+   "bad": 2,
+   "dup": 1
+  },
+  "btc": {
+   "s": "BTC",
+   "id": "bitcoin",
+   "p": 65075,
+   "mc": 1308824146519,
+   "warn": [],
+   "c1h": 0.5382,
+   "c24": -0.1815,
+   "c7": -13.3402,
+   "c30": -20.1193,
+   "rsi": 46
+  },
+  "gate": {
+   "closed": true,
+   "priceDowntrend": true,
+   "monetaryTight": true
+  },
+  "srr": [],
+  "longs": 153,
+  "avoid": 8,
+  "shorts": 23,
+  "alerts": [
+   "AKE 1小时 -18.7%,现价 $0.009402",
+   "ASTER 1小时 +5.4%,现价 $0.5485"
+  ]
+ },
+ "derivs": null,
+ "ledger": null,
+ "emailSubject": "⚠️ QUANT 提醒｜1h异动2个: AKE -18.7% ASTER +5.4%｜BTC $65,075 (24h -0.2%)｜震荡｜总闸关｜SRR 0",
+ "log": [
+  "扫描完成(Top250):震荡 · BTC $65,075 · 覆盖218 · SRR 0 · 多头153 · 回避/偏空31",
+  "提醒:2条新触发 / 2条处于触发状态;简报时段:未到;发邮件",
+  "[DRY RUN] 未发信。主题:⚠️ QUANT 提醒｜1h异动2个: AKE -18.7% ASTER +5.4%｜BTC $65,075 (24h -0.2%)｜震荡｜总闸关｜SRR 0",
+  "          邮件已写入 out/email.html"
+ ]
+}
