@@ -6,7 +6,6 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fetchDerivs } from './derivs.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'qs-selftest-'));
@@ -18,12 +17,6 @@ const r = spawnSync(process.execPath, ['cloud/scan.mjs'], {
 });
 const read = (f) => { try { return JSON.parse(fs.readFileSync(path.join(tmp, f), 'utf8')); } catch { return null; } };
 const latest = read('latest.json'), derivs = read('derivs.json'), summary = read('ledger/summary.json');
-// 衍生品数据源单独探测一次(不依赖扫描流程),各家成败和主流币样例都记下来
-let probe = null;
-try {
-  const d = await fetchDerivs({ majors: ['BTC', 'ETH', 'SOL', 'BNB', 'XRP'] });
-  probe = { sources: d.sources, lsFrom: d.lsFrom, coins: Object.keys(d.coins).length, majors: Object.fromEntries(d.majors.map((s) => [s, d.coins[s] || null])) };
-} catch (e) { probe = { error: String(e.message || e) }; }
 let subject = null;
 try { subject = fs.readFileSync(path.join(ROOT, 'out', 'email.html'), 'utf8').split('\n')[0].replace(/^<!-- | -->$/g, ''); } catch {}
 
@@ -43,7 +36,6 @@ const result = {
     time: derivs.time, sources: derivs.sources, lsFrom: derivs.lsFrom, coins: Object.keys(derivs.coins || {}).length,
     majors: Object.fromEntries((derivs.majors || []).map((s) => [s, derivs.coins?.[s] || null])),
   } : null,
-  derivsProbe: probe,
   ledger: summary ? { entries: summary.entries, init: summary.init, since: summary.since, pending: summary.pending } : null,
   emailSubject: subject,
   log: `${r.stdout || ''}\n${r.stderr || ''}`.split('\n').filter(Boolean).slice(-60),

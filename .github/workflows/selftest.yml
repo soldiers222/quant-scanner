@@ -26,8 +26,6 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: 衍生品数据源探测
-        run: node cloud/derivs.mjs || true
       - name: 完整流程自检
         run: node cloud/selftest.mjs
         env:

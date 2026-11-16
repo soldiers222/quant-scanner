@@ -151,14 +151,20 @@ export async function fetchDerivs({ majors = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP']
     coins[s] = { fr: frs.length ? median(frs) : null, oi: hasOi ? Math.round(oi) : null, px: pxs.length ? median(pxs) : null, v: used, oiBy: byVenue };
   }
 
-  // 多空比:找第一个能通的来源,给主流币各取一次
+  // 多空比:找第一个能通的来源,给主流币各取一次。
+  // 这类统计接口限流很紧(实测 OKX 连着请求会回 429),所以每次请求间隔一下,被限流就等一等再试一次。
+  const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+  const polite = async (fn, s) => {
+    try { return await fn(s); }
+    catch (e) { if (e.status !== 429) throw e; await pause(2500); return await fn(s); }
+  };
   let lsFrom = null;
   for (const [name, fn] of Object.entries(LS_SOURCES)) {
     try {
-      const first = await fn(majors[0]);
+      const first = await polite(fn, majors[0]);
       if (first == null) throw new Error('空');
       lsFrom = name; if (coins[majors[0]]) coins[majors[0]].ls = first;
-      for (const s of majors.slice(1)) { try { const r = await fn(s); if (r != null && coins[s]) coins[s].ls = r; } catch {} }
+      for (const s of majors.slice(1)) { await pause(500); try { const r = await polite(fn, s); if (r != null && coins[s]) coins[s].ls = r; } catch {} }
       break;
     } catch (e) { sources[`ls_${name}`] = { ok: false, err: String(e.message || e).slice(0, 80) }; }
   }
