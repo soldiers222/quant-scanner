@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.4)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.5)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -124,7 +124,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<'
 const pctHtml = (v) => `<span style="color:${v >= 0 ? '#0a7d4b' : '#c0392b'}">${v >= 0 ? '+' : ''}${(v ?? 0).toFixed(1)}%</span>`;
 const bjTime = (iso) => new Date(iso).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
 
-function buildEmail(snap, alerts, isDigest) {
+function buildEmail(snap, alerts, isDigest, lastRunIso) {
   const gate = snap.gate;
   const movers = alerts.filter((a) => a.mover).map((a) => a.mover);
   const others = alerts.filter((a) => !a.mover);
@@ -148,6 +148,14 @@ function buildEmail(snap, alerts, isDigest) {
 
   let html = `<div style="font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;max-width:680px;margin:0 auto;color:#222;line-height:1.55">`;
   html += `<div style="font-size:12px;color:#888">QUANT Terminal v${esc(snap.version)} · 扫描时间 ${esc(bjTime(snap.time))} (北京) · 扫描池 Top${esc(snap.pool)}</div>`;
+  // v5.5: 写明"多久发一次",以及这次离上次实际隔了多久(GitHub的定时触发经常晚到)
+  const hours = (cfg.digestHoursBeijing || []).map((h) => `${String(h).padStart(2, '0')}:00`).join('、');
+  let gap = '';
+  if (lastRunIso) {
+    const m = Math.round((new Date(snap.time).getTime() - new Date(lastRunIso).getTime()) / 60000);
+    if (m > 0) gap = ` 本次距上次云端扫描 ${m >= 60 ? Math.floor(m / 60) + '小时' : ''}${m % 60}分${m > 90 ? '(比计划晚,GitHub定时触发延迟)' : ''}。`;
+  }
+  html += `<div style="font-size:12px;color:#888;margin-top:2px">发送规则:每小时扫描一次;每天 ${esc(hours)}(北京)固定发简报,其余时间只在有新提醒时发。${esc(gap)}</div>`;
   html += `<div style="font-size:20px;font-weight:700;margin:4px 0 2px">${esc(snap.regime)} · 总闸${gate.closed ? '关闭' : '打开'}</div>`;
   html += `<div style="font-size:13px;color:#555">价格因子:${gate.priceDowntrend ? '下跌趋势' : '正常'} ｜ 货币因子:${gate.monetaryTight ? '紧缩(手动设定)' : '中性/宽松(手动设定)'}${gate.closed ? ' ｜ 多头信号已降分,最多试探仓' : ''}</div>`;
 
@@ -244,7 +252,7 @@ console.log(`提醒:${fresh.length}条新触发 / ${active.length}条处于触�
 let sent = false, sendError = null;
 if (shouldSend) {
   // 发信失败(密码错、SMTP被拒等)不能连扫描结果一起丢:先记下错误,结果照常保存,最后再让任务标红
-  try { sent = await sendEmail(buildEmail(snap, fresh, !!slot), snap); }
+  try { sent = await sendEmail(buildEmail(snap, fresh, !!slot, state.lastRun), snap); }
   catch (e) { sendError = e; console.log(`::error::邮件发送失败: ${e.message}`); }
 }
 

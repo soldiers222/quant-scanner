@@ -2,9 +2,10 @@ name: quant-scan
 
 on:
   schedule:
-    # 每小时一次(每个整点过7分)。GitHub 的定时任务常有十几分钟延迟,属正常。
-    # 想改频率就改这一行: 每2小时 '7 */2 * * *' ; 每4小时 '7 */4 * * *'
-    - cron: '7 * * * *'
+    # 目标是每小时扫一次。实测(11/14-11/16)写"每小时"时 GitHub 33小时只触发了7次,间隔4-8小时。
+    # 所以改成每10分钟给一次机会,由下面的"是否该扫"一步保证两次扫描至少间隔 MIN_GAP_MIN 分钟:
+    # GitHub 准时 → 每小时一次;GitHub 晚到 → 下一个10分钟档补上。
+    - cron: '7,17,27,37,47,57 * * * *'
   workflow_dispatch:
     inputs:
       force_email:
@@ -23,19 +24,39 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      MIN_GAP_MIN: 55   # 两次定时扫描的最小间隔(分钟)。想每2小时扫一次就改成 115
     steps:
       - uses: actions/checkout@v4
 
+      - name: 是否该扫
+        id: gate
+        run: |
+          run=true
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            last=$(jq -r '.lastRun // empty' data/state.json 2>/dev/null || true)
+            if [ -n "$last" ]; then
+              age=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 60 ))
+              echo "距上次扫描 ${age} 分钟(最小间隔 ${MIN_GAP_MIN})"
+              if [ "$age" -lt "$MIN_GAP_MIN" ]; then run=false; fi
+            fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
       - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
         with:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - if: steps.gate.outputs.run == 'true'
+        run: npm ci
 
-      - run: npx playwright install --with-deps chromium
+      - if: steps.gate.outputs.run == 'true'
+        run: npx playwright install --with-deps chromium
 
       - name: 扫描并推送邮件
+        if: steps.gate.outputs.run == 'true'
         run: node cloud/scan.mjs
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -48,6 +69,7 @@ jobs:
           QS_FORCE_EMAIL: ${{ inputs.force_email && '1' || '0' }}
 
       - name: 保存扫描结果
+        if: steps.gate.outputs.run == 'true'
         run: |
           git config user.name "quant-scan-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
