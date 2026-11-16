@@ -1,4 +1,4 @@
-# QUANT Terminal v5.5
+# QUANT Terminal v5.6
 
 手机 App（可装到桌面）＋ 云端定时扫描 ＋ 邮件推送。判定逻辑与 v5.0 完全相同，一行没动。
 
@@ -54,7 +54,7 @@ GitHub 新建一个 **Public** 仓库（例如 `quant-scanner`），把本文件
 - `poolSize`：云端扫描池，50 / 100 / 250（默认 250）。和 App 里的“扫描池”互不同步。
 - `watchlist`：自选标的，邮件里单列并按阈值提醒。App 里的自选存在手机本地，云端读不到。
 - `digestHoursBeijing`：每天发简报的北京时间。
-- `alerts`：提醒规则与阈值。`hourlyMovePct` 是 1 小时异动阈值（默认 3，填 0 关闭，行情剧烈时邮件太多可调到 5）。其余提醒同一条只在刚触发时发一次。
+- `alerts`：提醒规则与阈值。`hourlyMovePct` 是 1 小时异动阈值（默认 3，填 0 关闭，行情剧烈时邮件太多可调到 5）。`hourlyMinMcapUsd` 是异动推送的市值下限（现为 5000 万美元）。“市场状态变化”只在进入或离开 Risk-Off 时提醒。其余提醒同一条只在刚触发时发一次。
 
 扫描频率在 `.github/workflows/scan.yml` 的 `cron` 一行。
 

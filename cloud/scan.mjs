@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.5)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.6)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——

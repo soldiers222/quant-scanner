@@ -10,7 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>QUANT//v5.5</title>
+<title>QUANT//v5.6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -397,7 +397,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 const CG_BASE = 'https://api.coingecko.com/api/v3';
 // v5.1: 定时刷新档位(分钟)。原来固定60秒 —— 会撞CoinGecko免费限流,且不记忆;现在可选档位并持久化。
 const AUTO_OPTIONS = [0, 5, 15, 30, 60];
-const APP_VERSION = '5.5';
+const APP_VERSION = '5.6';
 // v5.2: 1小时异动阈值(%)。只用于展示和推送,不参与任何模式判定。
 const HOUR_MOVE_PCT = 3;
 // 云端定时任务用无头浏览器打开本页时带 ?cloud=1:不注册Service Worker、不读云端快照、不启动定时器。
@@ -936,7 +936,7 @@ function generateReport(tokens, macro, time) {
   const avoidCodes = ['HCEP', 'RPE_CRASH'];
   const shortCodes = ['WEAK', 'TRRP'];
 
-  let md = `# 🟢 QUANT TERMINAL v5.5 — 扫描报告\n\n`;
+  let md = `# 🟢 QUANT TERMINAL v5.6 — 扫描报告\n\n`;
   md += `**时间**: ${cnTs} (北京)  \n`;
   md += `**数据源**: CoinGecko (Top${TOP_N} by 24h volume)  \n`;
   md += `**覆盖**: ${tokens.length} 标的\n\n`;
@@ -1346,12 +1346,13 @@ function cleanPool(raw) {
 
 /* ============== v5.4: 提醒规则(App与云端共用这一份) ============== */
 // 返回当前"处于触发状态"的提醒。是否算"新消息"由调用方做边沿检测:key上一次不在、这一次在,才报。
-const DEFAULT_ALERTS = { regimeChange: true, gateFlip: true, gateStale: true, newSRR: true, btcMove24hPct: 5, watchMove24hPct: 10, hourlyMovePct: 3, hourlyMinMcapUsd: 0 };
+const DEFAULT_ALERTS = { regimeChange: true, gateFlip: true, gateStale: true, newSRR: true, btcMove24hPct: 5, watchMove24hPct: 10, hourlyMovePct: 3, hourlyMinMcapUsd: 50e6 };
 function computeAlerts(snap, prev, cfg) {
   const a = { ...DEFAULT_ALERTS, ...(cfg || {}) };
   const out = [];
-  if (a.regimeChange && prev && prev.regime && prev.regime !== snap.regime)
-    out.push({ key: `regime:${snap.regime}`, text: `市场状态变化:${prev.regime} → ${snap.regime}` });
+  // v5.6: 只在进入/离开 Risk-Off 时提醒。市场状态只看24小时涨跌,在震荡/弱势震荡/Risk-On之间来回切换是常态,不值得每次都推。
+  if (a.regimeChange && prev && prev.regime && (prev.regime === 'Risk-Off') !== (snap.regime === 'Risk-Off'))
+    out.push({ key: `regime:${snap.regime}`, text: snap.regime === 'Risk-Off' ? `进入 Risk-Off(此前:${prev.regime})` : `离开 Risk-Off → ${snap.regime}` });
   if (a.gateFlip && prev && prev.gate && !!prev.gate.closed !== !!snap.gate.closed)
     out.push({ key: `gate:${snap.gate.closed}`, text: `总闸${snap.gate.closed ? '关闭(多头信号被否决)' : '打开(多头信号放行)'} —— 价格因子:${snap.gate.priceDowntrend ? '下跌' : '正常'},货币因子:${snap.gate.monetaryTight ? '紧缩' : '中性/宽松'}` });
   if (a.gateStale && snap.gate.stale)
@@ -1692,7 +1693,7 @@ function renderHeader() {
         <div class="header-left">
           <div class="brand">
             <span class="brand-dot ${dotClass}"></span>
-            <span>QUANT//v5.5</span>
+            <span>QUANT//v5.6</span>
           </div>
           ${regimeHtml}
         </div>
@@ -1981,12 +1982,12 @@ function renderHelpTab() {
       </div>
 
       <div class="help-footer">
-        QUANT TERMINAL v5.5 (手机App · 定时刷新 · 邮件推送 · 1小时异动 · 扫描池可选 · 消息)<br>
+        QUANT TERMINAL v5.6 (手机App · 定时刷新 · 邮件推送 · 1小时异动 · 扫描池可选 · 消息)<br>
         覆盖: CoinGecko Top${TOP_N}标的(按24h成交量)<br>
         数据源: api.coingecko.com (免费公共API，全球可访问)<br>
         本地存储: 浏览器localStorage / 最近${HISTORY_LIMIT}次扫描历史<br><br>
         <strong>v4.3：</strong> TBR(三重底)+VEX(量爆发)+SER(板块echo)，基于LIT/GRASS/DEXE三例。<br>
-        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><strong>v5.2：</strong>①新增1小时涨跌幅(CoinGecko 1h字段):列表里≥3%的标的带"1h"徽标,可按"1h异动"排序,报告和邮件单列;②云端改为每小时扫描,1小时涨跌超过3%的币即时推送;③展开行增加TradingView链接。1h数据<em>只展示和推送,不参与任何模式判定</em>。<br><strong>v5.3：</strong>扫描池从固定50扩为可选 50/100/250(默认250,按24h成交量)。判定规则没变,但<em>此前所有验证(SRR 4/4跑赢、回避信号A级)都是在Top50上做的</em>;排名50以后的标的上出现的多头信号没有回测依据,市值小的会带 ⚠NANO/⚠MICRO 标记(SAHARA那次-55%就是这一类)。想回到原口径,把扫描池切回50。<br><strong>v5.4：</strong>①消息列表(右上角铃铛):云端每次提醒/简报和本机扫描发现的提醒都记在这里,带未读数;②新消息在App内顶部弹出;③允许通知后,App开着或刚切到后台时会弹系统通知。App被系统关掉后收不到网页通知(华为手机没有谷歌推送服务),那时靠邮件。提醒规则App与云端共用同一份代码。<br><strong>v5.5：</strong>扩池后实盘暴露的三个数据问题已在入池前清洗:①股票/ETF代币(bStocks、xStock、各家"Tokenized Stock",11/16实测前250里有27个)不再进池——RSI和回调模式对它们没有意义;②价格明显异常的脏数据(如POLYGOLD报价4.7e17)剔除;③同名重复只留成交量最大的一个。另:市值未知(CoinGecko无流通量)的标的加 ⚠NO-MCAP 标记。被剔除的数量写在报告末尾。<br><br>
+        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><strong>v5.2：</strong>①新增1小时涨跌幅(CoinGecko 1h字段):列表里≥3%的标的带"1h"徽标,可按"1h异动"排序,报告和邮件单列;②云端改为每小时扫描,1小时涨跌超过3%的币即时推送;③展开行增加TradingView链接。1h数据<em>只展示和推送,不参与任何模式判定</em>。<br><strong>v5.3：</strong>扫描池从固定50扩为可选 50/100/250(默认250,按24h成交量)。判定规则没变,但<em>此前所有验证(SRR 4/4跑赢、回避信号A级)都是在Top50上做的</em>;排名50以后的标的上出现的多头信号没有回测依据,市值小的会带 ⚠NANO/⚠MICRO 标记(SAHARA那次-55%就是这一类)。想回到原口径,把扫描池切回50。<br><strong>v5.4：</strong>①消息列表(右上角铃铛):云端每次提醒/简报和本机扫描发现的提醒都记在这里,带未读数;②新消息在App内顶部弹出;③允许通知后,App开着或刚切到后台时会弹系统通知。App被系统关掉后收不到网页通知(华为手机没有谷歌推送服务),那时靠邮件。提醒规则App与云端共用同一份代码。<br><strong>v5.5：</strong>扩池后实盘暴露的三个数据问题已在入池前清洗:①股票/ETF代币(bStocks、xStock、各家"Tokenized Stock",11/16实测前250里有27个)不再进池——RSI和回调模式对它们没有意义;②价格明显异常的脏数据(如POLYGOLD报价4.7e17)剔除;③同名重复只留成交量最大的一个。另:市值未知(CoinGecko无流通量)的标的加 ⚠NO-MCAP 标记。被剔除的数量写在报告末尾。<br><strong>v5.6：</strong>两处提醒降噪(依据11/14-11/16的实际推送):①1小时异动只推市值5000万美元以上的标的——7次云端运行列出的64个异动里41个是纳米盘;报告里的1小时异动段仍列全部;②"市场状态变化"只在进入或离开Risk-Off时提醒——这个标签只看24小时,33小时内变了4次。<br><br>
         ⚠️ 注意：CoinGecko免费API限流10-30次/分钟，开启自动刷新前请确认网络稳定。<br>
         若遇429限流错误，关掉自动刷新等60秒。
       </div>
