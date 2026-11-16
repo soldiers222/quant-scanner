@@ -23,7 +23,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const DATA = path.join(ROOT, 'data');
+const DATA = process.env.QS_DATA_DIR || path.join(ROOT, 'data');   // 自检时指向临时目录,不碰正式数据
 const env = process.env;
 const DRY = env.QS_DRY_RUN === '1';
 const FORCE = env.QS_FORCE_EMAIL === '1';

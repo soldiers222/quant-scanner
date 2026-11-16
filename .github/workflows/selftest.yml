@@ -1,0 +1,43 @@
+name: selftest
+
+# 代码或云端配置有改动时自动跑一遍完整流程(真实行情,不发邮件,不改正式数据),结果写到 data/selftest.json
+on:
+  push:
+    branches: [main]
+    paths: ['cloud/**', 'index.html', '.github/workflows/selftest.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: selftest
+  cancel-in-progress: true
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: 衍生品数据源探测
+        run: node cloud/derivs.mjs || true
+      - name: 完整流程自检
+        run: node cloud/selftest.mjs
+        env:
+          CG_DEMO_KEY: ${{ secrets.CG_DEMO_KEY }}
+      - name: 保存自检结果
+        run: |
+          git config user.name "quant-scan-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/selftest.json
+          git diff --cached --quiet && exit 0
+          git commit -m "selftest: $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash
+          git push
