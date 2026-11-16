@@ -10,7 +10,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<title>QUANT//v5.6</title>
+<title>QUANT//v6.0</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -345,6 +345,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 }
 .error-banner svg { flex-shrink: 0; width: 13px; height: 13px; margin-top: 1px; }
 
+.sec-title { padding: 14px 12px 6px; font-size: 11px; color: var(--text); letter-spacing: 0.05em; }
+.sec-sub { margin-left: 8px; font-size: 9px; color: var(--text-faint); }
+.qt { width: calc(100% - 24px); margin: 0 12px; border-collapse: collapse; font-size: 10px; }
+.qt th { text-align: left; padding: 6px 4px; color: var(--text-faint); font-weight: 400; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.qt td { padding: 7px 4px; border-bottom: 1px solid var(--border-light); color: var(--text-dim); vertical-align: top; line-height: 1.5; }
+.qt td b { color: var(--text); }
+.qt tr.hit td { background: var(--amber-bg); }
+.qt tr.thin td { opacity: 0.45; }
+.qt .up { color: var(--emerald); } .qt .down { color: var(--rose); } .qt .amber { color: var(--amber); }
+.qt-note { font-size: 9px; color: var(--text-faint); }
+.qt-hint { padding: 10px 12px; font-size: 9px; color: var(--text-faint); line-height: 1.7; }
 .badge {
   position: absolute; top: -5px; right: -5px; min-width: 15px; height: 15px; padding: 0 4px;
   background: var(--rose); color: #0a0a0a; border-radius: 8px;
@@ -397,7 +408,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 const CG_BASE = 'https://api.coingecko.com/api/v3';
 // v5.1: 定时刷新档位(分钟)。原来固定60秒 —— 会撞CoinGecko免费限流,且不记忆;现在可选档位并持久化。
 const AUTO_OPTIONS = [0, 5, 15, 30, 60];
-const APP_VERSION = '5.6';
+const APP_VERSION = '6.0';
 // v5.2: 1小时异动阈值(%)。只用于展示和推送,不参与任何模式判定。
 const HOUR_MOVE_PCT = 3;
 // 云端定时任务用无头浏览器打开本页时带 ?cloud=1:不注册Service Worker、不读云端快照、不启动定时器。
@@ -936,7 +947,7 @@ function generateReport(tokens, macro, time) {
   const avoidCodes = ['HCEP', 'RPE_CRASH'];
   const shortCodes = ['WEAK', 'TRRP'];
 
-  let md = `# 🟢 QUANT TERMINAL v5.6 — 扫描报告\n\n`;
+  let md = `# 🟢 QUANT TERMINAL v6.0 — 扫描报告\n\n`;
   md += `**时间**: ${cnTs} (北京)  \n`;
   md += `**数据源**: CoinGecko (Top${TOP_N} by 24h volume)  \n`;
   md += `**覆盖**: ${tokens.length} 标的\n\n`;
@@ -979,6 +990,7 @@ function generateReport(tokens, macro, time) {
     ? movers.slice(0, 15).map(t => `- **${t.symbol.toUpperCase()}** $${fmtPrice(t.price)} | 1h${fmtPct(t.change1h)} | 24h${fmtPct(t.change24h)} | 7d${fmtPct(t.change7d)} | 市值$${fmtVolume(t.marketCap)}${(t.warnings || []).length ? ' ⚠' + t.warnings.map(w => w.code).join('/') : ''}${t.patterns.length ? ' | ' + t.patterns.map(p => PATTERNS[p.code]?.name || p.code).join(' ') : ''}`).join('\n') + (movers.length > 15 ? `\n- …另有 ${movers.length - 15} 个未列出` : '') + '\n\n'
     : `本次无。\n\n`;
   md += `> 1小时涨跌只是"正在动"的提示,不是信号。是否可做仍看下面的模式标记和总闸状态。\n\n`;
+  md += boardReport() + derivsReport(tokens);
   md += `---\n\n## 🟢 STEP 2A｜多头候选\n\n`;
   let any = false;
   longCodes.forEach(c => {
@@ -1166,6 +1178,11 @@ const state = {
   cloud: null,              // v5.1: 云端定时扫描的最近一次快照(data/latest.json)
   showCloud: false,
   poolDropped: null,        // v5.5: 入池前被剔除的标的
+  derivs: window.__DERIVS || null,       // v6.0: 衍生品数据(云端抓取;App从 data/derivs.json 读)
+  cloudCfg: window.__CLOUD_CFG || null,  // v6.0: 云端配置(价位/持仓/主流币)。App只读
+  ledger: null,                          // v6.0: 信号账本汇总(data/ledger/summary.json)
+  cloudTried: false,
+  statH: 1, statSeg: 'all',
   cloudMsgs: [],            // v5.4: 云端消息(data/messages.json)
   localMsgs: lsGet('qs_messages') || [],   // v5.4: 本机扫描产生的消息
   msgReadAt: lsGet('qs_msg_read_at') || 0,
@@ -1344,9 +1361,96 @@ function cleanPool(raw) {
   return { kept, dropped };
 }
 
+/* ============== v6.0: 盯盘(价位/持仓) 与 衍生品 —— 报告、盯盘页、邮件共用 ============== */
+const DEFAULT_MAJORS = ['btc', 'eth', 'sol', 'bnb', 'xrp'];
+const fmtFr = (fr) => (fr == null ? '—' : `${fr >= 0 ? '+' : ''}${(fr * 100).toFixed(4)}%`);
+const fmtFrAnn = (fr) => (fr == null ? '—' : `${fr >= 0 ? '+' : ''}${(fr * 3 * 365 * 100).toFixed(0)}%`);
+// 衍生品数据超过3小时就不用了:过期的资金费率比没有更误导
+function derivsFresh() {
+  const d = state.derivs;
+  return d && d.coins && Date.now() - new Date(d.time).getTime() < 3 * 3600e3 ? d : null;
+}
+// 按symbol对上之后再核一次价格:小币重名很多,价格差超过15%就当作不是同一个币
+function derivOf(t) {
+  const d = derivsFresh()?.coins?.[t.symbol.toUpperCase()];
+  if (!d) return null;
+  if (d.px > 0 && t.price > 0 && Math.abs(d.px / t.price - 1) > 0.15) return null;
+  return d;
+}
+// 把配置里的价位和持仓对上当前价格,算出距离和盈亏
+function buildBoard(cfg) {
+  const c = cfg || state.cloudCfg || {};
+  const bySym = {};
+  state.tokens.forEach(t => { const s = t.symbol.toUpperCase(); if (!bySym[s]) bySym[s] = t; });
+  const levels = (c.levels || []).map(L => {
+    const t = bySym[String(L.s).toUpperCase()];
+    if (!t || !(L.price > 0)) return null;
+    const below = L.dir === 'below';
+    return { s: String(L.s).toUpperCase(), dir: below ? 'below' : 'above', price: L.price, note: L.note || '', p: t.price,
+      dist: (L.price / t.price - 1) * 100, hit: below ? t.price <= L.price : t.price >= L.price };
+  }).filter(Boolean);
+  const positions = (c.positions || []).map(P => {
+    const t = bySym[String(P.s).toUpperCase()];
+    if (!t || !(P.entry > 0)) return null;
+    const long = P.side !== 'short', lev = P.lev > 0 ? P.lev : 1;
+    return { s: String(P.s).toUpperCase(), side: long ? 'long' : 'short', entry: P.entry, stop: P.stop || null, target: P.target || null, lev, note: P.note || '',
+      p: t.price, pnl: (t.price / P.entry - 1) * 100 * (long ? 1 : -1) * lev,
+      tags: t.patterns.map(p => PATTERNS[p.code]?.name || p.code) };
+  }).filter(Boolean);
+  const majors = (c.majors || DEFAULT_MAJORS).map(m => {
+    const t = bySym[String(m).toUpperCase()]; if (!t) return null;
+    const d = derivOf(t);
+    return { s: t.symbol.toUpperCase(), p: t.price, c24: t.change24h, c7: t.change7d, h7: t.high7d, l7: t.low7d,
+      fr: d?.fr ?? null, oi: d?.oi ?? null, dOi24: d?.dOi24 ?? null, ls: d?.ls ?? null };
+  }).filter(Boolean);
+  return { levels, positions, majors };
+}
+
+// v6.0: 报告里的"盯盘"段
+function boardReport() {
+  const b = buildBoard();
+  if (!b.levels.length && !b.positions.length) return '';
+  let md = `---\n\n## 🎯 盯盘\n\n`;
+  if (b.levels.length) {
+    md += `| 标的 | 现价 | 条件 | 距离 | 备注 |\n|---|---|---|---|---|\n`;
+    b.levels.forEach(L => { md += `| ${L.s} | $${fmtPrice(L.p)} | ${L.dir === 'below' ? '跌破' : '站上'} $${fmtPrice(L.price)} | ${L.hit ? '**已触发**' : fmtPct(L.dist)} | ${L.note} |\n`; });
+    md += `\n`;
+  }
+  if (b.positions.length) {
+    md += `| 持仓 | 方向 | 入场 | 现价 | 盈亏 | 止损 | 目标 | 标记 |\n|---|---|---|---|---|---|---|---|\n`;
+    b.positions.forEach(P => { md += `| ${P.s} | ${P.side === 'long' ? '多' : '空'}${P.lev > 1 ? ' ' + P.lev + 'x' : ''} | $${fmtPrice(P.entry)} | $${fmtPrice(P.p)} | ${fmtPct(P.pnl)} | ${P.stop ? '$' + fmtPrice(P.stop) : '—'} | ${P.target ? '$' + fmtPrice(P.target) : '—'} | ${P.tags.join(' ') || '—'} |\n`; });
+    md += `\n`;
+  }
+  return md;
+}
+// v6.0: 报告里的"衍生品"段。只陈列,不参与任何模式判定。
+function derivsReport(tokens) {
+  const d = derivsFresh();
+  if (!d) return '';
+  const b = buildBoard();
+  const names = { hl: 'Hyperliquid', okx: 'OKX', bybit: 'Bybit', binance: 'Binance' };
+  const src = Object.entries(d.sources || {}).filter(([k, v]) => v.ok && !k.startsWith('ls_')).map(([k]) => names[k] || k);
+  let md = `---\n\n## 🧮 衍生品(资金费率 / 持仓量 / 多空比)\n\n`;
+  md += `**数据**: ${src.join(' + ') || '—'} · ${new Date(d.time).toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Shanghai' })}\n\n`;
+  md += `| 标的 | 资金费率/8h | 年化 | 持仓量 | 24h变化 | 多空比 |\n|---|---|---|---|---|---|\n`;
+  b.majors.forEach(m => { md += `| ${m.s} | ${fmtFr(m.fr)} | ${fmtFrAnn(m.fr)} | ${m.oi ? '$' + fmtVolume(m.oi) : '—'} | ${m.dOi24 == null ? '—' : fmtPct(m.dOi24)} | ${m.ls == null ? '—' : m.ls.toFixed(2)} |\n`; });
+  // 极值榜只看持仓量500万美元以上的,太小的合约费率没有参考价值
+  const rows = tokens.filter(t => !isPeggedAsset(t)).map(t => ({ t, d: derivOf(t) })).filter(x => x.d && x.d.fr != null && x.d.oi >= 5e6);
+  const line = (x) => `${x.t.symbol.toUpperCase()} ${fmtFr(x.d.fr)}`;
+  if (rows.length >= 6) {
+    const byFr = rows.slice().sort((x, y) => y.d.fr - x.d.fr);
+    md += `\n**资金费率最高**(多头付费最多): ${byFr.slice(0, 5).map(line).join(' · ')}\n`;
+    md += `**资金费率最低**(空头付费最多): ${byFr.slice(-5).reverse().map(line).join(' · ')}\n`;
+    const byOi = rows.filter(x => x.d.dOi24 != null).sort((x, y) => y.d.dOi24 - x.d.dOi24).slice(0, 5);
+    if (byOi.length) md += `**持仓量24h增幅最大**: ${byOi.map(x => `${x.t.symbol.toUpperCase()} ${fmtPct(x.d.dOi24)}(价格24h ${fmtPct(x.t.change24h)})`).join(' · ')}\n`;
+  }
+  md += `\n> 读法:费率为正=多头付钱给空头,越高说明多头越拥挤;为负则相反。持仓量增加而价格下跌,通常是新开空单或多头被套加仓;持仓量和价格一起跌,是多头在平仓离场。这一段只陈列,不参与模式判定。\n\n`;
+  return md;
+}
+
 /* ============== v5.4: 提醒规则(App与云端共用这一份) ============== */
 // 返回当前"处于触发状态"的提醒。是否算"新消息"由调用方做边沿检测:key上一次不在、这一次在,才报。
-const DEFAULT_ALERTS = { regimeChange: true, gateFlip: true, gateStale: true, newSRR: true, btcMove24hPct: 5, watchMove24hPct: 10, hourlyMovePct: 3, hourlyMinMcapUsd: 50e6 };
+const DEFAULT_ALERTS = { regimeChange: true, gateFlip: true, gateStale: true, newSRR: true, btcMove24hPct: 5, watchMove24hPct: 10, hourlyMovePct: 3, hourlyMinMcapUsd: 50e6, autoLevels: true, fundingExtreme8hPct: 0.05 };
 function computeAlerts(snap, prev, cfg) {
   const a = { ...DEFAULT_ALERTS, ...(cfg || {}) };
   const out = [];
@@ -1364,6 +1468,41 @@ function computeAlerts(snap, prev, cfg) {
   if (a.watchMove24hPct)
     (snap.watch || []).filter(w => Math.abs(w.c24) >= a.watchMove24hPct).forEach(w =>
       out.push({ key: `watch:${w.s}:${w.c24 > 0 ? 'up' : 'down'}`, text: `自选 ${w.s} 24h ${fmtPct(w.c24)},现价 $${fmtPrice(w.p)}` }));
+  // ---- v6.0: 价位 / 7日新高新低 / 持仓 / 资金费率极端 ----
+  const bySym = {};
+  (snap.all || []).forEach(t => { if (!bySym[t.s]) bySym[t.s] = t; });
+  const day = snap.time.slice(0, 10);
+  (a.levels || []).forEach(L => {
+    const t = bySym[String(L.s).toUpperCase()];
+    if (!t || !(L.price > 0)) return;
+    const below = L.dir === 'below';
+    // 条件成立期间key一直在,所以只在"刚穿过"时报一次;价格回去再穿,会再报
+    if (below ? t.p <= L.price : t.p >= L.price)
+      out.push({ key: `lvl:${t.s}:${below ? 'below' : 'above'}:${L.price}`, text: `${t.s} ${below ? '跌破' : '站上'} $${fmtPrice(L.price)}(现价 $${fmtPrice(t.p)})${L.note ? ' —— ' + L.note : ''}` });
+  });
+  const focus = new Set([...(a.majors || DEFAULT_MAJORS), ...(a.levels || []).map(l => l.s), ...(a.positions || []).map(p => p.s), ...(snap.watch || []).map(w => w.s)].map(x => String(x).toUpperCase()));
+  if (a.autoLevels) focus.forEach(sym => {
+    const t = bySym[sym]; if (!t) return;
+    if (t.l7 > 0 && t.p <= t.l7) out.push({ key: `lo7:${sym}:${day}`, text: `${sym} 创7日新低 $${fmtPrice(t.p)}` });
+    if (t.h7 > 0 && t.p >= t.h7) out.push({ key: `hi7:${sym}:${day}`, text: `${sym} 创7日新高 $${fmtPrice(t.p)}` });
+  });
+  (a.positions || []).forEach(P => {
+    const sym = String(P.s).toUpperCase(), t = bySym[sym];
+    if (!t || !(P.entry > 0)) return;
+    const long = P.side !== 'short', lev = P.lev > 0 ? P.lev : 1;
+    const pnl = (t.p / P.entry - 1) * 100 * (long ? 1 : -1) * lev;
+    const tag = `持仓 ${sym} ${long ? '多' : '空'}(入场 $${fmtPrice(P.entry)},现价 $${fmtPrice(t.p)},${fmtPct(pnl)}${lev > 1 ? ' @' + lev + 'x' : ''})`;
+    if (P.stop > 0 && (long ? t.p <= P.stop : t.p >= P.stop)) out.push({ key: `pos:${sym}:stop:${P.stop}`, text: `${tag} 触及止损 $${fmtPrice(P.stop)}` });
+    if (P.target > 0 && (long ? t.p >= P.target : t.p <= P.target)) out.push({ key: `pos:${sym}:target:${P.target}`, text: `${tag} 到达目标 $${fmtPrice(P.target)}` });
+    const adverse = long ? ['RPE_CRASH', 'WEAK', 'TRRP'] : ['SRR', 'MOMENTUM', 'TBR'];
+    (t.pats || []).filter(x => adverse.includes(x.c)).forEach(x =>
+      out.push({ key: `pos:${sym}:${x.c}`, text: `${tag} 出现不利标记 ${snap.patTypes?.[x.c]?.name || x.c}` }));
+  });
+  if (a.fundingExtreme8hPct && snap.dv) focus.forEach(sym => {
+    const d = snap.dv[sym];
+    if (d && d.fr != null && Math.abs(d.fr * 100) >= a.fundingExtreme8hPct)
+      out.push({ key: `fr:${sym}:${d.fr > 0 ? 'pos' : 'neg'}:${day}`, text: `${sym} 资金费率极端 ${fmtFr(d.fr)}/8h(年化 ${fmtFrAnn(d.fr)}),${d.fr > 0 ? '多头拥挤' : '空头拥挤'}` });
+  });
   // 1小时异动:key里带"小时",同一小时内不重复;下一小时仍超阈值会再报(那是新的一小时)
   if (a.hourlyMovePct) {
     const hourKey = snap.time.slice(0, 13);
@@ -1442,7 +1581,9 @@ function processLocalAlerts() {
   let prevKeys = new Set(lsGet('qs_alert_keys') || []);
   // 上次扫描是6小时以前的:不拿它比"状态变化",当作重新开始
   if (prev && Date.now() - new Date(prev.time).getTime() > 6 * 3600e3) { prev = null; prevKeys = new Set(); }
-  const active = computeAlerts(snap, prev, null);
+  // v6.0: 能读到云端配置时,本机也按同一份价位/持仓/阈值算提醒
+  const cc = state.cloudCfg;
+  const active = computeAlerts(snap, prev, cc ? { ...(cc.alerts || {}), levels: cc.levels, positions: cc.positions, majors: cc.majors } : null);
   // 云端3小时内已经报过的同一条,本机不再重复
   const cloudKeys = new Set();
   state.cloudMsgs.filter(m => Date.now() - new Date(m.time).getTime() < 3 * 3600e3).forEach(m => (m.keys || []).forEach(k => cloudKeys.add(k)));
@@ -1526,6 +1667,14 @@ async function loadCloudSnapshot() {
     if (d && d.time && d.report) { state.cloud = d; render(); }
   } catch {}
   await loadCloudMessages();
+  // v6.0: 衍生品、云端配置(价位/持仓)、账本汇总
+  const get = async (path) => { try { const r = await fetch(path + '?t=' + Date.now(), { cache: 'no-store' }); return r.ok ? await r.json() : null; } catch { return null; } };
+  const [dv, cfg, led] = await Promise.all([get('data/derivs.json'), get('cloud/config.json'), get('data/ledger/summary.json')]);
+  if (dv && dv.coins) state.derivs = dv;
+  if (cfg) state.cloudCfg = cfg;
+  if (led) state.ledger = led;
+  state.cloudTried = true;
+  render();
 }
 
 /* ============== v5.1: 对外快照(云端任务与邮件用) ============== */
@@ -1560,7 +1709,14 @@ function buildSnapshot() {
     pool: TOP_N,
     srr, longs: byType('long'), avoid: byType('avoid'), shorts: byType('short'), watch,
     // v5.2: 全部非锚定标的的精简行情(含1h),云端按阈值筛异动
-    all: state.tokens.filter(t => !isPeggedAsset(t)).map(t => ({ ...slim(t), tags: t.patterns.map(p => PATTERNS[p.code]?.name || p.code) })),
+    all: state.tokens.filter(t => !isPeggedAsset(t)).map(t => ({ ...slim(t), tags: t.patterns.map(p => PATTERNS[p.code]?.name || p.code),
+      // v6.0: 账本和价位提醒要用的原始字段 —— rk=成交量排名, pats=模式代码/分数/是否被否决, h7/l7=7日高低
+      rk: state.tokens.indexOf(t) + 1, h7: t.high7d, l7: t.low7d,
+      pats: t.patterns.map(p => ({ c: p.code, sc: p.score, v: p.vetoed ? 1 : 0 })) })),
+    patTypes: Object.fromEntries(Object.entries(PATTERNS).map(([c, v]) => [c, { name: v.name, type: v.type }])),
+    board: buildBoard(),
+    dv: (() => { const o = {}; state.tokens.forEach(t => { const d = derivOf(t); if (d) o[t.symbol.toUpperCase()] = { fr: d.fr, oi: d.oi, dOi24: d.dOi24 ?? null, dOi1: d.dOi1 ?? null, ls: d.ls ?? null }; }); return o; })(),
+    dvInfo: derivsFresh() ? { time: state.derivs.time, sources: Object.entries(state.derivs.sources || {}).filter(([k, v]) => v.ok && !k.startsWith('ls_')).map(([k]) => k), lsFrom: state.derivs.lsFrom || null } : null,
     report: state.report,
   };
 }
@@ -1614,6 +1770,8 @@ const ICONS = {
   check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
   plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
   edit: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>',
+  target: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>',
+  trend: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>',
   bell: '<svg class="icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>',
   alert: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
 };
@@ -1682,6 +1840,8 @@ function renderHeader() {
   const tabs = [
     { k: 'scan',    label: '扫描',   icon: ICONS.activity, count: filtered.length },
     { k: 'report',  label: '报告',   icon: ICONS.file },
+    { k: 'board',   label: '盯盘',   icon: ICONS.target },
+    { k: 'stats',   label: '战绩',   icon: ICONS.trend },
     { k: 'checklist', label: '清单', icon: ICONS.check, count: checklistScore.checked > 0 ? checklistScore.checked : undefined },
     { k: 'history', label: '历史',   icon: ICONS.history, count: state.history.length },
     { k: 'help',    label: 'v10',    icon: ICONS.chart },
@@ -1693,7 +1853,7 @@ function renderHeader() {
         <div class="header-left">
           <div class="brand">
             <span class="brand-dot ${dotClass}"></span>
-            <span>QUANT//v5.6</span>
+            <span>QUANT//v6.0</span>
           </div>
           ${regimeHtml}
         </div>
@@ -1778,6 +1938,11 @@ function renderTokenRow(t) {
           <div class="metric"><div class="label">24h</div><div class="value ${ch24Cls}">${fmtPct(t.change24h)}</div></div>
           <div class="metric"><div class="label">RSI</div><div class="value">${t.rsi.toFixed(0)}</div></div>
           <div class="metric"><div class="label">距7d高</div><div class="value down">${t.high7d ? ((t.price / t.high7d - 1) * 100).toFixed(1) : '0'}%</div></div>
+          ${(() => { const d = derivOf(t); return d ? `
+          <div class="metric"><div class="label">费率/8h</div><div class="value ${d.fr == null ? '' : d.fr >= 0 ? 'up' : 'down'}">${fmtFr(d.fr)}</div></div>
+          <div class="metric"><div class="label">费率年化</div><div class="value">${fmtFrAnn(d.fr)}</div></div>
+          <div class="metric"><div class="label">持仓量</div><div class="value">${d.oi ? '$' + fmtVolume(d.oi) : '—'}</div></div>
+          <div class="metric"><div class="label">持仓24h</div><div class="value">${d.dOi24 == null ? '—' : fmtPct(d.dOi24)}</div></div>` : ''; })()}
           <div class="metric"><div class="label">高7d</div><div class="value">$${fmtPrice(t.high7d)}</div></div>
           <div class="metric"><div class="label">低7d</div><div class="value">$${fmtPrice(t.low7d)}</div></div>
           <div class="metric"><div class="label">7d</div><div class="value ${ch7Cls}">${fmtPct(t.change7d)}</div></div>
@@ -1982,12 +2147,12 @@ function renderHelpTab() {
       </div>
 
       <div class="help-footer">
-        QUANT TERMINAL v5.6 (手机App · 定时刷新 · 邮件推送 · 1小时异动 · 扫描池可选 · 消息)<br>
+        QUANT TERMINAL v6.0 (手机App · 定时刷新 · 邮件推送 · 1小时异动 · 扫描池可选 · 消息)<br>
         覆盖: CoinGecko Top${TOP_N}标的(按24h成交量)<br>
         数据源: api.coingecko.com (免费公共API，全球可访问)<br>
         本地存储: 浏览器localStorage / 最近${HISTORY_LIMIT}次扫描历史<br><br>
         <strong>v4.3：</strong> TBR(三重底)+VEX(量爆发)+SER(板块echo)，基于LIT/GRASS/DEXE三例。<br>
-        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><strong>v5.2：</strong>①新增1小时涨跌幅(CoinGecko 1h字段):列表里≥3%的标的带"1h"徽标,可按"1h异动"排序,报告和邮件单列;②云端改为每小时扫描,1小时涨跌超过3%的币即时推送;③展开行增加TradingView链接。1h数据<em>只展示和推送,不参与任何模式判定</em>。<br><strong>v5.3：</strong>扫描池从固定50扩为可选 50/100/250(默认250,按24h成交量)。判定规则没变,但<em>此前所有验证(SRR 4/4跑赢、回避信号A级)都是在Top50上做的</em>;排名50以后的标的上出现的多头信号没有回测依据,市值小的会带 ⚠NANO/⚠MICRO 标记(SAHARA那次-55%就是这一类)。想回到原口径,把扫描池切回50。<br><strong>v5.4：</strong>①消息列表(右上角铃铛):云端每次提醒/简报和本机扫描发现的提醒都记在这里,带未读数;②新消息在App内顶部弹出;③允许通知后,App开着或刚切到后台时会弹系统通知。App被系统关掉后收不到网页通知(华为手机没有谷歌推送服务),那时靠邮件。提醒规则App与云端共用同一份代码。<br><strong>v5.5：</strong>扩池后实盘暴露的三个数据问题已在入池前清洗:①股票/ETF代币(bStocks、xStock、各家"Tokenized Stock",11/16实测前250里有27个)不再进池——RSI和回调模式对它们没有意义;②价格明显异常的脏数据(如POLYGOLD报价4.7e17)剔除;③同名重复只留成交量最大的一个。另:市值未知(CoinGecko无流通量)的标的加 ⚠NO-MCAP 标记。被剔除的数量写在报告末尾。<br><strong>v5.6：</strong>两处提醒降噪(依据11/14-11/16的实际推送):①1小时异动只推市值5000万美元以上的标的——7次云端运行列出的64个异动里41个是纳米盘;报告里的1小时异动段仍列全部;②"市场状态变化"只在进入或离开Risk-Off时提醒——这个标签只看24小时,33小时内变了4次。<br><br>
+        <strong>v4.4：</strong> 宏观否决层(下跌趋势多头信号-5分) + TBR/SER下跌停用 + VEX早期过滤(排除已涨>15%) + 微盘/反转/超买三类风险警告。基于6/4-6/9 七份报告实测(TBR下跌中0/8)。<br><strong>v4.5：</strong>融合可编辑情景触发清单。<br><strong>v4.6：</strong>双因子总闸(价格+货币)。<br><strong>v4.7：</strong>清单加L1催化追踪组。<br><strong>v4.8：</strong>新增SRR结构性重估判别器(四项打分)。<br><strong>v4.9：</strong>基于8/29-9/12实测校准两处:①阈值从≥3收紧到=4(4/4组+0.39%跑赢BTC,3/4组-17%崩盘);②冲突压制——WEAK(跑输大盘>10pp)或TRRP(顶部被拒)时SRR不成立(ENA当时双标签,14天-12.9%)。<br><strong>v5.0：</strong>①SECTOR_MAP补齐6个大类(L1/L2、隐私、存储、预言机、DEX、游戏)——此前漏表导致getTokenSector返回null,SRR第2项自动判负,这些标的结构上永远拿不到4/4(历史上每个4/4都来自已映射板块);②货币闸陈旧度提醒:关闸>60天且期间BTC涨>15%时报告顶部标注"需人工复核"——<em>只提醒,不改否决强度、不自动开闸</em>。10/15实测否定了放松否决的提议。<br><strong>v5.1：</strong>判定逻辑一行没动。①可装到手机桌面(PWA);②定时刷新改为可选档位(5/15/30/60分钟)并记忆,切回前台自动补扫;③云端定时任务按同一份代码扫描并发邮件,结果同步显示为"云端定时扫描"横幅。<br><strong>v5.2：</strong>①新增1小时涨跌幅(CoinGecko 1h字段):列表里≥3%的标的带"1h"徽标,可按"1h异动"排序,报告和邮件单列;②云端改为每小时扫描,1小时涨跌超过3%的币即时推送;③展开行增加TradingView链接。1h数据<em>只展示和推送,不参与任何模式判定</em>。<br><strong>v5.3：</strong>扫描池从固定50扩为可选 50/100/250(默认250,按24h成交量)。判定规则没变,但<em>此前所有验证(SRR 4/4跑赢、回避信号A级)都是在Top50上做的</em>;排名50以后的标的上出现的多头信号没有回测依据,市值小的会带 ⚠NANO/⚠MICRO 标记(SAHARA那次-55%就是这一类)。想回到原口径,把扫描池切回50。<br><strong>v5.4：</strong>①消息列表(右上角铃铛):云端每次提醒/简报和本机扫描发现的提醒都记在这里,带未读数;②新消息在App内顶部弹出;③允许通知后,App开着或刚切到后台时会弹系统通知。App被系统关掉后收不到网页通知(华为手机没有谷歌推送服务),那时靠邮件。提醒规则App与云端共用同一份代码。<br><strong>v5.5：</strong>扩池后实盘暴露的三个数据问题已在入池前清洗:①股票/ETF代币(bStocks、xStock、各家"Tokenized Stock",11/16实测前250里有27个)不再进池——RSI和回调模式对它们没有意义;②价格明显异常的脏数据(如POLYGOLD报价4.7e17)剔除;③同名重复只留成交量最大的一个。另:市值未知(CoinGecko无流通量)的标的加 ⚠NO-MCAP 标记。被剔除的数量写在报告末尾。<br><strong>v5.6：</strong>两处提醒降噪(依据11/14-11/16的实际推送):①1小时异动只推市值5000万美元以上的标的——7次云端运行列出的64个异动里41个是纳米盘;报告里的1小时异动段仍列全部;②"市场状态变化"只在进入或离开Risk-Off时提醒——这个标签只看24小时,33小时内变了4次。<br><strong>v6.0：</strong>借鉴主流交易bot的三块能力,判定规则仍然没动:①<em>信号账本</em>——云端记下每个标记新出现时的价格,1/3/7/14天后自动回填,按模式统计相对BTC的超额收益("战绩"页),以后验证不再靠手工;②<em>盯盘</em>——关键价位、7日新高新低、持仓止损止盈触发即推送("盯盘"页),价位在云端配置里;③<em>衍生品</em>——资金费率、持仓量、多空比,多个交易所公开接口互相补位,只陈列不参与判定,同时记进账本,攒够样本再看它们有没有用。<br><br>
         ⚠️ 注意：CoinGecko免费API限流10-30次/分钟，开启自动刷新前请确认网络稳定。<br>
         若遇429限流错误，关掉自动刷新等60秒。
       </div>
@@ -2145,6 +2310,73 @@ function renderChecklistTab() {
   `;
 }
 
+// v6.0: 云端数据读不到时的统一说明
+function cloudMissingNote(what) {
+  if (!location.protocol.startsWith('http')) return `<div class="empty">${what}来自云端。当前是直接打开的本地文件,读不到云端数据;请从App的网址打开。同样的内容也在定时邮件里。</div>`;
+  if (!state.cloudTried) return `<div class="empty">正在读取云端数据…</div>`;
+  return `<div class="empty">没读到${what}。可能云端还没运行过,或网页托管没有开启。同样的内容也在定时邮件里。</div>`;
+}
+// v6.0: 盯盘页 —— 价位、持仓、主流币衍生品
+function renderBoardTab() {
+  if (!state.cloudCfg) return cloudMissingNote('盯盘配置');
+  if (!state.tokens.length) return `<div class="empty">等扫描完成…</div>`;
+  const b = buildBoard();
+  const d = derivsFresh();
+  const cls = (v) => (v >= 0 ? 'up' : 'down');
+  let html = `<div class="sec-title">关键价位</div>`;
+  html += b.levels.length ? `<table class="qt"><tr><th>标的</th><th>条件</th><th>现价</th><th>距离</th></tr>${b.levels.map(L => `
+    <tr class="${L.hit ? 'hit' : ''}"><td><b>${L.s}</b></td><td>${L.dir === 'below' ? '跌破' : '站上'} $${fmtPrice(L.price)}<div class="qt-note">${escapeHtml(L.note)}</div></td>
+    <td>$${fmtPrice(L.p)}</td><td>${L.hit ? '<span class="amber">已触发</span>' : fmtPct(L.dist)}</td></tr>`).join('')}</table>` : `<div class="empty">没有设置价位</div>`;
+  html += `<div class="sec-title">持仓</div>`;
+  html += b.positions.length ? `<table class="qt"><tr><th>标的</th><th>入场→现价</th><th>盈亏</th><th>止损 / 目标</th></tr>${b.positions.map(P => `
+    <tr><td><b>${P.s}</b> ${P.side === 'long' ? '多' : '空'}${P.lev > 1 ? ' ' + P.lev + 'x' : ''}<div class="qt-note">${escapeHtml(P.tags.join(' '))}</div></td>
+    <td>$${fmtPrice(P.entry)} → $${fmtPrice(P.p)}</td><td class="${cls(P.pnl)}">${fmtPct(P.pnl)}</td>
+    <td>${P.stop ? '$' + fmtPrice(P.stop) : '—'} / ${P.target ? '$' + fmtPrice(P.target) : '—'}</td></tr>`).join('')}</table>`
+    : `<div class="qt-hint">没有登记持仓。登记后,触及止损/目标、或持仓币出现急跌、跑输大盘、顶部被拒等标记时会推送。</div>`;
+  html += `<div class="sec-title">主流币 · 衍生品${d ? `<span class="sec-sub">${new Date(d.time).toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' })}</span>` : ''}</div>`;
+  html += `<table class="qt"><tr><th>标的</th><th>7日低 / 高</th><th>费率/8h</th><th>持仓量(24h)</th><th>多空比</th></tr>${b.majors.map(m => `
+    <tr><td><b>${m.s}</b><div class="qt-note ${cls(m.c24)}">${fmtPct(m.c24)}</div></td><td>$${fmtPrice(m.l7)}<br>$${fmtPrice(m.h7)}</td>
+    <td class="${m.fr == null ? '' : cls(m.fr)}">${fmtFr(m.fr)}<div class="qt-note">年化 ${fmtFrAnn(m.fr)}</div></td>
+    <td>${m.oi ? '$' + fmtVolume(m.oi) : '—'}<div class="qt-note">${m.dOi24 == null ? '' : fmtPct(m.dOi24)}</div></td><td>${m.ls == null ? '—' : m.ls.toFixed(2)}</td></tr>`).join('')}</table>`;
+  if (!d) html += `<div class="qt-hint">衍生品数据暂时没有(云端3小时内没有成功抓取)。</div>`;
+  html += `<div class="qt-hint">价位和持仓写在云端配置 cloud/config.json 里,云端和App共用这一份;改动后下次定时运行生效。7日新高/新低对上面的主流币、设了价位的币和持仓币自动提醒。</div>`;
+  return html;
+}
+// v6.0: 战绩页 —— 信号账本的统计
+function renderStatsTab() {
+  const L = state.ledger;
+  if (!L) return cloudMissingNote('信号账本');
+  const H = L.horizons || [1, 3, 7, 14];
+  const table = L.seg?.[state.statSeg]?.[state.statH] || {};
+  const typeName = { long: '多头标记', avoid: '回避标记', short: '偏空标记' };
+  const row = (label, r, bold) => `<tr class="${r.n < 20 ? 'thin' : ''}"><td>${bold ? '<b>' + label + '</b>' : label}</td><td>${r.n}</td><td>${r.win}%</td><td class="${r.avg >= 0 ? 'up' : 'down'}">${fmtPct(r.avg)}</td><td class="${r.ex >= 0 ? 'up' : 'down'}">${fmtPct(r.ex)}</td></tr>`;
+  let body = '';
+  ['long', 'avoid', 'short'].forEach(ty => {
+    const agg = table['_' + ty];
+    if (!agg) return;
+    body += row(typeName[ty] + '(合计)', agg, true);
+    Object.entries(table).filter(([c]) => !c.startsWith('_') && L.types?.[c]?.type === ty).sort((a, b) => b[1].n - a[1].n)
+      .forEach(([c, r]) => { body += row('　' + escapeHtml(L.types[c].name || c), r, false); });
+  });
+  const since = L.since ? new Date(L.since).toLocaleDateString('zh-CN') : '—';
+  return `
+    <div class="filters"><div class="sort-row">
+      ${H.map(h => `<button class="chip-sort ${state.statH === h ? 'active' : ''}" onclick="setStat('statH', ${h})">${h}天后</button>`).join('')}
+    </div><div class="sort-row" style="margin-top:6px">
+      ${[['all', '全部'], ['top50', '成交量前50'], ['rest', '50名以后']].map(([k, n]) => `<button class="chip-sort ${state.statSeg === k ? 'active' : ''}" onclick="setStat('statSeg', '${k}')">${n}</button>`).join('')}
+    </div></div>
+    ${body ? `<table class="qt"><tr><th>标记</th><th>样本</th><th>正确率</th><th>平均涨跌</th><th>相对BTC</th></tr>${body}</table>`
+      : `<div class="empty">这个期限还没有到期的记录。账本从 ${since} 开始记,${state.statH}天期的结果最早要 ${state.statH} 天后才有。</div>`}
+    <div class="qt-hint">
+      账本自 ${since} 起,共记 ${L.entries} 条(其中 ${L.init} 条是建档时市场上已有的标记),${L.pending} 条尚未全部到期。<br>
+      <b>正确率</b>按相对BTC算:多头标记跑赢BTC算对,回避/偏空标记跑输BTC算对。50%等于抛硬币。<br>
+      <b>样本少于20的行是灰色的</b>,不足以下结论。这是往前记的账,不是回测:记下时不知道结果。
+    </div>
+    ${(L.recent || []).length ? `<div class="sec-title">最近到期(1天)</div><table class="qt"><tr><th>标的</th><th>标记</th><th>记录时</th><th>1天后</th><th>相对BTC</th></tr>${L.recent.slice(0, 20).map(e => `
+      <tr><td><b>${e.s}</b></td><td>${escapeHtml(L.types?.[e.c]?.name || e.c)}</td><td>$${fmtPrice(e.p)}</td><td class="${e.ret >= 0 ? 'up' : 'down'}">${fmtPct(e.ret)}</td><td class="${e.ex >= 0 ? 'up' : 'down'}">${fmtPct(e.ex)}</td></tr>`).join('')}</table>` : ''}
+  `;
+}
+
 // v5.4: 消息列表
 function renderMessagesTab() {
   const msgs = allMessages();
@@ -2176,6 +2408,8 @@ function render() {
   else if (state.tab === 'history') content = renderHistoryTab();
   else if (state.tab === 'help') content = renderHelpTab();
   else if (state.tab === 'messages') content = renderMessagesTab();
+  else if (state.tab === 'board') content = renderBoardTab();
+  else if (state.tab === 'stats') content = renderStatsTab();
 
   document.getElementById('app').innerHTML = renderHeader() + errorHtml + content;
 }
@@ -2190,6 +2424,7 @@ window.performScan = performScan;
 window.setAutoRefresh = setAutoRefresh;
 window.setAutoMin = setAutoMin;
 window.setPool = setPool;
+window.setStat = (k, v) => { state[k] = v; render(); };
 window.enableNotify = async () => {
   try { await Notification.requestPermission(); } catch {}
   render();

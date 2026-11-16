@@ -20,15 +20,19 @@ async function getJson(url, init = {}) {
   } finally { clearTimeout(timer); }
 }
 const num = (v) => { const n = Number(v); return Number.isFinite(n) ? n : null; };
-// 合约名 → 币种:BTCUSDT→BTC, 1000PEPEUSDT→PEPE, kPEPE→PEPE, BTC-USDT-SWAP→BTC
-function baseSym(raw) {
-  let s = String(raw || '');
+// 合约名 → 币种和计价倍数:BTCUSDT→BTC, 1000PEPEUSDT→PEPE(×1000), kPEPE→PEPE(×1000), BTC-USDT-SWAP→BTC
+function parseSym(raw) {
+  let s = String(raw || ''), mult = 1;
   if (s.includes('-')) s = s.split('-')[0];
   s = s.replace(/USDT$|USDC$|USD$/, '');
-  s = s.replace(/^(1000000|100000|10000|1000)/, '');
-  if (/^k[A-Z]/.test(s)) s = s.slice(1);
-  return s.toUpperCase();
+  const m = s.match(/^(1000000|100000|10000|1000)(.+)$/);
+  if (m) { mult = Number(m[1]); s = m[2]; }
+  if (/^k[A-Z]/.test(s)) { mult = 1000; s = s.slice(1); }
+  return { sym: s.toUpperCase(), mult };
 }
+const baseSym = (raw) => parseSym(raw).sym;
+// 单币价格(把 1000PEPE 这类合约价除回去)。页面拿它和 CoinGecko 价格比对,差太多就认为是重名的另一个币
+const unitPx = (raw, px) => (px == null ? null : px / parseSym(raw).mult);
 // 各家结算周期不同(1h/4h/8h),统一折算成"每8小时"的费率
 const to8h = (rate, hours) => (rate == null ? null : rate * (8 / (hours || 8)));
 
@@ -43,7 +47,7 @@ async function hyperliquid() {
   uni.forEach((u, i) => {
     const c = ctx[i]; if (!c || u.isDelisted) return;
     const px = num(c.markPx) ?? num(c.oraclePx), oiCoins = num(c.openInterest);
-    out[baseSym(u.name)] = { fr: to8h(num(c.funding), 1), oi: px != null && oiCoins != null ? px * oiCoins : null };
+    out[baseSym(u.name)] = { fr: to8h(num(c.funding), 1), oi: px != null && oiCoins != null ? px * oiCoins : null, px: unitPx(u.name, px) };
   });
   return out;
 }
@@ -55,7 +59,7 @@ async function bybit() {
   for (const t of list) {
     if (!/USDT$/.test(t.symbol)) continue;
     const hours = num(t.fundingIntervalHour) || 8;
-    out[baseSym(t.symbol)] = { fr: to8h(num(t.fundingRate), hours), oi: num(t.openInterestValue) };
+    out[baseSym(t.symbol)] = { fr: to8h(num(t.fundingRate), hours), oi: num(t.openInterestValue), px: unitPx(t.symbol, num(t.lastPrice)) };
   }
   return out;
 }
@@ -71,7 +75,7 @@ async function okx(majors) {
   for (const o of oi.data) {
     if (!/-USDT-SWAP$/.test(o.instId)) continue;
     const usd = num(o.oiUsd) ?? (num(o.oiCcy) != null && last[o.instId] != null ? num(o.oiCcy) * last[o.instId] : null);
-    out[baseSym(o.instId)] = { fr: null, oi: usd };
+    out[baseSym(o.instId)] = { fr: null, oi: usd, px: unitPx(o.instId, last[o.instId]) };
   }
   // 资金费率:先试一次取全部;不支持就只取主流币(逐个请求)
   const putFr = (r) => {
@@ -97,7 +101,7 @@ async function binance(majors) {
   for (const r of idx) {
     if (!/USDT$/.test(r.symbol)) continue;
     const s = baseSym(r.symbol); mark[s] = num(r.markPrice);
-    out[s] = { fr: to8h(num(r.lastFundingRate), 8), oi: null };
+    out[s] = { fr: to8h(num(r.lastFundingRate), 8), oi: null, px: unitPx(r.symbol, mark[s]) };
   }
   for (const s of majors) {   // 币安没有"全部持仓量"的批量接口,只取主流币
     try { const r = await getJson(`https://fapi.binance.com/fapi/v1/openInterest?symbol=${s}USDT`); if (out[s] && mark[s] != null) out[s].oi = num(r.openInterest) * mark[s]; } catch {}
@@ -134,16 +138,17 @@ export async function fetchDerivs({ majors = ['BTC', 'ETH', 'SOL', 'BNB', 'XRP']
   const coins = {};
   const syms = new Set(Object.values(per).flatMap((m) => Object.keys(m)));
   for (const s of syms) {
-    const frs = [], used = [], byVenue = {}; let oi = 0, hasOi = false;
+    const frs = [], pxs = [], used = [], byVenue = {}; let oi = 0, hasOi = false;
     for (const [name, m] of Object.entries(per)) {
       const x = m[s]; if (!x) continue;
       if (x.fr != null) frs.push(x.fr);
+      if (x.px > 0) pxs.push(x.px);
       if (x.oi != null && x.oi > 0) { oi += x.oi; hasOi = true; byVenue[name] = Math.round(x.oi); }
       used.push(name);
     }
     if (!frs.length && !hasOi) continue;
     // 资金费率取各家中位数(单家异常值不带偏);持仓量各家相加
-    coins[s] = { fr: frs.length ? median(frs) : null, oi: hasOi ? Math.round(oi) : null, v: used, oiBy: byVenue };
+    coins[s] = { fr: frs.length ? median(frs) : null, oi: hasOi ? Math.round(oi) : null, px: pxs.length ? median(pxs) : null, v: used, oiBy: byVenue };
   }
 
   // 多空比:找第一个能通的来源,给主流币各取一次

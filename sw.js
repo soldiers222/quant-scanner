@@ -1,7 +1,7 @@
-/* QUANT Terminal service worker (v5.6)
+/* QUANT Terminal service worker (v6.0)
  * 只缓存 App 外壳,让它能装到桌面、断网时也能打开界面。
  * 行情(CoinGecko)和云端快照(data/)永远走网络,绝不缓存 —— 过期行情比没有行情更危险。 */
-const CACHE = 'quant-shell-v5.6';
+const CACHE = 'quant-shell-v6.0';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {

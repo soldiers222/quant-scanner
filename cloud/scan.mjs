@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v5.6)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v6.0)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -21,6 +21,8 @@ import nodemailer from 'nodemailer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fetchDerivs, withOiChange } from './derivs.mjs';
+import { updateLedger } from './ledger.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DATA = process.env.QS_DATA_DIR || path.join(ROOT, 'data');   // 自检时指向临时目录,不碰正式数据
@@ -35,21 +37,25 @@ const readJson = async (p, fallback = null) => {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /* ---------- 1. 跑扫描 ---------- */
-async function runScan(cfg, prev, state, isDigest) {
+async function runScan(cfg, prev, state, isDigest, derivs) {
   const browser = await chromium.launch(env.QS_CHROMIUM ? { executablePath: env.QS_CHROMIUM } : {});
   try {
     const ctx = await browser.newContext({ locale: 'zh-CN', timezoneId: 'Asia/Shanghai' });
     // 把云端设置灌进页面的 localStorage(页面本来就从那里读货币闸和自选)
     const anchor = cfg.monetaryTight ? (cfg.monetaryAnchor || prev?.gate?.anchor || null) : null;
-    await ctx.addInitScript(({ tight, anchor, watch, pool }) => {
+    await ctx.addInitScript(({ tight, anchor, watch, pool, derivs, cloudCfg }) => {
+      window.__DERIVS = derivs;        // v6.0: 衍生品数据和云端配置直接交给页面,报告/盯盘/提醒都用它
+      window.__CLOUD_CFG = cloudCfg;
       localStorage.setItem('qs_pool', JSON.stringify(pool));
       localStorage.setItem('qs_monetary_tight', JSON.stringify(tight));
       if (anchor) localStorage.setItem('qs_monetary_anchor', JSON.stringify(anchor));
       else localStorage.removeItem('qs_monetary_anchor');
       localStorage.setItem('qs_watchlist', JSON.stringify(watch));
-    }, { tight: !!cfg.monetaryTight, anchor, watch: (cfg.watchlist || []).map((s) => String(s).toLowerCase()), pool: [50, 100, 250].includes(cfg.poolSize) ? cfg.poolSize : 50 });
+    }, { tight: !!cfg.monetaryTight, anchor, watch: (cfg.watchlist || []).map((s) => String(s).toLowerCase()), pool: [50, 100, 250].includes(cfg.poolSize) ? cfg.poolSize : 50,
+      derivs, cloudCfg: { levels: cfg.levels || [], positions: cfg.positions || [], majors: cfg.majors || null, alerts: cfg.alerts || {} } });
 
     const page = await ctx.newPage();
+    if (env.QS_NOW) await page.clock.setFixedTime(now);   // 测试:让页面里的"现在"也是 QS_NOW
     if (env.QS_MOCK) {
       const body = await fs.readFile(env.QS_MOCK, 'utf8');
       await page.route('**/api.coingecko.com/**', (r) => r.fulfill({ status: 200, contentType: 'application/json', body }));
@@ -83,7 +89,7 @@ async function runScan(cfg, prev, state, isDigest) {
       return { snap, active, fresh, message };
     }, {
       prev: prev ? { regime: prev.regime, gate: prev.gate } : null,
-      alertCfg: cfg.alerts || {},
+      alertCfg: { ...(cfg.alerts || {}), levels: cfg.levels || [], positions: cfg.positions || [], ...(cfg.majors ? { majors: cfg.majors } : {}) },
       prevKeys: state.activeAlertKeys || [],
       isDigest,
     });
@@ -124,7 +130,7 @@ const esc = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<'
 const pctHtml = (v) => `<span style="color:${v >= 0 ? '#0a7d4b' : '#c0392b'}">${v >= 0 ? '+' : ''}${(v ?? 0).toFixed(1)}%</span>`;
 const bjTime = (iso) => new Date(iso).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false });
 
-function buildEmail(snap, alerts, isDigest, lastRunIso) {
+function buildEmail(snap, alerts, isDigest, lastRunIso, ledger) {
   const gate = snap.gate;
   const movers = alerts.filter((a) => a.mover).map((a) => a.mover);
   const others = alerts.filter((a) => !a.mover);
@@ -177,9 +183,56 @@ function buildEmail(snap, alerts, isDigest, lastRunIso) {
     html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">1小时涨跌只说明"正在动",不是买卖信号。是否可做看"标记"一列和总闸状态。⚠NANO/MICRO = 市值低于5000万/1.5亿美元,极易插针。</div>`;
   }
 
+  // ---- v6.0: 盯盘(价位/持仓) ----
+  const board = snap.board || { levels: [], positions: [], majors: [] };
+  if (board.levels.length) {
+    html += h2('盯盘价位');
+    html += table(['标的', '条件', '现价', '距离', '备注'], board.levels.map((L) => [
+      `<b>${esc(L.s)}</b>`, `${L.dir === 'below' ? '跌破' : '站上'} $${fmtPrice(L.price)}`, `$${fmtPrice(L.p)}`,
+      L.hit ? '<b style="color:#b26a00">已触发</b>' : pctHtml(L.dist), `<span style="color:#555;font-size:12px">${esc(L.note)}</span>`]));
+  }
+  if (board.positions.length) {
+    html += h2('持仓');
+    html += table(['标的', '方向', '入场', '现价', '盈亏', '止损 / 目标', '标记'], board.positions.map((P) => [
+      `<b>${esc(P.s)}</b>`, `${P.side === 'long' ? '多' : '空'}${P.lev > 1 ? ' ' + P.lev + 'x' : ''}`, `$${fmtPrice(P.entry)}`, `$${fmtPrice(P.p)}`, pctHtml(P.pnl),
+      `${P.stop ? '$' + fmtPrice(P.stop) : '—'} / ${P.target ? '$' + fmtPrice(P.target) : '—'}`, esc(P.tags.join(' ') || '—')]));
+  }
+
   html += h2('宏观');
   html += table(['', '价格', '1h', '24h', '7d', '30d', 'RSI'], [snap.btc, snap.eth].filter(Boolean).map((x) =>
     [`<b>${esc(x.s)}</b>`, `$${fmtPrice(x.p)}`, x.c1h == null ? '—' : pctHtml(x.c1h), pctHtml(x.c24), pctHtml(x.c7), pctHtml(x.c30), x.rsi]));
+
+  // ---- v6.0: 主流币衍生品 ----
+  if (snap.dvInfo && board.majors.some((m) => m.fr != null || m.oi)) {
+    const names = { hl: 'Hyperliquid', okx: 'OKX', bybit: 'Bybit', binance: 'Binance' };
+    const usd = (v) => (!v ? '—' : v >= 1e9 ? `$${(v / 1e9).toFixed(2)}B` : `$${(v / 1e6).toFixed(0)}M`);
+    const fr = (v) => (v == null ? '—' : `<span style="color:${v >= 0 ? '#0a7d4b' : '#c0392b'}">${v >= 0 ? '+' : ''}${(v * 100).toFixed(4)}%</span>`);
+    html += h2('主流币衍生品');
+    html += table(['标的', '资金费率/8h', '年化', '持仓量', '持仓24h', '多空比'], board.majors.map((m) => [
+      `<b>${esc(m.s)}</b>`, fr(m.fr), m.fr == null ? '—' : `${m.fr >= 0 ? '+' : ''}${(m.fr * 3 * 365 * 100).toFixed(0)}%`, usd(m.oi),
+      m.dOi24 == null ? '—' : pctHtml(m.dOi24), m.ls == null ? '—' : m.ls.toFixed(2)]));
+    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">数据:${esc(snap.dvInfo.sources.map((k) => names[k] || k).join(' + '))}。费率为正=多头付钱给空头;多空比是账户数口径。只陈列,不参与模式判定。</div>`;
+  }
+
+  // ---- v6.0: 信号战绩(只在定时简报里放) ----
+  if (isDigest && ledger) {
+    html += h2('信号战绩(相对BTC)');
+    const typeName = { _long: '多头标记', _avoid: '回避标记', _short: '偏空标记' };
+    const rows = [];
+    for (const h of ledger.horizons || []) for (const k of ['_long', '_avoid', '_short']) {
+      const a = ledger.seg?.all?.[h]?.[k]; if (!a) continue;
+      const t50 = ledger.seg?.top50?.[h]?.[k], rest = ledger.seg?.rest?.[h]?.[k];
+      const cell = (r) => (r ? `${r.win}% <span style="color:#888">(${r.n})</span>` : '—');
+      rows.push([`${h}天后`, typeName[k], cell(a), pctHtml(a.ex), cell(t50), cell(rest)]);
+    }
+    const since = ledger.since ? bjTime(ledger.since).slice(0, 10).replace(/\/$/, '') : '—';
+    if (rows.length) {
+      html += table(['期限', '类型', '正确率(样本)', '平均超额', '前50', '50名以后'], rows);
+      html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">正确率:多头标记跑赢BTC算对,回避/偏空标记跑输BTC算对,50%等于抛硬币。样本少于20不足以下结论。账本自 ${esc(since)} 起共 ${ledger.entries} 条,${ledger.pending} 条未到期。</div>`;
+    } else {
+      html += `<div style="font-size:13px;color:#777;margin-bottom:12px">账本自 ${esc(since)} 起已记 ${ledger.entries} 条(其中 ${ledger.init} 条是建档时已有的标记),还没有到期的结果;1天期的最早明天出现。</div>`;
+    }
+  }
 
   html += h2(`SRR 4/4 结构性重估(${snap.srr.length})`);
   html += snap.srr.length ? table(patHead, patRows(snap.srr, 10))
@@ -243,21 +296,61 @@ const prev = await readJson(path.join(DATA, 'latest.json'));
 const state = await readJson(path.join(DATA, 'state.json'), {});
 
 const slot = dueDigestSlot(cfg, state);
-const { snap, active, fresh, message } = await runScan(cfg, prev, state, !!slot);
+
+// ---- v6.0: 衍生品。抓不到不影响扫描,报告里那一段不出现而已 ----
+let derivs = null;
+if (env.QS_MOCK_DERIVS) derivs = await readJson(env.QS_MOCK_DERIVS);
+else if (!env.QS_MOCK) {
+  try { derivs = await fetchDerivs({ majors: cfg.majors || ['btc', 'eth', 'sol', 'bnb', 'xrp'] }); }
+  catch (e) { console.log(`::warning::衍生品数据抓取失败: ${e.message}`); }
+}
+if (derivs && Object.keys(derivs.coins || {}).length) {
+  const hist = withOiChange(derivs, await readJson(path.join(DATA, 'derivs-hist.json'), []));
+  // 写盘的版本去掉分交易所明细,只留持仓量100万美元以上的,控制文件体积
+  const slim = {};
+  for (const [k, c] of Object.entries(derivs.coins)) if (c.oi >= 1e6) slim[k] = { fr: c.fr, oi: c.oi, px: c.px, ...(c.dOi24 != null ? { dOi24: c.dOi24 } : {}), ...(c.dOi1 != null ? { dOi1: c.dOi1 } : {}), ...(c.ls != null ? { ls: +c.ls.toFixed(2) } : {}) };
+  derivs = { time: env.QS_NOW ? now.toISOString() : derivs.time, sources: derivs.sources, lsFrom: derivs.lsFrom, majors: derivs.majors, coins: slim };
+  await fs.mkdir(DATA, { recursive: true });
+  await fs.writeFile(path.join(DATA, 'derivs.json'), JSON.stringify(derivs));
+  await fs.writeFile(path.join(DATA, 'derivs-hist.json'), JSON.stringify(hist));
+  const okSrc = Object.entries(derivs.sources).filter(([k, v]) => v.ok && !k.startsWith('ls_')).map(([k]) => k);
+  console.log(`衍生品:${Object.keys(slim).length} 个币,来源 ${okSrc.join('+') || '无'},多空比来源 ${derivs.lsFrom || '无'}`);
+} else derivs = null;
+
+const { snap, active, fresh, message } = await runScan(cfg, prev, state, !!slot, derivs);
 console.log(`扫描完成(Top${snap.pool}):${snap.regime} · BTC $${fmtPrice(snap.btc?.p)} · 覆盖${snap.covered} · SRR ${snap.srr.length} · 多头${snap.longs.length} · 回避/偏空${snap.avoid.length + snap.shorts.length}`);
 
 const shouldSend = FORCE || fresh.length > 0 || !!slot;
 console.log(`提醒:${fresh.length}条新触发 / ${active.length}条处于触发状态;简报时段:${slot ? '到点' : '未到'};${shouldSend ? '发邮件' : '不发邮件'}`);
 
+// ---- v6.0: 信号账本。出错不影响邮件和扫描结果 ----
+let ledger = null;
+try {
+  ledger = await updateLedger({
+    dir: path.join(DATA, 'ledger'), snap, log: console.log,
+    fetchPrices: async (ids) => {   // 掉出扫描池的币单独查价
+      if (env.QS_MOCK) return {};
+      const out = {};
+      for (let i = 0; i < ids.length; i += 100) {
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=${ids.slice(i, i + 100).map(encodeURIComponent).join(',')}`,
+          { headers: { Accept: 'application/json', ...(env.CG_DEMO_KEY ? { 'x-cg-demo-api-key': env.CG_DEMO_KEY } : {}) } });
+        if (!res.ok) throw new Error(`CoinGecko ${res.status}`);
+        for (const [id, v] of Object.entries(await res.json())) if (v?.usd > 0) out[id] = v.usd;
+      }
+      return out;
+    },
+  });
+} catch (e) { console.log(`::warning::账本更新失败: ${e.message}`); }
+
 let sent = false, sendError = null;
 if (shouldSend) {
   // 发信失败(密码错、SMTP被拒等)不能连扫描结果一起丢:先记下错误,结果照常保存,最后再让任务标红
-  try { sent = await sendEmail(buildEmail(snap, fresh, !!slot, state.lastRun), snap); }
+  try { sent = await sendEmail(buildEmail(snap, fresh, !!slot, state.lastRun, ledger), snap); }
   catch (e) { sendError = e; console.log(`::error::邮件发送失败: ${e.message}`); }
 }
 
 await fs.mkdir(path.join(DATA, 'reports'), { recursive: true });
-await fs.writeFile(path.join(DATA, 'latest.json'), JSON.stringify({ ...snap, alerts: fresh.map((a) => a.text), emailed: sent }, null, 1));
+await fs.writeFile(path.join(DATA, 'latest.json'), JSON.stringify({ ...snap, alerts: fresh.map((a) => a.text), emailed: sent }));
 if (message) {   // App的消息列表读这个文件;只留最近100条
   const msgs = await readJson(path.join(DATA, 'messages.json'), []);
   await fs.writeFile(path.join(DATA, 'messages.json'), JSON.stringify([message, ...(Array.isArray(msgs) ? msgs : [])].slice(0, 100), null, 1));

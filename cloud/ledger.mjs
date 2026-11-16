@@ -45,7 +45,7 @@ export async function updateLedger({ dir, snap, fetchPrices = async () => ({}), 
       const last = seen[k] ? new Date(seen[k]).getTime() : 0;
       seen[k] = snap.time;
       if (now - last < REENTRY_HOURS * HOUR) continue;
-      const e = { s: t.s, id: t.id, c: p.c, sc: p.sc, v: p.v ? 1 : 0, t: snap.time, p: t.p, b: btc, rk: t.rk, mc: Math.round(t.mc || 0), g: snap.gate?.closed ? 1 : 0, f: {} };
+      const e = { s: t.s, id: t.id, c: p.c, sc: p.sc, v: p.v ? 1 : 0, t: snap.time, p: sig(t.p), b: sig(btc), rk: t.rk, mc: Math.round(t.mc || 0), g: snap.gate?.closed ? 1 : 0, f: {} };
       if (isInit) e.i = 1;
       const dv = snap.dv?.[t.s];                // 当时的资金费率/持仓变化,留着以后检验它们有没有用
       if (dv?.fr != null) e.fr = +(dv.fr * 100).toFixed(4);
@@ -87,7 +87,7 @@ export async function updateLedger({ dir, snap, fetchPrices = async () => ({}), 
   for (const [e, h, f] of due) {
     const p = price[e.id];
     if (!(p > 0)) continue;                      // 这次没查到价,容差内下次再试
-    e.f[h] = [p, btc]; dirty.add(f); filled++;
+    e.f[h] = [sig(p), sig(btc)]; dirty.add(f); filled++;
   }
   for (const f of dirty) await writeJson(path.join(dir, f), days[f]);
   await writeJson(activePath, { keys: seen });
@@ -105,6 +105,7 @@ export async function updateLedger({ dir, snap, fetchPrices = async () => ({}), 
 const mean = (a) => a.reduce((x, y) => x + y, 0) / a.length;
 const median = (a) => { const s = a.slice().sort((x, y) => x - y), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 const r1 = (x) => +x.toFixed(1);
+const sig = (x) => +Number(x).toPrecision(6);   // 价格留6位有效数字就够算涨跌幅,省体积
 
 // "对"的定义统一用相对BTC的超额收益:多头标记 → 跑赢BTC算对;回避/偏空标记 → 跑输BTC算对。
 // 用超额而不用绝对涨跌,是因为大盘一起涨一起跌时,绝对涨跌说明不了标记本身有没有用。

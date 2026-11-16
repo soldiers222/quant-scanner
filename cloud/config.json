@@ -10,6 +10,28 @@
   "poolSize": 250,
   "_poolSize": "云端扫描池:50 / 100 / 250(按24h成交量排名)。50是此前回测的口径;更大的池子会带进小市值标的,信号未经回测。和App里的'扫描池'互不同步。",
 
+  "majors": ["btc", "eth", "sol", "bnb", "xrp"],
+  "_majors": "主流币。盯盘页和邮件里的衍生品表列这几个;它们创7日新高/新低时自动提醒。",
+
+  "levels": [
+    { "s": "btc", "dir": "below", "price": 62000, "note": "11/15周末低点(币安$62,006);跌破=下行延续" },
+    { "s": "btc", "dir": "below", "price": 60000, "note": "整数关口" },
+    { "s": "btc", "dir": "below", "price": 58566, "note": "12个月低点(7/1)" },
+    { "s": "btc", "dir": "above", "price": 68000, "note": "收回200周均线一带(约$67,922),周末跌破处" },
+    { "s": "btc", "dir": "above", "price": 73000, "note": "200日均线附近,11月中旬跌破处" },
+    { "s": "eth", "dir": "below", "price": 1711, "note": "11/15周末低点(7/8以来最低)" },
+    { "s": "eth", "dir": "above", "price": 2000, "note": "11/13失守的整数位" },
+    { "s": "sol", "dir": "below", "price": 67.5, "note": "11/15周末低点一带(云端扫描记录$67.76)" },
+    { "s": "sol", "dir": "above", "price": 81.5, "note": "11/13收盘价,周末下跌的起点" },
+    { "s": "bnb", "dir": "below", "price": 568, "note": "11/15周末低点一带(云端扫描记录$568.55)" },
+    { "s": "xrp", "dir": "below", "price": 0.9, "note": "11/15周末低点一带(云端扫描记录$0.9047)" },
+    { "s": "xrp", "dir": "above", "price": 1.04, "note": "11/13收盘价,周末下跌的起点" }
+  ],
+  "_levels": "盯盘价位。s=币种,dir=below(跌破)/above(站上),price=价位,note=备注。价格穿过时推送一次;回去再穿会再推。这些是11/16按公开数据预设的参考位,不是预测,行情走远了要更新。",
+
+  "positions": [],
+  "_positions": "持仓。例:{ \"s\": \"sol\", \"side\": \"long\", \"entry\": 71.2, \"stop\": 67, \"target\": 81, \"lev\": 3, \"note\": \"\" }。side=long/short,lev=杠杆(可省)。触及止损/目标、或持仓币出现急跌/跑输大盘/顶部被拒等不利标记时推送。仓库公开时这里的内容别人看得到。",
+
   "watchlist": [],
   "_watchlist": "自选标的(小写symbol),例如 [\"sol\",\"ena\",\"render\"]。邮件里会单列,并按下面的阈值触发提醒。",
 
@@ -24,7 +46,9 @@
     "btcMove24hPct": 5,
     "watchMove24hPct": 10,
     "hourlyMovePct": 3,
-    "hourlyMinMcapUsd": 50000000
+    "hourlyMinMcapUsd": 50000000,
+    "autoLevels": true,
+    "fundingExtreme8hPct": 0.05
   },
-  "_alerts": "提醒规则。regimeChange=进入或离开Risk-Off时提醒(其余状态切换不推);gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。hourlyMovePct=任意标的1小时涨跌超过该百分比就推送(填0关闭;嫌多就调到5)。hourlyMinMcapUsd=1小时异动只推市值不低于该金额(美元)的标的,0=不限;现为5000万(滤掉NANO和市值未知的),还嫌吵就填 150000000(1.5亿,连MICRO一起滤掉)。除1小时异动外,同一条提醒只在刚触发时发一次。"
+  "_alerts": "提醒规则。regimeChange=进入或离开Risk-Off时提醒(其余状态切换不推);gateFlip=总闸开/关变化;gateStale=货币闸陈旧需复核;newSRR=出现新的SRR 4/4;btcMove24hPct=BTC 24h涨跌超过该百分比;watchMove24hPct=自选标的24h涨跌超过该百分比。hourlyMovePct=任意标的1小时涨跌超过该百分比就推送(填0关闭;嫌多就调到5)。hourlyMinMcapUsd=1小时异动只推市值不低于该金额(美元)的标的,0=不限;现为5000万(滤掉NANO和市值未知的),还嫌吵就填 150000000(1.5亿,连MICRO一起滤掉)。autoLevels=主流币、设了价位的币、持仓币创7日新高/新低时提醒(每币每天最多各一次);fundingExtreme8hPct=这些币的资金费率(每8小时,百分比)绝对值超过该值时提醒,0.05相当于年化约55%,填0关闭。除1小时异动外,同一条提醒只在刚触发时发一次。"
 }
