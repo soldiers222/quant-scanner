@@ -99,6 +99,22 @@ GitHub 新建一个 **Public** 仓库（例如 `quant-scanner`），把本文件
 - **价格是扫描时刻的快照**：邮件到手时可能已过去几分钟到几十分钟，下单前以交易所 App 为准。
 - **App 的定时刷新只在 App 开着时有效**：切到后台会暂停，切回来若已过点会立即补扫。
 
+## 用外部定时服务触发（GitHub 自带定时不准时用）
+
+GitHub 自带的定时触发可能几小时都不来。要稳定地每小时一次，用外部定时服务按时调用 GitHub 的接口：
+
+1. GitHub 右上角头像 → Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token。
+   Repository access 选 Only select repositories → `quant-scanner`；Permissions → Repository permissions → **Actions: Read and write**；其余不动。生成后复制令牌。
+2. 在 cron-job.org 注册（免费），新建一个 cronjob：
+   - URL：`https://api.github.com/repos/<你的用户名>/quant-scanner/actions/workflows/scan.yml/dispatches`
+   - 时间：每小时一次（例如每小时第 5 分钟）
+   - Advanced → Request method：`POST`
+   - Headers：`Authorization: Bearer <令牌>`、`Accept: application/vnd.github+json`、`Content-Type: application/json`
+   - Request body：`{"ref":"main","inputs":{"force_email":"false"}}`
+3. 保存后点一次 Test run，返回 204 即成功，仓库 Actions 里会出现一次新的运行。
+
+令牌只填在 cron-job.org 里，不要写进仓库或发到聊天里。它只能触发这一个仓库的 Actions。
+
 ## 本地自测（可选）
 
 ```bash

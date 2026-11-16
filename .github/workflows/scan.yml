@@ -34,7 +34,8 @@ jobs:
         id: gate
         run: |
           run=true
-          if [ "${{ github.event_name }}" = "schedule" ]; then
+          # 定时触发、以及外部定时服务的触发(force_email=false)都受最小间隔约束;在网页上手动点的那次(默认勾选发邮件)总是执行
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name == 'workflow_dispatch' && inputs.force_email == false }}" = "true" ]; then
             last=$(jq -r '.lastRun // empty' data/state.json 2>/dev/null || true)
             if [ -n "$last" ]; then
               age=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 60 ))
