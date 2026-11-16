@@ -1,4 +1,4 @@
-// QUANT Terminal — 云端定时扫描 + 邮件推送 (v6.0)
+// QUANT Terminal — 云端定时扫描 + 邮件推送 (v6.1)
 //
 // 做法:用无头浏览器打开仓库里的 index.html(就是手机上那个App),等它扫完,
 // 从 window.__QS.snapshot() 取结果。判定逻辑只有 index.html 里那一份 ——
@@ -43,7 +43,8 @@ async function runScan(cfg, prev, state, isDigest, derivs) {
     const ctx = await browser.newContext({ locale: 'zh-CN', timezoneId: 'Asia/Shanghai' });
     // 把云端设置灌进页面的 localStorage(页面本来就从那里读货币闸和自选)
     const anchor = cfg.monetaryTight ? (cfg.monetaryAnchor || prev?.gate?.anchor || null) : null;
-    await ctx.addInitScript(({ tight, anchor, watch, pool, derivs, cloudCfg }) => {
+    await ctx.addInitScript(({ tight, anchor, watch, pool, derivs, cloudCfg, prevPx }) => {
+      window.__PREV_PX = prevPx;       // v6.1: 上一次云端扫描的价格,页面用它直接算短时涨跌
       window.__DERIVS = derivs;        // v6.0: 衍生品数据和云端配置直接交给页面,报告/盯盘/提醒都用它
       window.__CLOUD_CFG = cloudCfg;
       localStorage.setItem('qs_pool', JSON.stringify(pool));
@@ -52,6 +53,7 @@ async function runScan(cfg, prev, state, isDigest, derivs) {
       else localStorage.removeItem('qs_monetary_anchor');
       localStorage.setItem('qs_watchlist', JSON.stringify(watch));
     }, { tight: !!cfg.monetaryTight, anchor, watch: (cfg.watchlist || []).map((s) => String(s).toLowerCase()), pool: [50, 100, 250].includes(cfg.poolSize) ? cfg.poolSize : 50,
+      prevPx: prev?.all?.length ? { time: prev.time, px: Object.fromEntries(prev.all.map((t) => [t.id, t.p])) } : null,
       derivs, cloudCfg: { levels: cfg.levels || [], positions: cfg.positions || [], majors: cfg.majors || null, alerts: cfg.alerts || {} } });
 
     const page = await ctx.newPage();
@@ -136,7 +138,8 @@ function buildEmail(snap, alerts, isDigest, lastRunIso, ledger) {
   const others = alerts.filter((a) => !a.mover);
   const sgn = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
   const kind = isDigest ? (alerts.length ? '定时简报+提醒' : '定时简报') : (alerts.length ? '提醒' : '测试');
-  const moverSubj = movers.length ? `1h异动${movers.length}个: ${movers.slice(0, 3).map((m) => `${m.s} ${sgn(m.c1h)}`).join(' ')}${movers.length > 3 ? ' 等' : ''}｜` : '';
+  const mvShort = snap.move?.src === 'scan' ? `近${snap.move.min}分` : '1h';
+  const moverSubj = movers.length ? `${mvShort}异动${movers.length}个: ${movers.slice(0, 3).map((m) => `${m.s} ${sgn(m.c1h)}`).join(' ')}${movers.length > 3 ? ' 等' : ''}｜` : '';
   const subject = `${alerts.length ? '⚠️ ' : ''}QUANT ${kind}｜${moverSubj}BTC $${fmtPrice(snap.btc?.p)} (24h ${snap.btc?.c24 >= 0 ? '+' : ''}${snap.btc?.c24?.toFixed(1)}%)｜${snap.regime}｜总闸${gate.closed ? '关' : '开'}｜SRR ${snap.srr.length}`;
 
   const th = 'padding:6px 8px;border-bottom:2px solid #ddd;text-align:left;font-size:12px;color:#666;white-space:nowrap';
@@ -167,7 +170,7 @@ function buildEmail(snap, alerts, isDigest, lastRunIso, ledger) {
 
   if (alerts.length) {
     const lines = others.map((a) => esc(a.text));
-    if (movers.length) lines.push(`1小时涨跌超过阈值的标的 ${movers.length} 个(见下表)`);
+    if (movers.length) lines.push(`${mvShort}涨跌超过阈值的标的 ${movers.length} 个(见下表)`);
     html += `<div style="margin:14px 0;padding:10px 12px;background:#fff7e6;border-left:4px solid #f0a020;font-size:13px">
       <b>本次触发的提醒</b><ul style="margin:6px 0 0;padding-left:18px">${lines.map((l) => `<li>${l}</li>`).join('')}</ul></div>`;
   }
@@ -176,11 +179,11 @@ function buildEmail(snap, alerts, isDigest, lastRunIso, ledger) {
     const MAX_ROWS = 20;
     const mcap = (v) => !v ? '—' : v >= 1e9 ? `$${(v / 1e9).toFixed(1)}B` : `$${(v / 1e6).toFixed(0)}M`;
     const warn = (m) => (m.warn || []).length ? ` <span style="color:#c0392b;font-size:11px">⚠${esc(m.warn.join('/'))}</span>` : '';
-    html += h2(`1小时异动(${movers.length})`);
-    html += table(['标的', '价格', '1h', '24h', '7d', '市值', '标记'], movers.slice(0, MAX_ROWS).map((m) =>
+    html += h2(`短时异动(${movers.length})`);
+    html += table(['标的', '价格', mvShort, '24h', '7d', '市值', '标记'], movers.slice(0, MAX_ROWS).map((m) =>
       [link(m) + warn(m), `$${fmtPrice(m.p)}`, pctHtml(m.c1h), pctHtml(m.c24), pctHtml(m.c7), mcap(m.mc), esc((m.tags || []).join(' ') || '—')]));
     if (movers.length > MAX_ROWS) html += `<div style="font-size:12px;color:#777;margin:-8px 0 8px">按幅度只列前 ${MAX_ROWS} 个,另有 ${movers.length - MAX_ROWS} 个未列出。</div>`;
-    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">1小时涨跌只说明"正在动",不是买卖信号。是否可做看"标记"一列和总闸状态。⚠NANO/MICRO = 市值低于5000万/1.5亿美元,极易插针。</div>`;
+    html += `<div style="font-size:12px;color:#777;margin:-8px 0 12px">${snap.move?.src === 'scan' ? `口径:本次价格对比 ${snap.move.min} 分钟前那次云端扫描的价格,是实际发生的涨跌。` : '口径:没有可用的上一次扫描作参照,本次用的是 CoinGecko 的1小时涨跌字段,更新比价格慢,可能已过期。'}只说明"正在动",不是买卖信号。⚠NANO/MICRO = 市值低于5000万/1.5亿美元,极易插针。</div>`;
   }
 
   // ---- v6.0: 盯盘(价位/持仓) ----
@@ -199,7 +202,7 @@ function buildEmail(snap, alerts, isDigest, lastRunIso, ledger) {
   }
 
   html += h2('宏观');
-  html += table(['', '价格', '1h', '24h', '7d', '30d', 'RSI'], [snap.btc, snap.eth].filter(Boolean).map((x) =>
+  html += table(['', '价格', mvShort, '24h', '7d', '30d', 'RSI'], [snap.btc, snap.eth].filter(Boolean).map((x) =>
     [`<b>${esc(x.s)}</b>`, `$${fmtPrice(x.p)}`, x.c1h == null ? '—' : pctHtml(x.c1h), pctHtml(x.c24), pctHtml(x.c7), pctHtml(x.c30), x.rsi]));
 
   // ---- v6.0: 主流币衍生品 ----
