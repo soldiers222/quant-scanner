@@ -1,11 +1,13 @@
 name: quant-scan
 
+# 怎么做到"每小时一次":
+#   GitHub 自带的定时(schedule)不可靠 —— 实测(11/14-11/16)写"每小时"时4-8小时才触发一次,11/16 下午近8小时一次没来。
+#   所以改成"接力":每次扫描结束后,由 next 这个任务等 55 分钟,再触发下一次扫描。一环扣一环,不依赖 GitHub 的定时。
+#   schedule 仍然保留,只当保险用:万一接力断了(GitHub 故障、任务被取消),它哪次触发了就把接力重新接上。
+#   想马上重启接力:在 Actions 页面手动 Run workflow 一次即可。
+
 on:
   schedule:
-    # 目标是每小时扫一次。GitHub 不保证定时准点:实测(11/14-11/16)写"每小时"时,它4-8小时才触发一次。
-    # 所以每10分钟给它一次触发机会,由下面"是否该扫"一步保证两次扫描至少间隔 MIN_GAP_MIN 分钟:
-    # 准时 → 每小时一次;晚到 → 下一个10分钟档补上。被跳过的那几次只花十几秒。
-    # 仓库是公开的,Actions 分钟数不限。如果改回私有,要把这一行改回 '7 * * * *'(私有仓库每月只有2000分钟)。
     - cron: '7,17,27,37,47,57 * * * *'
   workflow_dispatch:
     inputs:
@@ -13,20 +15,25 @@ on:
         description: '不管有没有提醒都发一封邮件(测试用)'
         type: boolean
         default: true
+  push:
+    branches: [main]
+    paths: ['.github/workflows/scan.yml']   # 改了这个文件就立即跑一次,让新设置马上生效
 
 permissions:
   contents: write   # 把扫描结果写回 data/
-
-concurrency:
-  group: quant-scan
-  cancel-in-progress: false
 
 jobs:
   scan:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    concurrency:            # 同一时间只跑一个扫描;排队而不是取消
+      group: quant-scan
+      cancel-in-progress: false
     env:
-      MIN_GAP_MIN: 55   # 两次定时扫描的最小间隔(分钟)。想每2小时扫一次就改成 115
+      MIN_GAP_MIN: 50   # 两次自动扫描的最小间隔(分钟)。接力每 55 分钟一次,这里留一点余量
+    outputs:
+      ran: ${{ steps.gate.outputs.run }}
+      started: ${{ steps.gate.outputs.started }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,7 +41,8 @@ jobs:
         id: gate
         run: |
           run=true
-          # 定时触发、以及外部定时服务的触发(force_email=false)都受最小间隔约束;在网页上手动点的那次(默认勾选发邮件)总是执行
+          # 自动触发(GitHub定时、接力、外部定时服务)都受最小间隔约束;
+          # 在网页上手动点的那次(默认勾选发邮件)和改动本文件后的那次总是执行
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ github.event_name == 'workflow_dispatch' && inputs.force_email == false }}" = "true" ]; then
             last=$(jq -r '.lastRun // empty' data/state.json 2>/dev/null || true)
             if [ -n "$last" ]; then
@@ -44,6 +52,7 @@ jobs:
             fi
           fi
           echo "run=$run" >> "$GITHUB_OUTPUT"
+          echo "started=$(date +%s)" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-node@v4
         if: steps.gate.outputs.run == 'true'
@@ -80,3 +89,39 @@ jobs:
           git commit -m "scan: $(date -u +%Y-%m-%dT%H:%MZ)"
           git pull --rebase --autostash
           git push
+
+  # 接力:等 55 分钟后触发下一次扫描。
+  # 只有"这次真的扫了"才接力 —— 被最小间隔跳过的那次不接,所以任何时候只有一条接力在跑,不会越接越多。
+  # 扫描失败(比如行情接口一时不通)也照样接,不让一次失败把接力打断。
+  next:
+    name: 预约下一次扫描
+    needs: scan
+    if: ${{ always() && needs.scan.outputs.ran == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    # 如果在仓库 Settings → Environments → hourly-tick 里设了 55 分钟的 Wait timer,
+    # 等待就由 GitHub 代管、不占用机器;没设的话,就在机器上空等(公开仓库不计费)。两种情况下面的脚本都能处理。
+    environment: hourly-tick
+    permissions:
+      actions: write   # 触发下一次运行
+    steps:
+      - name: 等到点再触发
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STARTED: ${{ needs.scan.outputs.started }}
+          WAIT_MIN: 55
+        run: |
+          # 私有仓库的 Actions 分钟数有限,空等一小时会把额度耗光:私有时不接力,只靠 GitHub 自带定时
+          if [ "$(gh api "repos/$GITHUB_REPOSITORY" --jq .private)" = "true" ]; then
+            echo "::warning::仓库是私有的,不启用接力(避免耗尽 Actions 分钟数)"; exit 0
+          fi
+          elapsed=$(( $(date +%s) - STARTED ))
+          remain=$(( WAIT_MIN * 60 - elapsed ))
+          if [ "$remain" -gt 0 ]; then
+            echo "在这里等 $(( remain / 60 )) 分钟"
+            sleep "$remain"
+          else
+            echo "等待计时器已生效(距本次扫描 $(( elapsed / 60 )) 分钟)"
+          fi
+          gh workflow run scan.yml --repo "$GITHUB_REPOSITORY" --ref main -f force_email=false
+          echo "已触发下一次扫描"
