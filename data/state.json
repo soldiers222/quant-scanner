@@ -1,9 +1,5 @@
 {
  "lastDigestSlot": "2026-11-17T00:00:00.000Z",
- "activeAlertKeys": [
-  "h1:RAIN:2026-11-17T07:08",
-  "h1:BTW:2026-11-17T07:08",
-  "h1:KMNO:2026-11-17T07:08"
- ],
- "lastRun": "2026-11-17T07:08:44.252Z"
+ "activeAlertKeys": [],
+ "lastRun": "2026-11-17T08:03:41.452Z"
 }
