@@ -1,5 +1,30 @@
 [
  {
+  "id": "cloud:2026-11-20T11:42:14.529Z",
+  "time": "2026-11-20T11:42:14.529Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "进入 Risk-Off(此前:弱势震荡) 等7条",
+  "lines": [
+   "进入 Risk-Off(此前:弱势震荡)",
+   "BTC 跌破 $62000(现价 $61765) —— 11/15周末低点(币安$62,006);跌破=下行延续",
+   "AKE 55分 -37.1% · $0.005938 · 24h -40.0% ⚠MICRO · MOM+ ATL-N CRASH",
+   "META 55分 -6.9% · $3.67 · 24h +10.5% ⚠MICRO · RPE-1 VEX",
+   "PIEVERSE 55分 +5.2% · $2.65 · 24h -8.1% ⚠POST-PUMP · RPE-2 MOM+",
+   "MMT 55分 -3.7% · $0.2457 · 24h +22.1% ⚠MICRO/EXTENDED · RPE-2 MOM+ ATL-N",
+   "USELESS 55分 -3.5% · $0.0890 · 24h -15.2% ⚠MICRO · CRASH WEAK"
+  ],
+  "keys": [
+   "regime:Risk-Off",
+   "lvl:BTC:below:62000",
+   "h1:AKE:2026-11-20T11:42",
+   "h1:META:2026-11-20T11:42",
+   "h1:PIEVERSE:2026-11-20T11:42",
+   "h1:MMT:2026-11-20T11:42",
+   "h1:USELESS:2026-11-20T11:42"
+  ]
+ },
+ {
   "id": "cloud:2026-11-20T10:47:16.651Z",
   "time": "2026-11-20T10:47:16.651Z",
   "src": "cloud",
@@ -1785,25 +1810,6 @@
   "keys": [
    "h1:BTW:2026-11-16T12:45",
    "h1:RAIN:2026-11-16T12:45"
-  ]
- },
- {
-  "id": "cloud:2026-11-16T11:50:09.432Z",
-  "time": "2026-11-16T11:50:09.432Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近56分钟异动 4 个:RAIN -9.8% AKE +3.6% CASHCAT +3.5% 等",
-  "lines": [
-   "RAIN 56分 -9.8% · $0.006803 · 24h +86.8% · MOM+",
-   "AKE 56分 +3.6% · $0.0115 · 24h +11.0% ⚠EXTENDED · RPE-1 MOM+ VEX ATL-N",
-   "CASHCAT 56分 +3.5% · $0.0529 · 24h +31.4% ⚠MICRO · RPE-3 HCEP WEAK",
-   "SKR 56分 -3.1% · $0.0101 · 24h +12.5% ⚠MICRO · RPE-1 VEX"
-  ],
-  "keys": [
-   "h1:RAIN:2026-11-16T11:50",
-   "h1:AKE:2026-11-16T11:50",
-   "h1:CASHCAT:2026-11-16T11:50",
-   "h1:SKR:2026-11-16T11:50"
   ]
  }
 ]
