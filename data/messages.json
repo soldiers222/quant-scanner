@@ -1,5 +1,18 @@
 [
  {
+  "id": "cloud:2026-11-20T01:38:49.138Z",
+  "time": "2026-11-20T01:38:49.138Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "近55分钟异动 1 个:PIEVERSE -3.6%",
+  "lines": [
+   "PIEVERSE 55分 -3.6% · $2.92 · 24h -11.5% ⚠POST-PUMP · RPE-1 MOM+ CRASH"
+  ],
+  "keys": [
+   "h1:PIEVERSE:2026-11-20T01:38"
+  ]
+ },
+ {
   "id": "cloud:2026-11-20T00:43:29.815Z",
   "time": "2026-11-20T00:43:29.815Z",
   "src": "cloud",
