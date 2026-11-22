@@ -2,10 +2,12 @@
  "lastDigestSlot": "2026-11-22T00:00:00.000Z",
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
+  "lvl:BTC:below:60000",
   "lvl:ETH:below:1711",
   "lvl:BNB:below:568",
-  "h1:AKE:2026-11-22T01:52",
-  "h1:DRV:2026-11-22T01:52"
+  "h1:AKE:2026-11-22T02:47",
+  "h1:ICNT:2026-11-22T02:47",
+  "h1:DRV:2026-11-22T02:47"
  ],
- "lastRun": "2026-11-22T01:52:23.330Z"
+ "lastRun": "2026-11-22T02:47:28.048Z"
 }
