@@ -1,5 +1,20 @@
 [
  {
+  "id": "cloud:2026-11-22T18:24:42.817Z",
+  "time": "2026-11-22T18:24:42.817Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "近55分钟异动 2 个:NES -21.9% PROM -5.7%",
+  "lines": [
+   "NES 1h -21.9% · $0.2121 · 24h -27.8% ⚠MICRO/POST-PUMP · RPE-2 MOM+ CRASH TRRP?",
+   "PROM 55分 -5.7% · $4.44 · 24h -11.4% ⚠MICRO · RPE-2 ATL-N CRASH"
+  ],
+  "keys": [
+   "h1:NES:2026-11-22T18:24",
+   "h1:PROM:2026-11-22T18:24"
+  ]
+ },
+ {
   "id": "cloud:2026-11-22T17:29:36.751Z",
   "time": "2026-11-22T17:29:36.751Z",
   "src": "cloud",
@@ -2106,27 +2121,6 @@
   ],
   "keys": [
    "h1:RAIN:2026-11-18T15:18"
-  ]
- },
- {
-  "id": "cloud:2026-11-18T14:23:23.196Z",
-  "time": "2026-11-18T14:23:23.196Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近55分钟异动 5 个:PIEVERSE +11.1% RAIN +6.3% ICNT +3.4% 等",
-  "lines": [
-   "PIEVERSE 55分 +11.1% · $3.20 · 24h +62.1% ⚠EXTENDED · HCEP",
-   "RAIN 55分 +6.3% · $0.005089 · 24h -7.8%",
-   "ICNT 55分 +3.4% · $0.3367 · 24h +42.3% ⚠MICRO · HCEP",
-   "AKE 55分 +3.2% · $0.0104 · 24h -3.9% ⚠POST-PUMP/EXTENDED · RPE-2 MOM+ ATL-N",
-   "SOON 55分 +3.1% · $0.2591 · 24h +12.1% ⚠MICRO · VEX ATL-N"
-  ],
-  "keys": [
-   "h1:PIEVERSE:2026-11-18T14:23",
-   "h1:RAIN:2026-11-18T14:23",
-   "h1:ICNT:2026-11-18T14:23",
-   "h1:AKE:2026-11-18T14:23",
-   "h1:SOON:2026-11-18T14:23"
   ]
  }
 ]

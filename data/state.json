@@ -3,9 +3,8 @@
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
   "lvl:BNB:below:568",
-  "h1:PROM:2026-11-22T17:29",
-  "h1:PIEVERSE:2026-11-22T17:29",
-  "h1:ALLO:2026-11-22T17:29"
+  "h1:NES:2026-11-22T18:24",
+  "h1:PROM:2026-11-22T18:24"
  ],
- "lastRun": "2026-11-22T17:29:32.253Z"
+ "lastRun": "2026-11-22T18:24:37.910Z"
 }
