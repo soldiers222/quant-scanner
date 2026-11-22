@@ -2,8 +2,7 @@
  "lastDigestSlot": "2026-11-22T12:00:00.000Z",
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
-  "lvl:BNB:below:568",
-  "h1:NES:2026-11-22T22:05"
+  "lvl:BNB:below:568"
  ],
- "lastRun": "2026-11-22T22:05:09.139Z"
+ "lastRun": "2026-11-22T22:58:33.862Z"
 }
