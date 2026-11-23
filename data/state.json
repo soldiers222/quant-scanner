@@ -2,8 +2,11 @@
  "lastDigestSlot": "2026-11-23T00:00:00.000Z",
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
+  "lvl:ETH:below:1711",
   "lvl:BNB:below:568",
-  "h1:NES:2026-11-23T01:44"
+  "h1:PIEVERSE:2026-11-23T02:39",
+  "h1:AKE:2026-11-23T02:39",
+  "h1:DRV:2026-11-23T02:39"
  ],
- "lastRun": "2026-11-23T01:44:00.515Z"
+ "lastRun": "2026-11-23T02:39:20.189Z"
 }
