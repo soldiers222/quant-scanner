@@ -3,8 +3,7 @@
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
   "lvl:ETH:below:1711",
-  "lvl:BNB:below:568",
-  "h1:PEARL:2026-11-23T22:52"
+  "lvl:BNB:below:568"
  ],
- "lastRun": "2026-11-23T22:52:43.628Z"
+ "lastRun": "2026-11-23T23:47:23.361Z"
 }
