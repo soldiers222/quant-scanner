@@ -1,5 +1,24 @@
 [
  {
+  "id": "cloud:2026-11-23T10:57:43.640Z",
+  "time": "2026-11-23T10:57:43.640Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "近57分钟异动 4 个:PROM +18.3% PIEVERSE +8.7% LUNC +4.1% 等",
+  "lines": [
+   "PROM 57分 +18.3% · $5.37 · 24h +4.2% ⚠MICRO · VEX ATL-N",
+   "PIEVERSE 57分 +8.7% · $3.75 · 24h -20.5% ⚠POST-PUMP/EXTENDED · RPE-2 MOM+ CRASH",
+   "LUNC 57分 +4.1% · $0.000042 · 24h +6.3% · ATL-N",
+   "MON 57分 +3.8% · $0.0120 · 24h -8.6% ⚠MICRO · RPE-2 WEAK"
+  ],
+  "keys": [
+   "h1:PROM:2026-11-23T10:57",
+   "h1:PIEVERSE:2026-11-23T10:57",
+   "h1:LUNC:2026-11-23T10:57",
+   "h1:MON:2026-11-23T10:57"
+  ]
+ },
+ {
   "id": "cloud:2026-11-23T10:00:18.356Z",
   "time": "2026-11-23T10:00:18.356Z",
   "src": "cloud",
@@ -2064,23 +2083,6 @@
    "h1:SENT:2026-11-19T06:26",
    "h1:CAP:2026-11-19T06:26",
    "h1:GRASS:2026-11-19T06:26"
-  ]
- },
- {
-  "id": "cloud:2026-11-19T05:28:05.042Z",
-  "time": "2026-11-19T05:28:05.042Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近56分钟异动 3 个:PIEVERSE -13.4% ONE -4.8% PONS +4.7%",
-  "lines": [
-   "PIEVERSE 56分 -13.4% · $2.58 · 24h +20.2% ⚠EXTENDED · RPE-2 MOM+",
-   "ONE 56分 -4.8% · $0.1731 · 24h +5.5% ⚠MICRO · MOM+ VEX",
-   "PONS 56分 +4.7% · $0.1243 · 24h +8.6% ⚠MICRO · RPE-2 VEX"
-  ],
-  "keys": [
-   "h1:PIEVERSE:2026-11-19T05:28",
-   "h1:ONE:2026-11-19T05:28",
-   "h1:PONS:2026-11-19T05:28"
   ]
  }
 ]
