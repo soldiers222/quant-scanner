@@ -1,5 +1,24 @@
 [
  {
+  "id": "cloud:2026-11-24T19:06:06.378Z",
+  "time": "2026-11-24T19:06:06.378Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "进入 Risk-Off(此前:弱势震荡) 等4条",
+  "lines": [
+   "进入 Risk-Off(此前:弱势震荡)",
+   "BTC 跌破 $60000(现价 $59756) —— 整数关口",
+   "MNT 55分 -4.7% · $0.3605 · 24h -10.5% · CRASH",
+   "PONS 55分 -4.0% · $0.0833 · 24h -12.9% ⚠MICRO · ATL-N CRASH WEAK"
+  ],
+  "keys": [
+   "regime:Risk-Off",
+   "lvl:BTC:below:60000",
+   "h1:MNT:2026-11-24T19:06",
+   "h1:PONS:2026-11-24T19:06"
+  ]
+ },
+ {
   "id": "cloud:2026-11-24T18:10:51.298Z",
   "time": "2026-11-24T18:10:51.298Z",
   "src": "cloud",
@@ -2114,23 +2133,6 @@
    "h1:META:2026-11-20T08:56",
    "h1:RAIN:2026-11-20T08:56",
    "h1:PIEVERSE:2026-11-20T08:56"
-  ]
- },
- {
-  "id": "cloud:2026-11-20T08:01:46.702Z",
-  "time": "2026-11-20T08:01:46.702Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近55分钟异动 3 个:AKE +8.8% PEARL +5.3% PIEVERSE -3.9%",
-  "lines": [
-   "AKE 55分 +8.8% · $0.009096 · 24h -12.9% ⚠POST-PUMP/EXTENDED · MOM+ ATL-N CRASH",
-   "PEARL 55分 +5.3% · $2.00 · 24h -14.5% ⚠POST-PUMP · MOM+ CRASH TRRP?",
-   "PIEVERSE 55分 -3.9% · $2.93 · 24h +9.8% · RPE-1 MOM+ VEX"
-  ],
-  "keys": [
-   "h1:AKE:2026-11-20T08:01",
-   "h1:PEARL:2026-11-20T08:01",
-   "h1:PIEVERSE:2026-11-20T08:01"
   ]
  }
 ]
