@@ -1,5 +1,18 @@
 [
  {
+  "id": "cloud:2026-11-24T20:01:12.651Z",
+  "time": "2026-11-24T20:01:12.651Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "离开 Risk-Off → 弱势震荡",
+  "lines": [
+   "离开 Risk-Off → 弱势震荡"
+  ],
+  "keys": [
+   "regime:弱势震荡"
+  ]
+ },
+ {
   "id": "cloud:2026-11-24T19:06:06.378Z",
   "time": "2026-11-24T19:06:06.378Z",
   "src": "cloud",
@@ -2114,25 +2127,6 @@
    "h1:PIEVERSE:2026-11-20T09:52",
    "h1:APEPE:2026-11-20T09:52",
    "h1:SENT:2026-11-20T09:52"
-  ]
- },
- {
-  "id": "cloud:2026-11-20T08:56:53.708Z",
-  "time": "2026-11-20T08:56:53.708Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近55分钟异动 4 个:AKE -32.2% META -7.5% RAIN -7.0% 等",
-  "lines": [
-   "AKE 55分 -32.2% · $0.006169 · 24h -40.3% ⚠MICRO/POST-PUMP/EXTENDED · MOM+ ATL-N CRASH",
-   "META 55分 -7.5% · $3.94 · 24h +18.6% ⚠MICRO · HCEP",
-   "RAIN 55分 -7.0% · $0.003771 · 24h -15.6% · CRASH",
-   "PIEVERSE 55分 -4.1% · $2.81 · 24h +5.3% · RPE-2 MOM+ VEX"
-  ],
-  "keys": [
-   "h1:AKE:2026-11-20T08:56",
-   "h1:META:2026-11-20T08:56",
-   "h1:RAIN:2026-11-20T08:56",
-   "h1:PIEVERSE:2026-11-20T08:56"
   ]
  }
 ]
