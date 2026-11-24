@@ -4,7 +4,9 @@
   "lvl:BTC:below:62000",
   "lvl:BTC:below:60000",
   "lvl:ETH:below:1711",
-  "lvl:BNB:below:568"
+  "lvl:BNB:below:568",
+  "h1:PEARL:2026-11-24T22:46",
+  "h1:ETHFI:2026-11-24T22:46"
  ],
- "lastRun": "2026-11-24T21:51:16.247Z"
+ "lastRun": "2026-11-24T22:46:23.639Z"
 }
