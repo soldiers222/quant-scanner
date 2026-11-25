@@ -1,15 +1,13 @@
 {
- "lastDigestSlot": "2026-11-25T00:00:00.000Z",
+ "lastDigestSlot": "2026-11-25T12:00:00.000Z",
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
   "lvl:BTC:below:60000",
-  "lvl:BTC:below:58566",
   "lvl:ETH:below:1711",
-  "lvl:SOL:below:67.5",
   "lvl:BNB:below:568",
-  "h1:SYRUP:2026-11-25T11:38",
-  "h1:MMT:2026-11-25T11:38",
-  "h1:PIEVERSE:2026-11-25T11:38"
+  "h1:MMT:2026-11-25T12:33",
+  "h1:ARIA:2026-11-25T12:33",
+  "h1:PROS:2026-11-25T12:33"
  ],
- "lastRun": "2026-11-25T11:38:18.833Z"
+ "lastRun": "2026-11-25T12:33:31.209Z"
 }
