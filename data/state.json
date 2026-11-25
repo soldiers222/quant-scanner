@@ -4,10 +4,7 @@
   "lvl:BTC:below:62000",
   "lvl:BTC:below:60000",
   "lvl:ETH:below:1711",
-  "lvl:SOL:below:67.5",
-  "lvl:BNB:below:568",
-  "h1:PONS:2026-11-25T09:48",
-  "h1:MON:2026-11-25T09:48"
+  "lvl:BNB:below:568"
  ],
- "lastRun": "2026-11-25T09:48:25.925Z"
+ "lastRun": "2026-11-25T10:43:15.510Z"
 }
