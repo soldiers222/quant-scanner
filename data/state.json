@@ -1,13 +1,15 @@
 {
  "lastDigestSlot": "2026-11-25T00:00:00.000Z",
  "activeAlertKeys": [
-  "regime:弱势震荡",
   "lvl:BTC:below:62000",
   "lvl:BTC:below:60000",
   "lvl:ETH:below:1711",
   "lvl:BNB:below:568",
-  "h1:META:2026-11-25T02:27",
-  "h1:WIN:2026-11-25T02:27"
+  "h1:PROM:2026-11-25T03:22",
+  "h1:PEARL:2026-11-25T03:22",
+  "h1:MON:2026-11-25T03:22",
+  "h1:SYRUP:2026-11-25T03:22",
+  "h1:AIOT:2026-11-25T03:22"
  ],
- "lastRun": "2026-11-25T02:26:56.084Z"
+ "lastRun": "2026-11-25T03:22:11.356Z"
 }
