@@ -1,13 +1,10 @@
 {
  "lastDigestSlot": "2026-11-26T12:00:00.000Z",
  "activeAlertKeys": [
-  "btc24:up",
   "lvl:BTC:below:62000",
   "lvl:ETH:below:1711",
   "lvl:BNB:below:568",
-  "h1:XMR:2026-11-26T14:51",
-  "h1:TFUEL:2026-11-26T14:51",
-  "h1:ZEC:2026-11-26T14:51"
+  "h1:PEARL:2026-11-26T23"
  ],
- "lastRun": "2026-11-26T14:51:25.543Z"
+ "lastRun": "2026-11-26T23:56:30.965Z"
 }
