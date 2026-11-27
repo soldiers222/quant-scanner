@@ -1,5 +1,22 @@
 [
  {
+  "id": "cloud:2026-11-27T18:18:50.884Z",
+  "time": "2026-11-27T18:18:50.884Z",
+  "src": "cloud",
+  "kind": "alert",
+  "title": "近55分钟异动 3 个:PIEVERSE +8.6% FIGR_HELOC -6.1% PONS +3.6%",
+  "lines": [
+   "PIEVERSE 55分 +8.6% · $4.28 · 24h +6.3% · MOM+ TRRP?",
+   "FIGR_HELOC 1h -6.1% · $1.00 · 24h -5.1%",
+   "PONS 55分 +3.6% · $0.1006 · 24h +15.9% ⚠MICRO · QCI"
+  ],
+  "keys": [
+   "h1:PIEVERSE:2026-11-27T18:18",
+   "h1:FIGR_HELOC:2026-11-27T18:18",
+   "h1:PONS:2026-11-27T18:18"
+  ]
+ },
+ {
   "id": "cloud:2026-11-27T17:23:52.038Z",
   "time": "2026-11-27T17:23:52.038Z",
   "src": "cloud",
@@ -1718,21 +1735,6 @@
    "h1:NES:2026-11-22T19:20",
    "h1:AKE:2026-11-22T19:20",
    "h1:PROM:2026-11-22T19:20"
-  ]
- },
- {
-  "id": "cloud:2026-11-22T18:24:42.817Z",
-  "time": "2026-11-22T18:24:42.817Z",
-  "src": "cloud",
-  "kind": "alert",
-  "title": "近55分钟异动 2 个:NES -21.9% PROM -5.7%",
-  "lines": [
-   "NES 1h -21.9% · $0.2121 · 24h -27.8% ⚠MICRO/POST-PUMP · RPE-2 MOM+ CRASH TRRP?",
-   "PROM 55分 -5.7% · $4.44 · 24h -11.4% ⚠MICRO · RPE-2 ATL-N CRASH"
-  ],
-  "keys": [
-   "h1:NES:2026-11-22T18:24",
-   "h1:PROM:2026-11-22T18:24"
   ]
  }
 ]
