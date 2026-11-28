@@ -1,12 +1,12 @@
 {
- "lastDigestSlot": "2026-11-28T00:00:00.000Z",
+ "lastDigestSlot": "2026-11-28T12:00:00.000Z",
  "activeAlertKeys": [
   "lvl:BTC:below:62000",
   "lvl:BTC:below:60000",
   "lvl:ETH:below:1711",
   "lvl:BNB:below:568",
-  "h1:BTW:2026-11-28T11:14",
-  "h1:TAG:2026-11-28T11:14"
+  "h1:TAG:2026-11-28T12:09",
+  "h1:NIGHT:2026-11-28T12:09"
  ],
- "lastRun": "2026-11-28T11:14:16.754Z"
+ "lastRun": "2026-11-28T12:09:32.352Z"
 }
